@@ -1,10 +1,22 @@
 #include <iostream>
 #include <vector>
+#include "blank.h"
+#include "block.h"
+#include "level.h"
+#include "board.h"
+#include "observer.h"
+#include "text.h"
+#include "observer.h"
+#include "subject.h"
+#include "player.h"
+
 
 int main()
 {
     // make a new canvas for tetris
+    Board* canvas = new Blank;
     // make studio work on canvas
+    Player* p1 = new Player(canvas); // for now make it one player
     // list of observers
     // std::vector<Observer*> observers;
     // make two players, wich store their own canvas
@@ -12,42 +24,42 @@ int main()
 
     while (std::cin >> command)
     {
-        if (command[0] == "l")
+        if (command[0] == 'l')
         { // left
         }
-        else if (command[0] == "r")
+        else if (command[0] == 'r')
         { // right
         }
-        else if (command[1] == "o")
+        else if (command[1] == 'o')
         { // down
         }
-        else if (command[1] == "r")
+        else if (command[1] == 'r')
         { // drop
         }
-        else if (cmd == "I")
+        else if (command == "I")
         {
         }
-        else if (cmd == "J")
-        {
-            
-        }
-        else if (cmd == "L")
+        else if (command == "J")
         {
             
         }
-        else if (cmd == "O")
+        else if (command == "L")
         {
             
         }
-        else if (cmd == "S")
+        else if (command == "O")
         {
             
         }
-        else if (cmd == "Z")
+        else if (command == "S")
         {
             
         }
-        else if (cmd == "T")
+        else if (command == "Z")
+        {
+            
+        }
+        else if (command == "T")
         {
             
         }
@@ -70,4 +82,5 @@ int main()
     //   for (Observer* observer : observers) {
     //     delete observer;  // Explicitly delete each observer
     //   }
+    return 0;
 } // main
