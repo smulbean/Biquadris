@@ -5,7 +5,6 @@
 class Board {
  public:
    virtual ~Board();
-
    virtual char charAt(int row, int col, int tick) = 0;
 };
 
