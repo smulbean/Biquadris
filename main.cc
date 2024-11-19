@@ -14,9 +14,11 @@
 int main()
 {
     // make a new canvas for tetris
-    Board* canvas = new Blank;
+    Board* c1 = new Blank;
+    Board* c2 = new Blank;
     // make studio work on canvas
-    Player* p1 = new Player(canvas); // for now make it one player
+    Player* p1 = new Player(c1); // for now make it one player
+    Player* p2 = new Player(c2); // for now make it one player
     // list of observers
     // std::vector<Observer*> observers;
     // make two players, wich store their own canvas
