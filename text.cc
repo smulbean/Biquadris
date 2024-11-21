@@ -5,13 +5,13 @@
 #include <iostream>
 using namespace std;
 
-Text::Text(int t, int b, int l, int r, Studio *subject): t{t}, b{b}, l{l}, r{r}, subject{subject}{
+Text::Text(Studio *subject): subject{subject}{
 }
 
 void Text::notify(){
-  int cols = b - t + 1;
-  int rows = r - l + 1;
-    cout << '+';
+  int cols = 11;
+  int rows = 18; // but in reality 15 as the top 3 is display only, die when you hit 15
+  cout << '+';
   for (int j = 0; j < cols; ++j) cout << '-';
   cout << '+' << std::endl;
   for (int i = 0; i < rows; ++i) {

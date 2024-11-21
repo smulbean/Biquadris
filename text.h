@@ -4,10 +4,9 @@
 #include "subject.h"
 
 class Text : public Observer {
-  int t, b, l, r;
   Studio *subject;
  public:
-  Text(int t, int b, int l, int r, Studio *subject); // constructor
+  Text(Studio *subject); // constructor
   void notify() override;
   ~Text() override;
 };
