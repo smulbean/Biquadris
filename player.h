@@ -8,8 +8,9 @@
 #include "Board.h"
 #include "Level.h"
 #include "Subject.h"
-#include "studio"
-
+#include "studio.h"
+#include "block.h"
+using namespace std;
 
 
 class Player
@@ -18,17 +19,22 @@ private:
     Board* canvas;
     int score;
     int highscore;
+    int levelnum;
     Level* level;
-    Studio* canvas;
+    Studio* canva;
+    vector<Block*> blocks;
 public:
-    Player(Board* canvas, int score = 0, int highscore = 0, Level* level = new Level0());
+    Player(Board* canvas, int score = 0, int highscore = 0, int levelnum = 0, Level* level = new Level0());
     ~Player();
     int getScore();
     int getHighScore();
-    Level* getLevel();
+    int getLevel();
     Level* Levelup();
     Level* Leveldown();
     void force();
+    Block* curBlock();
+    void setcur(char c);
+    Studio* getcanvas();
 };
 
 

@@ -13,6 +13,7 @@ struct Player;
 
 class Level{
 	public:
+		Level(); // constructor
 		virtual BlockDecorator *createBlock() = 0; // factory method
 };
 
