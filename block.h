@@ -7,12 +7,12 @@
 #include "board.h"
 //abstract class for block
 
-class BlockDecorator : public Board {
+class Block : public Board {
 protected:
     Board* base;
 public:
-    BlockDecorator(Board* base);
-    virtual ~BlockDecorator();
+    Block(Board* base);
+    virtual ~Block();
 };
 
 #endif
