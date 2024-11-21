@@ -3,6 +3,7 @@
 #include "blank.h"
 #include "block.h"
 #include "level.h"
+#include "level0.h"
 #include "board.h"
 #include "observer.h"
 #include "text.h"
@@ -14,11 +15,14 @@
 int main()
 {
     // make a new canvas for tetris
-    Board* c1 = new Blank;
-    Board* c2 = new Blank;
+    Board* c1 = new Blank(); // fix this for parameters
+    Board* c2 = new Blank();
+    // start level 0
+    Level* l = new Levelzero(); // fix this for parameters
     // make studio work on canvas
-    Player* p1 = new Player(c1); // for now make it one player
-    Player* p2 = new Player(c2); // for now make it one player
+    Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
+    Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
+    Player* p = p1;
     // list of observers
     // std::vector<Observer*> observers;
     // make two players, wich store their own canvas
@@ -26,44 +30,66 @@ int main()
 
     while (std::cin >> command)
     {
-        if (command[0] == 'l')
+        if (command[0] == 'l' && command[2] == 'f')
         { // left
+            p->curBlock()->left();
+            p->getcanvas()->notifyObservers();
         }
         else if (command[0] == 'r')
         { // right
+            p->curBlock()->right();
+            p->getcanvas()->notifyObservers();
         }
         else if (command[1] == 'o')
         { // down
+            p->curBlock()->down();
+            p->getcanvas()->notifyObservers();
         }
         else if (command[1] == 'r')
         { // drop
+            p->curBlock()->drop();
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "I")
         {
+            p->setcur('I');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "J")
         {
-            
+            p->setcur('J');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "L")
         {
-            
+            p->setcur('L');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "O")
         {
-            
+            p->setcur('O');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "S")
         {
-            
+            p->setcur('S');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "Z")
         {
-            
+            p->setcur('Z');
+            p->getcanvas()->notifyObservers();
         }
         else if (command == "T")
         {
-            
+            p->setcur('T');
+            p->getcanvas()->notifyObservers();
+        }
+        else if (command[0] == 'l' && command[5] == 'u') { // levelup 
+            p->Levelup();
+        }
+        else if (command[0] == 'l' && command[5] == 'd') { // level down
+            p->Leveldown();
         }
 
         // else if (command == "addtext") {

@@ -1,5 +1,5 @@
-#ifndef __LEVEL0_H__
-#define __LEVEL0_H__
+#ifndef __LEVELZERO_H__
+#define __LEVELZERO_H__
 // this is the abstract class for level
 #include <iostream>
 #include <fstream>
@@ -11,8 +11,9 @@
 struct Player;
 
 
-class Level0 : public Level{
+class Levelzero : public Level{
 	public:
+		Levelzero(); // constructor
 		BlockDecorator *createBlock() override; // create blocks for level 0
 };
 
