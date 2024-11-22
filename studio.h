@@ -6,18 +6,17 @@
 class Board;
 
 class Studio : public Subject{
-  Board *thePicture;
+  Player *p1;
+  Player *p2;
   int ticks = 0;
 
  public:
-  explicit Studio( Board* picture ): thePicture{picture} {}
+  explicit Studio( Player* player1, Player* player2): p1{player1}, p2{player2}{}
 
-  Board*& picture() { return thePicture; }
   void reset();
   void render();
-  void animate(int numTicks);
-
-  char getState(int row, int col) const override;
+  char getStatep1(int row, int col) const override;
+  char getStatep2(int row, int col) const override;
 
   ~Studio();
 };

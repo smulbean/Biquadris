@@ -1,18 +1,27 @@
 #include "studio.h"
 #include "board.h"
 
-void Studio::reset() { ticks = 0; }
-
-void Studio::render() { ++ticks; }
-
-void Studio::animate(int numTicks) {
-    for ( int i = 0; i < numTicks; ++i ) render();
+void Studio::reset()
+{
+    p1->reset();
+    p2->reset();
 }
 
-char Studio::getState(int row, int col) const {
-    return thePicture->charAt(row, col, ticks);
+void Studio::render(){
+    
 }
 
-Studio::~Studio() { 
-    delete thePicture; 
+char Studio::getStatep1(int row, int col) const
+{
+    return p1->getcanvas()->charAt(row, col);
+}
+
+char Studio::getStatep2(int row, int col) const
+{
+    return p2->getcanvas()->charAt(row, col);
+}
+
+Studio::~Studio()
+{
+    delete thePicture;
 }

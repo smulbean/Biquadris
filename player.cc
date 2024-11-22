@@ -90,3 +90,12 @@ Studio* Player::getcanvas(){
     return canva;
 }
 
+void Player::reset(){
+    for (auto it = blocks.begin(); it != blocks.end(); ++it) {
+        observers.erase(it);
+    }
+    int score = 0;
+    int levelnum = 0;
+    level = new Levelzero();
+}
+

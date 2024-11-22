@@ -3,13 +3,14 @@
 #include "blank.h"
 #include "block.h"
 #include "level.h"
-#include "level0.h"
+#include "levelzero.h"
 #include "board.h"
 #include "observer.h"
 #include "text.h"
 #include "observer.h"
 #include "subject.h"
 #include "player.h"
+#include "studio.h"
 
 
 int main()
@@ -23,6 +24,8 @@ int main()
     Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
     Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
     Player* p = p1;
+    // studio will take both players
+    Studio s{p1, p2};
     // list of observers
     // std::vector<Observer*> observers;
     // make two players, wich store their own canvas
@@ -33,57 +36,57 @@ int main()
         if (command[0] == 'l' && command[2] == 'f')
         { // left
             p->curBlock()->left();
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command[0] == 'r')
         { // right
             p->curBlock()->right();
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command[1] == 'o')
         { // down
             p->curBlock()->down();
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command[1] == 'r')
         { // drop
             p->curBlock()->drop();
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "I")
         {
             p->setcur('I');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "J")
         {
             p->setcur('J');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "L")
         {
             p->setcur('L');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "O")
         {
             p->setcur('O');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "S")
         {
             p->setcur('S');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "Z")
         {
             p->setcur('Z');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command == "T")
         {
             p->setcur('T');
-            p->getcanvas()->notifyObservers();
+            s.notifyObservers();
         }
         else if (command[0] == 'l' && command[5] == 'u') { // levelup 
             p->Levelup();
