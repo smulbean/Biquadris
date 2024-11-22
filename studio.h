@@ -14,7 +14,6 @@ class Studio : public Subject{
   explicit Studio( Player* player1, Player* player2): p1{player1}, p2{player2}{}
 
   void reset();
-  void render();
   char getStatep1(int row, int col) const override;
   char getStatep2(int row, int col) const override;
 

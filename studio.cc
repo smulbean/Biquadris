@@ -7,10 +7,6 @@ void Studio::reset()
     p2->reset();
 }
 
-void Studio::render(){
-    
-}
-
 char Studio::getStatep1(int row, int col) const
 {
     return p1->getcanvas()->charAt(row, col);
