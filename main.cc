@@ -13,19 +13,52 @@
 #include "studio.h"
 
 
-int main()
-{
-    // make a new canvas for tetris
-    Board* c1 = new Blank(); // fix this for parameters
-    Board* c2 = new Blank();
-    // start level 0
-    Level* l = new Levelzero(); // fix this for parameters
-    // make studio work on canvas
+int main(int argc, char* argv[])
+{   
+    // initialize players
     Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
     Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
     Player* p = p1;
+    // make studio work on canvas
     // studio will take both players
     Studio s{p1, p2};
+    Level* l;
+    if (argc > 1) {
+        bool textonly = false;
+        for (int i = 1; i < argc; ++i) {
+            if (argv[i] == "-text"){
+                // text only
+                Text *Tobserver = new Text(&s);
+                s.attach(Tobserver);
+                textonly = true;
+            }
+            if (argv[i] == "-startlevel"){
+                //l == new Level argv[i + 1]
+            }
+            if (argv[i] == "-scriptfile1"){
+                //read in to player 1 from argv[i + 1]
+            }
+            if (argv[i] == "-scriptfile2"){
+                //read in to player 2 from argv[i + 1]
+            }
+            if (argv[i] == "-seed "){
+                //read in seed from argv[i + 1]
+            }
+        }
+        if (!textonly){
+            Text *Tobserver = new Text(&s);
+            s.attach(Tobserver);
+            // Graphic *Gobserver = new Graphic(&s);
+            // s.attach(Gobserver);
+        }
+    } else {
+        // start level 0
+        l = new Levelzero(); // fix this for parameters
+    }
+    // make a new canvas for tetris
+    Board* c1 = new Blank(); // fix this for parameters
+    Board* c2 = new Blank();
+   
     // list of observers
     // std::vector<Observer*> observers;
     // make two players, wich store their own canvas
