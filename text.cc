@@ -25,25 +25,37 @@ void Text::notify(){
   for (int i = 0; i < cols; i++){
     cout << "-";
   }
+  for (int i = 0; i < spacing; i++){
+    cout << " ";
+  }
   for (int i = cols + spacing; i < 2*cols + spacing; i++){
     cout << "-";
   }
+  cout << endl;
   // print board
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < cols; ++j) {
       cout << subject->getStatep1(i, j);
     }
-    for (int j = cols+spacing; j < 2*cols+spacing; ++j) {
-      cout << subject->getStatep2(i, j);
+    for (int j = 0; j < spacing; ++j) {
+      cout << " ";
     }
+    for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
+      cout << subject->getStatep2(i, j - (cols+spacing));
+    }
+    cout << endl;
   }
   // print second seperator
   for (int i = 0; i < cols; i++){
     cout << "-";
   }
+  for (int i = 0; i < spacing; i++){
+    cout << " ";
+  }
   for (int i = cols + spacing; i < 2*cols + spacing; i++){
     cout << "-";
   }
+  cout << endl;
   //next block
   //manual function that presents the blocks
 }

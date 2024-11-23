@@ -23,45 +23,57 @@ int main(int argc, char* argv[])
     bool startlevel = false;
     bool scriptfile1 = false;
     bool scriptfile2 = false;
-    bool seed = false;
+    // bool seed = false;
     string file1string;
     string file2string;
     // list of observers
     std::vector<Observer*> observers;
     // make studio work on canvas
     // studio will take both players
-    if (argc > 1) {
-        for (int i = 1; i < argc; ++i) {
-            if (argv[i] == "-text"){
-                // text only
-                textonly = true;
-            }
-            if (argv[i] == "-startlevel"){
-                //l == new Level argv[i + 1]
-                startlevel = true;
-            }
-            if (argv[i] == "-scriptfile1"){
-                //read in to player 1 from argv[i + 1]
-                file1string = argv[i + 1];
-                scriptfile1 = true;
-            }
-            if (argv[i] == "-scriptfile2"){
-                //read in to player 2 from argv[i + 1]
-                file2string = argv[i+1];
-                scriptfile2 = true;
-            }
-            if (argv[i] == "-seed "){
-                //read in seed from argv[i + 1]
-                seed = true;
-            }
-        }
-    } 
+    // if (argc > 1) {
+    //     for (int i = 1; i < argc; ++i) {
+    //         if (argv[i] == "-text"){
+    //             // text only
+    //             textonly = true;
+    //         }
+    //         if (argv[i] == "-startlevel"){
+    //             //l == new Level argv[i + 1]
+    //             if (std::stoi(argv[i + 1]) == 1){
+    //                 l = new Levelone();
+    //             }
+    //             else if (std::stoi(argv[i + 1]) == 2){
+    //                 l = new Leveltwo();
+    //             }
+    //             else if (std::stoi(argv[i + 1]) == 3){
+    //                 l = new Levelthree();
+    //             }
+    //             else if (std::stoi(argv[i + 1]) == 4){
+    //                 l = new Levelfour();
+    //             }
+    //             startlevel = true;
+    //         }
+    //         if (argv[i] == "-scriptfile1"){
+    //             //read in to player 1 from argv[i + 1]
+    //             file1string = argv[i + 1];
+    //             scriptfile1 = true;
+    //         }
+    //         if (argv[i] == "-scriptfile2"){
+    //             //read in to player 2 from argv[i + 1]
+    //             file2string = argv[i+1];
+    //             scriptfile2 = true;
+    //         }
+    //         if (argv[i] == "-seed "){
+    //             //read in seed from argv[i + 1]
+    //             seed = true;
+    //         }
+    //     }
+    // } 
     if (!startlevel){
         // start level 0
-        l = new Levelzero(); // fix this for parameters
+        l = new LevelZero(); // fix this for parameters
     }
     if (!scriptfile1){
-        file1string = "sequence1.txt";
+        file1string = "sequence1.txt"; // wrong
     }
     if (!scriptfile2){
         file2string = "sequence2.txt";
@@ -93,43 +105,32 @@ int main(int argc, char* argv[])
     //read from files
     std::ifstream file1(file1string); // did not account for the edge case where one file is longer than the other one
     std::ifstream file2(file2string);
-    std::string line;
-    bool file1_turn = true; // Flag to alternate between files
+    std::string line; // Flag to alternate between files
 
-    // make two players, wich store their own canvas
+    bool turn1 = true;
 
-
-    while (!(file1.eof() && file2.eof()))
+    string command;
+    while (cin >> command)
     {
-        // chose from which file to read
-        if (file1_turn && std::getline(file1, line)) {
-            p = p1;
-        } else if (!file1_turn && std::getline(file2, line)) {
-            p = p2;
-        }
-        file1_turn = !file1_turn;
-        std::stringstream ss(line);
-        std::string command;
-        ss >> command;
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
-            p->curBlock()->left();
+            p->getcanvas()->left();
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
-            p->curBlock()->right();
+            p->getcanvas()->right();
             s.notifyObservers();
         }
         else if (command[1] == 'o')
         { // down
-            p->curBlock()->down();
+            p->getcanvas()->down();
             s.notifyObservers();
         }
         else if (command[1] == 'r')
         { // drop
-            p->curBlock()->drop();
+            p->getcanvas()->drop();
             s.notifyObservers();
         }
         else if (command == "I")
@@ -137,44 +138,54 @@ int main(int argc, char* argv[])
             p->setcur('I');
             s.notifyObservers();
         }
-        else if (command == "J")
-        {
-            p->setcur('J');
-            s.notifyObservers();
-        }
-        else if (command == "L")
-        {
-            p->setcur('L');
-            s.notifyObservers();
-        }
-        else if (command == "O")
-        {
-            p->setcur('O');
-            s.notifyObservers();
-        }
-        else if (command == "S")
-        {
-            p->setcur('S');
-            s.notifyObservers();
-        }
-        else if (command == "Z")
-        {
-            p->setcur('Z');
-            s.notifyObservers();
-        }
-        else if (command == "T")
-        {
-            p->setcur('T');
-            s.notifyObservers();
-        }
-        else if (command[0] == 'l' && command[5] == 'u') { // levelup 
-            p->Levelup();
-        }
-        else if (command[0] == 'l' && command[5] == 'd') { // level down
-            p->Leveldown();
-        }
+        // else if (command == "J")
+        // {
+        //     p->setcur('J');
+        //     s.notifyObservers();
+        // }
+        // else if (command == "L")
+        // {
+        //     p->setcur('L');
+        //     s.notifyObservers();
+        // }
+        // else if (command == "O")
+        // {
+        //     p->setcur('O');
+        //     s.notifyObservers();
+        // }
+        // else if (command == "S")
+        // {
+        //     p->setcur('S');
+        //     s.notifyObservers();
+        // }
+        // else if (command == "Z")
+        // {
+        //     p->setcur('Z');
+        //     s.notifyObservers();
+        // }
+        // else if (command == "T")
+        // {
+        //     p->setcur('T');
+        //     s.notifyObservers();
+        // }
+        // else if (command[0] == 'l' && command[5] == 'u') { // levelup 
+        //     p->Levelup();
+        // }
+        // else if (command[0] == 'l' && command[5] == 'd') { // level down
+        //     p->Leveldown();
+        // }
         else if (command[0] == 'r' && command[5] == 'e') { // restart
             p->restart();
+        }
+        if (p->getcanvas()->done()){
+            // level will return next block, will call p->setcur('L') and then notify
+        }
+        if (turn1){
+            p = p2;
+            turn1 = false;
+        } else {
+            p = p1;
+            turn1 = true;
         }
     } 
     file1.close();

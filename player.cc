@@ -2,16 +2,13 @@
 #include "block.h"
 #include "level0.h"
 #include "blank.h"
+#include "iblock.h"
 
-Player::Player(Board* canvas, int score, int high, int levelnum, Level* Level) : 
-canvas{canvas}, score{score}, highscore{high}, level{level}, levelnum{}
-{
-    Studio s{canvas};
-}
+Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
+canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {}
 
 Player::~Player()
 {
-    delete this;
 }
 
 int Player::getScore(){
@@ -25,65 +22,67 @@ int Player::getLevel(){
 }
 Level *Player::Levelup(){
     // level up
-    if (levelnum == 0){
-        level = new levelOne(); // and its level one parameters
-    } else if (levelnum == 1){
-        level = new levelTwo(); // and its level one parameters
-    } else if (levelnum == 2){
-        level = new levelThree(); // and its level one parameters
-    } else if (levelnum == 3){
-        level = new levelFour(); // and its level one parameters
-    } else {
-        return level;
-    }
+
+    // if (levelnum == 0){
+    //     level = new levelone(); // and its level one parameters
+    // } else if (levelnum == 1){
+    //     level = new leveltwo(); // and its level one parameters
+    // } else if (levelnum == 2){
+    //     level = new levelthree(); // and its level one parameters
+    // } else if (levelnum == 3){
+    //     level = new levelfour(); // and its level one parameters
+    // } else {
+    //     return level;
+    // }
+    return level;
 
 }
 Level *Player::Leveldown(){
     // level down
-    if (levelnum == 2){
-        level = new levelone(); // and its level one parameters
-    } else if (levelnum == 3){
-        level = new leveltwo(); // and its level one parameters
-    } else if (levelnum == 4){
-        level = new levelthree(); // and its level one parameters
-    } else if (levelnum == 1){
-        level = new Levelzero(); // and its level one parameters
-    } else {
-        return level;
-    }
+    // if (levelnum == 2){
+    //     level = new levelone(); // and its level one parameters
+    // } else if (levelnum == 3){
+    //     level = new leveltwo(); // and its level one parameters
+    // } else if (levelnum == 4){
+    //     level = new levelthree(); // and its level one parameters
+    // } else if (levelnum == 1){
+    //     level = new Levelzero(); // and its level one parameters
+    // } else {
+    //     return level;
+    // }
+    return level;
 }
 void Player::force(){
     // force
 }
 
-Block* Player::curBlock(){
-    return blocks[blocks.size() - 1];
-}
+// Block* Player::curBlock(){
+//     return blocks[blocks.size() - 1];
+// }
 
 void Player::setcur(char c){
-    Block *cur;
     if (c == 'I'){
-        cur = new IBlock(); // fix this later
+        canvas = new IBlock(canvas); // fix this later
     }
-    else if (c == 'J'){
-        cur = new JBlock(); // fix this later
-    }
-    else if (c == 'L'){
-        cur = new LBlock(); // fix this later
-    }
-    else if (c == 'O'){
-        cur = new OBlock(); // fix this later
-    }
-    else if (c == 'S'){
-        cur = new SBlock(); // fix this later
-    }
-    else if (c == 'Z'){
-        cur = new ZBlock(); // fix this later
-    }
-    else{
-        cur = new TBlock(); // fix this later
-    }
-    blocks.emplace_back(cur);
+    // else if (c == 'J'){
+    //     cur = new JBlock(); // fix this later
+    // }
+    // else if (c == 'L'){
+    //     cur = new LBlock(); // fix this later
+    // }
+    // else if (c == 'O'){
+    //     cur = new OBlock(); // fix this later
+    // }
+    // else if (c == 'S'){
+    //     cur = new SBlock(); // fix this later
+    // }
+    // else if (c == 'Z'){
+    //     cur = new ZBlock(); // fix this later
+    // }
+    // else{
+    //     cur = new TBlock(); // fix this later
+    // }
+
 }
 
 
@@ -92,12 +91,11 @@ Board* Player::getcanvas(){
 }
 
 void Player::restart(){
-    for (auto it = blocks.begin(); it != blocks.end(); ++it) {
-        blocks.erase(it);
-    }
-    int score = 0;
-    int levelnum = 0;
-    level = new LevelZero();
+
+    blocks.erase(blocks.begin(), blocks.end());
+    // int score = 0;
+    // int levelnum = 0;
+    // level = new Levelzero();
     canvas = new Blank();
 }
 

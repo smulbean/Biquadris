@@ -8,17 +8,11 @@
 //abstract class for block
 
 class Block : public Board {
-protected:
-    Board* base;
-public:
-    Block(Board* base);
-    virtual ~Block();
-    
-    void rotateCC();
-    void down();
-    void left();
-    void right();
-    char charAt();
+    protected:
+        Board* base;
+    public:
+        Block(Board* base);
+        virtual ~Block();
 };
 
 #endif
