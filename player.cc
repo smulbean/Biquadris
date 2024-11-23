@@ -62,6 +62,7 @@ Block* Player::curBlock(){
 
 void Player::setcur(char c){
     Block *cur;
+    // Block *name = new IBlock();
     if (c == 'I'){
         cur = new IBlock(); // fix this later
     }

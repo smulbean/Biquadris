@@ -14,6 +14,7 @@ struct Player;
 class Levelzero : public Level{
 	public:
 		Levelzero(); // constructor
+		// need a destructor
 		BlockDecorator *createBlock() override; // create blocks for level 0
 };
 
