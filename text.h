@@ -5,6 +5,7 @@
 
 class Text : public Observer {
   Studio *subject;
+  bool blind; // remember to put in blind
  public:
   Text(Studio *subject); // constructor
   void notify() override;
