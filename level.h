@@ -12,9 +12,11 @@ struct Player;
 
 
 class Level{
+	int playerNumber;
 	public:
-		Level(); // constructor
-		virtual Block *createBlock() = 0; // factory method
+		Level(int id) : playerNumber{id} {} // constructor
+		virtual ~Level() = 0;
+		virtual char createBlock() = 0; // factory method
 };
 
 

@@ -22,6 +22,7 @@ int Player::getLevel(){
 }
 Level *Player::Levelup(){
     // level up
+
     // if (levelnum == 0){
     //     level = new levelone(); // and its level one parameters
     // } else if (levelnum == 1){
@@ -90,6 +91,7 @@ Board* Player::getcanvas(){
 }
 
 void Player::restart(){
+
     blocks.erase(blocks.begin(), blocks.end());
     // int score = 0;
     // int levelnum = 0;
