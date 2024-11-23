@@ -3,16 +3,17 @@
 #include "coor.h"
 #include "block.h" // h only no .cc
 
-class IBlock : public Block{
-    std::vector<Coor> Coor;
+class IBlock : public Block
+{
+    std::vector<Coor *> coordinates;
     bool isHeavy;
 
 private:
     int phase;
 
 public:
-    IBlock(); //constructor
-    ~IBlock(); //destructor
+    IBlock(Board* base);  // constructor
+    ~IBlock(); // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;
@@ -20,9 +21,6 @@ public:
     void right() override;
     char charAt(int row, int col) override;
     void drop() override;
-}
-
+};
 
 #endif
-
-

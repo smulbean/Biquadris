@@ -13,7 +13,7 @@ protected:
 public:
     Block(Board* base);
     virtual ~Block();
-
+    virtual void rotateC();
     virtual void rotateCC() = 0;
     virtual void down() = 0;
     virtual void left() = 0;
