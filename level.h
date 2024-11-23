@@ -16,7 +16,7 @@ class Level{
 	public:
 		Level(int id) : playerNumber{id} {} // constructor
 		virtual ~Level() = 0;
-		virtual Block *createBlock() = 0; // factory method
+		virtual char createBlock() = 0; // factory method
 };
 
 

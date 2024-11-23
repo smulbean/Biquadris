@@ -19,7 +19,7 @@ class LevelZero : public Level{
 	public:
 		LevelZero(int id); // constructor
 		~LevelZero();
-		Block *createBlock() override; // create blocks for level 0
+		char createBlock() override; // create blocks for level 0
 };
 
 #endif

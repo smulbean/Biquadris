@@ -16,31 +16,12 @@ LevelZero::LevelZero(int id) : Level{id}, sequenceIdx{0} {
 
 LevelZero::~LevelZero() {}
 
-Block* LevelZero::createBlock() {
-    std::string blockID = playerSequence[sequenceIdx]; // blockID gives the actual block
-    Block *createdBlock = nullptr; // must initialize outside of else statement
-
-    if (blockID == "I") {
-        createdBlock = new IBlock();
-    } else if (blockID == "J") {
-        createdBlock = new JBlock();
-    } else if (blockID == "L") {
-        createdBlock = new LBlock();
-    } else if (blockID == "O") {
-        createdBlock = new OBlock();
-    } else if (blockID == "S") {
-        createdBlock = new SBlock();
-    } else if (blockID == "Z") {
-        createdBlock = new ZBlock();
-    } else if (blockID == "T") {
-        createdBlock = new TBlock();
-    }
-
-    if (sequenceIdx == playerSequence.size() - 1) { 
-        sequenceIdx = 0; // if end of sequence, go back to front
+char LevelZero::createBlock() {
+    char blockID = playerSequence[sequenceIdx][0];
+    if (sequenceIdx == playerSequence.size() - 1) {
+        sequenceIdx = 0;
     } else {
         sequenceIdx++;
     }
-
-    return createdBlock;
+    return blockID;
 }
