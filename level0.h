@@ -11,11 +11,11 @@
 struct Player;
 
 
-class Levelzero : public Level{
+class LevelZero : public Level{
 	public:
-		Levelzero(); // constructor
+		LevelZero(); // constructor
 		// need a destructor
-		BlockDecorator *createBlock() override; // create blocks for level 0
+		Block *createBlock() override; // create blocks for level 0
 };
 
 

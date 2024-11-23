@@ -15,6 +15,7 @@ public:
     virtual ~Block();
     
     void rotateCC();
+    void drop();
     void down();
     void left();
     void right();

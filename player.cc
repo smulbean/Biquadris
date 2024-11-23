@@ -3,8 +3,8 @@
 #include "level0.h"
 #include "blank.h"
 
-Player::Player(Board* canvas, int score, int high, int levelnum, Level* Level) : 
-canvas{canvas}, score{score}, highscore{high}, level{level}, levelnum{}
+Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
+canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level}
 {
     Studio s{canvas};
 }

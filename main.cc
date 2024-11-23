@@ -179,7 +179,7 @@ int main(int argc, char* argv[])
         }
         if (turn1){
             p = p2;
-            turn1 = false
+            turn1 = false;
         } else {
             p = p1;
             turn1 = true;
