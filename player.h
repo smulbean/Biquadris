@@ -33,7 +33,7 @@ public:
     Level *Levelup();
     Level *Leveldown();
     void force();
-    Block *curBlock(); // Level->func() => block
+    // Block *curBlock(); // Level->func() => block
     void setcur(char c);
     Board *getcanvas();
     void restart();

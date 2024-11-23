@@ -2,18 +2,22 @@
 #include "block.h"
 #include "iblock.h"
 #include "board.h"
+#include <iostream>
+
 
 IBlock::IBlock(Board* base): Block{base} {
     phase = 1;
-    coordinates.emplace_back(new Coor(4, 2));
-    coordinates.emplace_back(new Coor(5, 2));
-    coordinates.emplace_back(new Coor(6, 2));
-    coordinates.emplace_back(new Coor(7, 2));
+    coordinates[0] = new Coor(4, 2);
+    coordinates[1] = new Coor(5, 2);
+    coordinates[2] = new Coor(6, 2);
+    coordinates[3] = new Coor(7, 2);
 
 }
 
 IBlock::~IBlock() {
-    coordinates.clear();
+    for (int i = 0; i<4 ; i++){
+        delete coordinates[i];
+    }
 }
 
 void IBlock::rotateCC() {
@@ -83,6 +87,7 @@ void IBlock::left(){
             return;
         }
     }
+    std::cout << "Here" << std::endl;
 
     for(int i = 0; i < 4; i++) {
         coordinates[i]->x--;
@@ -98,7 +103,7 @@ void IBlock::right(){
     }
 
     for(int i = 0; i < 4; i++) {
-        coordinates[i]->x--;
+        coordinates[i]->x++;
     }
     return;
 }

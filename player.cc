@@ -55,15 +55,13 @@ void Player::force(){
     // force
 }
 
-Block* Player::curBlock(){
-    return blocks[blocks.size()];
-}
+// Block* Player::curBlock(){
+//     return blocks[blocks.size() - 1];
+// }
 
 void Player::setcur(char c){
-    Block *cur;
     if (c == 'I'){
         canvas = new IBlock(canvas); // fix this later
-        cur = new IBlock(canvas);
     }
     // else if (c == 'J'){
     //     cur = new JBlock(); // fix this later
@@ -83,7 +81,7 @@ void Player::setcur(char c){
     // else{
     //     cur = new TBlock(); // fix this later
     // }
-    blocks.emplace_back();
+
 }
 
 

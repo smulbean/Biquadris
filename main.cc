@@ -115,22 +115,22 @@ int main(int argc, char* argv[])
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
-            p->curBlock()->left();
+            p->getcanvas()->left();
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
-            p->curBlock()->right();
+            p->getcanvas()->right();
             s.notifyObservers();
         }
         else if (command[1] == 'o')
         { // down
-            p->curBlock()->down();
+            p->getcanvas()->down();
             s.notifyObservers();
         }
         else if (command[1] == 'r')
         { // drop
-            p->curBlock()->drop();
+            p->getcanvas()->drop();
             s.notifyObservers();
         }
         else if (command == "I")
@@ -176,6 +176,9 @@ int main(int argc, char* argv[])
         // }
         else if (command[0] == 'r' && command[5] == 'e') { // restart
             p->restart();
+        }
+        if (p->getcanvas()->done()){
+            // level will return next block, will call p->setcur('L') and then notify
         }
         if (turn1){
             p = p2;
