@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     bool startlevel = false;
     bool scriptfile1 = false;
     bool scriptfile2 = false;
-    bool seed = false;
+    // bool seed = false;
     string file1string;
     string file2string;
     // list of observers

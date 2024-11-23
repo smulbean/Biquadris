@@ -5,7 +5,7 @@
 
 class IBlock : public Block
 {
-    std::vector<Coor *> coordinates;
+    std::vector<Coor *> coordinates; // dynamic
     bool isHeavy;
 
 private:

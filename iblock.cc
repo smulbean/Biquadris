@@ -5,10 +5,10 @@
 
 IBlock::IBlock(Board* base): Block{base} {
     phase = 1;
-    coordinates[0] = new Coor(4, 2);
-    coordinates[1] = new Coor(5, 2);
-    coordinates[2] = new Coor(6, 2);
-    coordinates[3] = new Coor(7, 2);
+    coordinates.emplace_back(new Coor(4, 2));
+    coordinates.emplace_back(new Coor(5, 2));
+    coordinates.emplace_back(new Coor(6, 2));
+    coordinates.emplace_back(new Coor(7, 2));
 
 }
 

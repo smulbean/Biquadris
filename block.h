@@ -8,18 +8,17 @@
 //abstract class for block
 
 class Block : public Board {
-protected:
-    Board* base;
-public:
-    Block(Board* base);
-    virtual ~Block();
-    virtual void rotateC();
-    virtual void rotateCC() = 0;
-    virtual void down() = 0;
-    virtual void left() = 0;
-    virtual void right() = 0;
-    virtual void drop() = 0;
-    char charAt(int row, int col) override;
+    protected:
+        Board* base;
+    public:
+        Block(Board* base);
+        virtual ~Block();
+        virtual void rotateC() = 0;
+        virtual void rotateCC() = 0;
+        virtual void down() = 0;
+        virtual void left() = 0;
+        virtual void right() = 0;
+        virtual void drop() = 0;
 };
 
 #endif

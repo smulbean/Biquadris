@@ -5,14 +5,10 @@
 #include "iblock.h"
 
 Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level}
-{
-    Studio s{canvas};
-}
+canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {}
 
 Player::~Player()
 {
-    delete this;
 }
 
 int Player::getScore(){
@@ -37,6 +33,7 @@ Level *Player::Levelup(){
     // } else {
     //     return level;
     // }
+    return level;
 
 }
 Level *Player::Leveldown(){
@@ -52,19 +49,21 @@ Level *Player::Leveldown(){
     // } else {
     //     return level;
     // }
+    return level;
 }
 void Player::force(){
     // force
 }
 
 Block* Player::curBlock(){
-    return blocks[blocks.size() - 1];
+    return blocks[blocks.size()];
 }
 
 void Player::setcur(char c){
-    // Block *name = new IBlock();
+    Block *cur;
     if (c == 'I'){
         canvas = new IBlock(canvas); // fix this later
+        cur = new IBlock(canvas);
     }
     // else if (c == 'J'){
     //     cur = new JBlock(); // fix this later
@@ -84,7 +83,7 @@ void Player::setcur(char c){
     // else{
     //     cur = new TBlock(); // fix this later
     // }
-    blocks.emplace_back(canvas);
+    blocks.emplace_back();
 }
 
 
@@ -93,11 +92,9 @@ Board* Player::getcanvas(){
 }
 
 void Player::restart(){
-    for (auto it = blocks.begin(); it != blocks.end(); ++it) {
-        blocks.erase(it);
-    }
-    int score = 0;
-    int levelnum = 0;
+    blocks.erase(blocks.begin(), blocks.end());
+    // int score = 0;
+    // int levelnum = 0;
     // level = new Levelzero();
     canvas = new Blank();
 }

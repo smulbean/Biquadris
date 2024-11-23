@@ -1,5 +1,8 @@
 #include "level0.h"
 
-LevelZero::LevelZero(){
-    
+LevelZero::LevelZero()
+{}
+
+Block *LevelZero::createBlock(){
+
 }
