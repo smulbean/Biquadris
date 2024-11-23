@@ -1,9 +1,11 @@
 #include <iostream>
+#include <string>
 #include <vector>
+#include <sstream>
 #include "blank.h"
 #include "block.h"
 #include "level.h"
-#include "levelzero.h"
+#include "level0.h"
 #include "board.h"
 #include "observer.h"
 #include "text.h"
@@ -14,64 +16,108 @@
 
 
 int main(int argc, char* argv[])
-{   
-    // initialize players
-    Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
-    Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
-    Player* p = p1;
+{      
+    //initialize a level
+    Level* l;
+    bool textonly = false;
+    bool startlevel = false;
+    bool scriptfile1 = false;
+    bool scriptfile2 = false;
+    bool seed = false;
+    string file1string;
+    string file2string;
+    // list of observers
+    std::vector<Observer*> observers;
     // make studio work on canvas
     // studio will take both players
-    Studio s{p1, p2};
-    Level* l;
     if (argc > 1) {
-        bool textonly = false;
         for (int i = 1; i < argc; ++i) {
             if (argv[i] == "-text"){
                 // text only
-                Text *Tobserver = new Text(&s);
-                s.attach(Tobserver);
                 textonly = true;
             }
             if (argv[i] == "-startlevel"){
                 //l == new Level argv[i + 1]
+                startlevel = true;
             }
             if (argv[i] == "-scriptfile1"){
                 //read in to player 1 from argv[i + 1]
+                file1string = argv[i + 1];
+                scriptfile1 = true;
             }
             if (argv[i] == "-scriptfile2"){
                 //read in to player 2 from argv[i + 1]
+                file2string = argv[i+1];
+                scriptfile2 = true;
             }
             if (argv[i] == "-seed "){
                 //read in seed from argv[i + 1]
+                seed = true;
             }
         }
-        if (!textonly){
-            Text *Tobserver = new Text(&s);
-            s.attach(Tobserver);
-            // Graphic *Gobserver = new Graphic(&s);
-            // s.attach(Gobserver);
-        }
-    } else {
+    } 
+    if (!startlevel){
         // start level 0
         l = new Levelzero(); // fix this for parameters
+    }
+    if (!scriptfile1){
+        file1string = "sequence1.txt";
+    }
+    if (!scriptfile2){
+        file2string = "sequence2.txt";
     }
     // make a new canvas for tetris
     Board* c1 = new Blank(); // fix this for parameters
     Board* c2 = new Blank();
-   
-    // list of observers
-    // std::vector<Observer*> observers;
-    // make two players, wich store their own canvas
-    std::string command;
+    // initialize players
+    Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
+    Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
+    Player* p = p1;
+    // create studio
+    Studio s{p1, p2};
+    if (!textonly){
+        Text *Tobserver = new Text(&s);
+        s.attach(Tobserver);
+        observers.push_back(Tobserver);
+        // Graphic *Gobserver = new Graphic(&s);
+        // s.attach(Gobserver);
+        //observers.push_back(Gobserver);
+    }
+    //if textonly, then create the text observer
+    if (textonly){
+        Text *Tobserver = new Text(&s);
+        s.attach(Tobserver);
+        observers.push_back(Tobserver);
+    }
 
-    while (std::cin >> command)
+    //read from files
+    std::ifstream file1(file1string); // did not account for the edge case where one file is longer than the other one
+    std::ifstream file2(file2string);
+    std::string line;
+    bool file1_turn = true; // Flag to alternate between files
+
+    // make two players, wich store their own canvas
+
+
+    while (!(file1.eof() && file2.eof()))
     {
+        // chose from which file to read
+        if (file1_turn && std::getline(file1, line)) {
+            p = p1;
+        } else if (!file1_turn && std::getline(file2, line)) {
+            p = p2;
+        }
+        file1_turn = !file1_turn;
+        std::stringstream ss(line);
+        std::string command;
+        ss >> command;
+        // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
             p->curBlock()->left();
             s.notifyObservers();
         }
-        else if (command[0] == 'r')
+        else if (command[0] == 'r' && command[1] == 'i')
         { // right
             p->curBlock()->right();
             s.notifyObservers();
@@ -127,24 +173,14 @@ int main(int argc, char* argv[])
         else if (command[0] == 'l' && command[5] == 'd') { // level down
             p->Leveldown();
         }
-
-        // else if (command == "addtext") {
-        //   int top, bottom, left, right;
-        //   std::cin >> top >> bottom >> left >> right;
-        //   Text *Tobserver = new Text(top, bottom, left, right, &s);
-        //   s.attach(Tobserver);
-        //   observers.push_back(Tobserver);
-        // }
-        // else if (command == "addgraphics") {
-        //   int top, bottom, left, right;
-        //   std::cin >> top >> bottom >> left >> right;
-        //   Graphic *Gobserver = new Graphic(top, bottom, left, right, &s);
-        //   s.attach(Gobserver);
-        //   observers.push_back(Gobserver);
-        // } // if
-    } // while
-    //   for (Observer* observer : observers) {
-    //     delete observer;  // Explicitly delete each observer
-    //   }
+        else if (command[0] == 'r' && command[5] == 'e') { // restart
+            p->restart();
+        }
+    } 
+    file1.close();
+    file2.close();
+    for (Observer* observer : observers) {
+        delete observer;  // Explicitly delete each observer
+    }
     return 0;
 } // main

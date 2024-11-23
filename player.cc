@@ -1,6 +1,7 @@
 #include "player.h"
 #include "block.h"
 #include "level0.h"
+#include "blank.h"
 
 Player::Player(Board* canvas, int score, int high, int levelnum, Level* Level) : 
 canvas{canvas}, score{score}, highscore{high}, level{level}, levelnum{}
@@ -86,16 +87,17 @@ void Player::setcur(char c){
 }
 
 
-Studio* Player::getcanvas(){
-    return canva;
+Board* Player::getcanvas(){
+    return canvas;
 }
 
-void Player::reset(){
+void Player::restart(){
     for (auto it = blocks.begin(); it != blocks.end(); ++it) {
-        observers.erase(it);
+        blocks.erase(it);
     }
     int score = 0;
     int levelnum = 0;
     level = new Levelzero();
+    canvas = new Blank();
 }
 

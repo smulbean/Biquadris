@@ -20,7 +20,7 @@ private:
     int highscore;
     int levelnum;
     Level *level;
-    Studio *canva;
+    // Studio *canva;
     vector<Block *> blocks;
 
 public:
@@ -35,8 +35,8 @@ public:
     void force();
     Block *curBlock();
     void setcur(char c);
-    Studio *getcanvas();
-    void reset();
+    Board *getcanvas();
+    void restart();
 };
 
 #endif

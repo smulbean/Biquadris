@@ -2,6 +2,7 @@
 #define STUDIO_H
 #include <iostream>
 #include "subject.h"
+#include "player.h"
 
 class Board;
 
@@ -14,6 +15,8 @@ class Studio : public Subject{
   explicit Studio( Player* player1, Player* player2): p1{player1}, p2{player2}{}
 
   void reset();
+  Player* getp1();
+  Player* getp2();
   char getStatep1(int row, int col) const override;
   char getStatep2(int row, int col) const override;
 
