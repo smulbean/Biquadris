@@ -1,3 +1,4 @@
+#include <iostream>
 #include "studio.h"
 #include "board.h"
 

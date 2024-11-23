@@ -38,6 +38,18 @@ int main(int argc, char* argv[])
             }
             if (argv[i] == "-startlevel"){
                 //l == new Level argv[i + 1]
+                if (std::stoi(argv[i + 1]) == 1){
+                    l = new Levelone();
+                }
+                else if (std::stoi(argv[i + 1]) == 2){
+                    l = new Leveltwo();
+                }
+                else if (std::stoi(argv[i + 1]) == 3){
+                    l = new Levelthree();
+                }
+                else if (std::stoi(argv[i + 1]) == 4){
+                    l = new Levelfour();
+                }
                 startlevel = true;
             }
             if (argv[i] == "-scriptfile1"){
@@ -58,10 +70,10 @@ int main(int argc, char* argv[])
     } 
     if (!startlevel){
         // start level 0
-        l = new Levelzero(); // fix this for parameters
+        l = new LevelZero(); // fix this for parameters
     }
     if (!scriptfile1){
-        file1string = "sequence1.txt";
+        file1string = "sequence1.txt"; // wrong
     }
     if (!scriptfile2){
         file2string = "sequence2.txt";
@@ -93,24 +105,13 @@ int main(int argc, char* argv[])
     //read from files
     std::ifstream file1(file1string); // did not account for the edge case where one file is longer than the other one
     std::ifstream file2(file2string);
-    std::string line;
-    bool file1_turn = true; // Flag to alternate between files
+    std::string line; // Flag to alternate between files
 
-    // make two players, wich store their own canvas
+    bool turn1 = true;
 
-
-    while (!(file1.eof() && file2.eof()))
+    string command;
+    while (cin >> command)
     {
-        // chose from which file to read
-        if (file1_turn && std::getline(file1, line)) {
-            p = p1;
-        } else if (!file1_turn && std::getline(file2, line)) {
-            p = p2;
-        }
-        file1_turn = !file1_turn;
-        std::stringstream ss(line);
-        std::string command;
-        ss >> command;
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
@@ -175,6 +176,13 @@ int main(int argc, char* argv[])
         }
         else if (command[0] == 'r' && command[5] == 'e') { // restart
             p->restart();
+        }
+        if (turn1){
+            p = p2;
+            turn1 = false;
+        } else {
+            p = p1;
+            turn1 = true;
         }
     } 
     file1.close();
