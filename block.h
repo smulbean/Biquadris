@@ -18,6 +18,7 @@ public:
     virtual void down() = 0;
     virtual void left() = 0;
     virtual void right() = 0;
+    virtual void drop() = 0;
     char charAt(int row, int col) override;
 };
 

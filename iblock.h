@@ -13,14 +13,13 @@ private:
 public:
     IBlock(); //constructor
     ~IBlock(); //destructor
-    void rotateCC();
-    void rotateC();
-    void down();
-    void left();
-    void right();
+    void rotateCC() override;
+    void rotateC() override;
+    void down() override;
+    void left() override;
+    void right() override;
     char charAt(int row, int col) override;
-    void drop();
-
+    void drop() override;
 }
 
 
