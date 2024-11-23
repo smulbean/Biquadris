@@ -26,13 +26,13 @@ int Player::getLevel(){
 Level *Player::Levelup(){
     // level up
     if (levelnum == 0){
-        level = new levelone(); // and its level one parameters
+        level = new levelOne(); // and its level one parameters
     } else if (levelnum == 1){
-        level = new leveltwo(); // and its level one parameters
+        level = new levelTwo(); // and its level one parameters
     } else if (levelnum == 2){
-        level = new levelthree(); // and its level one parameters
+        level = new levelThree(); // and its level one parameters
     } else if (levelnum == 3){
-        level = new levelfour(); // and its level one parameters
+        level = new levelFour(); // and its level one parameters
     } else {
         return level;
     }
@@ -97,7 +97,7 @@ void Player::restart(){
     }
     int score = 0;
     int levelnum = 0;
-    level = new Levelzero();
+    level = new LevelZero();
     canvas = new Blank();
 }
 

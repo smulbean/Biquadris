@@ -7,19 +7,19 @@
 #include <vector>
 #include <memory>
 #include "level.h"
+#include "block.h"
 
 struct Player;
 
 
-class Levelzero : public Level{
+class LevelZero : public Level{
+	std::vector<std::string> playerSequence;
+	int sequenceIdx;
+
 	public:
-		Levelzero(); // constructor
-		BlockDecorator *createBlock() override; // create blocks for level 0
+		LevelZero(int id); // constructor
+		~LevelZero();
+		Block *createBlock() override; // create blocks for level 0
 };
 
-
-
 #endif
-
-
-
