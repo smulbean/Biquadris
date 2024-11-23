@@ -13,13 +13,13 @@ protected:
 public:
     Block(Board* base);
     virtual ~Block();
-    
-    void rotateCC();
-    void drop();
-    void down();
-    void left();
-    void right();
-    char charAt();
+
+    virtual void rotateCC() = 0;
+    virtual void down() = 0;
+    virtual void left() = 0;
+    virtual void right() = 0;
+    virtual void drop() = 0;
+    char charAt(int row, int col) override;
 };
 
 #endif
