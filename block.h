@@ -13,6 +13,12 @@ protected:
 public:
     Block(Board* base);
     virtual ~Block();
+    
+    void rotateCC();
+    void down();
+    void left();
+    void right();
+    char charAt();
 };
 
 #endif
