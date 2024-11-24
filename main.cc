@@ -136,7 +136,7 @@ int main(int argc, char* argv[])
             p->getpic()->down();
             s.notifyObservers();
         }
-        else if ((p->getpic() != nullptr)&& (command[1] == 'r'))
+        else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
             p->getpic()->drop();
             s.notifyObservers();

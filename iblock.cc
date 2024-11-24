@@ -99,25 +99,25 @@ void IBlock::down(){
         end = true;
         return;
 
-    // } else if (phase == 2) {
-    //     if (charAt(coordinates[3]->x, coordinates[3]->y+1) == ' '){
-    //         for (int i=0; i<4; i++){
-    //             coordinates[i]->y++;
-    //         }
-    //         return;
-    //     }
-    //     end = true;
-    //     return;
+    } else if (phase == 2) {
+        if (charAt(coordinates[3]->x, coordinates[3]->y+1) == ' '){
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            return;
+        }
+        end = true;
+        return;
 
-    // } else if (phase == 4) {
-    //     if(charAt(coordinates[0]->x, coordinates[0]->y+1) == ' '){
-    //         for (int i=0; i<4; i++){
-    //             coordinates[i]->y++;
-    //         }
-    //         return;
-    //     }
-    //     end = true;
-    //     return;
+    } else if (phase == 4) {
+        if(charAt(coordinates[0]->x, coordinates[0]->y+1) == ' '){
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            return;
+        }
+        end = true;
+        return;
     }
 }
 
