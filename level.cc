@@ -6,5 +6,6 @@
 #include "block.h"
 #include "level.h"
 
-Level::Level(){
-}
+Level::Level(int id) : playerNumber{id} {}
+
+Level::~Level() {}
