@@ -274,7 +274,7 @@ void LBlock::right(){
         return;
     } else if((phase == 4)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
                             (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
-                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')) {
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
         return;
     }
 

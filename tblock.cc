@@ -74,7 +74,7 @@ void TBlock::rotateCC() {
         return;
 
     } else if (phase == 4) {
-        if ((charAt(coordinates[1]->x+!, coordinates[1]->y) == ' ') && 
+        if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ')){
             coordinates[0]->x = coordinates[1]->x+1;
@@ -112,7 +112,7 @@ void TBlock::rotateC(){
         return;
 
     } else if (phase == 2) {
-        if ((charAt(coordinates[1]->x+!, coordinates[1]->y) == ' ') && 
+        if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ')){
             coordinates[0]->x = coordinates[1]->x+1;
@@ -294,7 +294,7 @@ void TBlock::right(){
 char TBlock::charAt(int col, int row) {
     for (int i = 0; i<4; i++){
         if((row == coordinates[i]->y) && (col == coordinates[i]->x)){
-            return 'I';
+            return 'T';
         }
     }
     return base->charAt(col, row);

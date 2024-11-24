@@ -2,7 +2,7 @@
 #define STRUCT_H
 
 // Define your structure
-class Coor {
+struct Coor {
     int x;
     int y;
 

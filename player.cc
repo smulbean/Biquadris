@@ -3,6 +3,12 @@
 #include "level0.h"
 #include "blank.h"
 #include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "tblock.h"
+#include "zblock.h"
+#include "oblock.h"
+#include "sblock.h"
 
 Player::Player(Board* canvas, int score, int high,  Level* level) : 
 canvas{canvas}, score{score}, highscore{high}, level{level} {
@@ -80,24 +86,42 @@ void Player::setcur(char c){
         blocks.emplace_back(cur);
         canvas = picture;
     }
-    // else if (c == 'J'){
-    //     cur = new JBlock(); // fix this later
-    // }
-    // else if (c == 'L'){
-    //     cur = new LBlock(); // fix this later
-    // }
-    // else if (c == 'O'){
-    //     cur = new OBlock(); // fix this later
-    // }
-    // else if (c == 'S'){
-    //     cur = new SBlock(); // fix this later
-    // }
-    // else if (c == 'Z'){
-    //     cur = new ZBlock(); // fix this later
-    // }
-    // else{
-    //     cur = new TBlock(); // fix this later
-    // }
+    else if (c == 'J'){
+        picture = new JBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
+    else if (c == 'L'){
+        picture = new LBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
+    else if (c == 'O'){
+        picture = new OBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
+    else if (c == 'S'){
+        picture = new SBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
+    else if (c == 'Z'){
+        picture = new ZBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
+    else{
+        picture = new TBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
+    }
 
 }
 

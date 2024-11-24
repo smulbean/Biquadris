@@ -157,36 +157,36 @@ int main(int argc, char* argv[])
             s.notifyObservers();
         }
         
-        // else if (command == "J")
-        // {
-        //     p->setcur('J');
-        //     s.notifyObservers();
-        // }
-        // else if (command == "L")
-        // {
-        //     p->setcur('L');
-        //     s.notifyObservers();
-        // }
-        // else if (command == "O")
-        // {
-        //     p->setcur('O');
-        //     s.notifyObservers();
-        // }
-        // else if (command == "S")
-        // {
-        //     p->setcur('S');
-        //     s.notifyObservers();
-        // }
-        // else if (command == "Z")
-        // {
-        //     p->setcur('Z');
-        //     s.notifyObservers();
-        // }
-        // else if (command == "T")
-        // {
-        //     p->setcur('T');
-        //     s.notifyObservers();
-        // }
+        else if (command == "J")
+        {
+            p->setcur('J');
+            s.notifyObservers();
+        }
+        else if (command == "L")
+        {
+            p->setcur('L');
+            s.notifyObservers();
+        }
+        else if (command == "O")
+        {
+            p->setcur('O');
+            s.notifyObservers();
+        }
+        else if (command == "S")
+        {
+            p->setcur('S');
+            s.notifyObservers();
+        }
+        else if (command == "Z")
+        {
+            p->setcur('Z');
+            s.notifyObservers();
+        }
+        else if (command == "T")
+        {
+            p->setcur('T');
+            s.notifyObservers();
+        }
         // else if (command[0] == 'l' && command[5] == 'u') { // levelup 
         //     p->Levelup();
         // }
