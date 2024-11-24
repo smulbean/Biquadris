@@ -5,6 +5,11 @@
 #include <iostream>
 using namespace std;
 
+// need a function to check if everyline on that board is cleansed, if so, we just not print that line
+// and then add the score to score and update highscore
+// subject->getp1()->updateScore(int inc) adds inc to current score
+// subject->getp1()->updateHigh(int high)changes highscore to high
+
 Text::Text(Studio *subject): subject{subject}{
 }
 

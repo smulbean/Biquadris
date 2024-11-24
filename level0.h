@@ -9,7 +9,7 @@
 #include "level.h"
 #include "block.h"
 
-struct Player;
+class Player;
 
 
 class LevelZero : public Level{

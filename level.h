@@ -8,7 +8,7 @@
 #include <memory>
 #include "block.h"
 
-struct Player;
+class Player;
 
 
 class Level{
