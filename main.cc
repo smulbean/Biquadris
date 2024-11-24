@@ -70,7 +70,7 @@ int main(int argc, char* argv[])
     // } 
     if (!startlevel){
         // start level 0
-        l = new LevelZero(); // fix this for parameters
+        l = new LevelZero(1); // fix this for parameters
     }
     if (!scriptfile1){
         file1string = "sequence1.txt"; // wrong
@@ -115,22 +115,22 @@ int main(int argc, char* argv[])
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
-            p->getcanvas()->left();
+            p->getpic()->left();
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
-            p->getcanvas()->right();
+            p->getpic()->right();
             s.notifyObservers();
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
-            p->getcanvas()->down();
+            p->getpic()->down();
             s.notifyObservers();
         }
         else if (command[1] == 'r')
         { // drop
-            p->getcanvas()->drop();
+            p->getpic()->drop();
             s.notifyObservers();
         }
         else if (command == "I")
@@ -140,12 +140,12 @@ int main(int argc, char* argv[])
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
-            p->getcanvas()->rotateC();
+            p->getpic()->rotateC();
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
-            p->getcanvas()->rotateCC();
+            p->getpic()->rotateCC();
             s.notifyObservers();
         }
         // else if (command == "J")
@@ -187,7 +187,7 @@ int main(int argc, char* argv[])
         else if (command[0] == 'r' && command[5] == 'e') { // restart
             p->restart();
         }
-        if (p->getcanvas()->done()){
+        if (p->getpic()->done()){
             // level will return next block, will call p->setcur('L') and then notify
             p->setcur('I');
             s.notifyObservers();

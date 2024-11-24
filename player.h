@@ -15,14 +15,14 @@ using namespace std;
 class Player
 {
 private:
-    Board *current;
+    Block *picture;
     Board *canvas;
     int score;
     int highscore;
     int levelnum;
     Level *level; 
     // Studio *canva;
-    vector<Block *> blocks;
+    // vector<Block *> blocks;
 
 public:
     Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, Level *level = nullptr);
@@ -36,7 +36,7 @@ public:
     void force();
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
-    Board *getcanvas();
+    Block *getpic();
     void restart();
 };
 

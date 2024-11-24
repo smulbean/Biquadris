@@ -7,5 +7,3 @@
 #include "level.h"
 
 Level::Level(int id) : playerNumber{id} {}
-
-Level::~Level(){}

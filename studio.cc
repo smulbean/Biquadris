@@ -10,12 +10,12 @@ void Studio::reset()
 
 char Studio::getStatep1(int row, int col) const
 {
-    return p1->getcanvas()->charAt(row, col);
+    return p1->getpic()->charAt(row, col);
 }
 
 char Studio::getStatep2(int row, int col) const
 {
-    return p2->getcanvas()->charAt(row, col);
+    return p2->getpic()->charAt(row, col);
 }
 
 Studio::~Studio()

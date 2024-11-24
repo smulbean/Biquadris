@@ -3,14 +3,18 @@
 #include "level0.h"
 #include "blank.h"
 #include "iblock.h"
+#include "blankblock.h"
 
 Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {}
+canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {
+    picture = new BlankBlock(canvas); // fix this later
+    canvas = picture;
+}
 
 Player::~Player()
 {
 }
-
+ 
 int Player::getScore(){
     return score;
 }
@@ -62,8 +66,8 @@ void Player::force(){
 
 void Player::setcur(char c){
     if (c == 'I'){
-        canvas = new IBlock(canvas); // fix this later
-        current = canvas;
+        picture = new IBlock(picture); // fix this later
+        canvas = picture;
     }
     // else if (c == 'J'){
     //     cur = new JBlock(); // fix this later
@@ -87,13 +91,13 @@ void Player::setcur(char c){
 }
 
 
-Board* Player::getcanvas(){
-    return canvas;
+Block* Player::getpic(){
+    return picture;
 }
 
 void Player::restart(){
 
-    blocks.erase(blocks.begin(), blocks.end());
+    // blocks.erase(blocks.begin(), blocks.end());
     // int score = 0;
     // int levelnum = 0;
     // level = new Levelzero();
