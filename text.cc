@@ -9,64 +9,131 @@ using namespace std;
 // and then add the score to score and update highscore
 // subject->getp1()->updateScore(int inc) adds inc to current score
 // subject->getp1()->updateHigh(int high)changes highscore to high
-
-Text::Text(Studio *subject): subject{subject}{
+bool Text::fullrow1(int row)
+{
+  for (int i = 0; i < cols; i++)
+  {
+    if (subject->getStatep1(i, row) == ' ')
+    {
+      return false;
+    }
+  }
+  subject->getp1()->updateScore((subject->getp1()->getLevel() + 1)*(subject->getp1()->getLevel() + 1));
+  if (subject->getp1()->getScore() > subject->getp1()->getHighScore()){
+    subject->getp1()->updateHigh(subject->getp1()->getScore());
+  }
+  return true;
 }
 
-void Text::notify(){
-  int cols = 11;
-  int rows = 18;
-  int spacing = 5;
+bool Text::fullrow2(int row)
+{
+  for (int i = cols + spacing; i < 2 * cols; i++)
+  {
+    if (subject->getStatep1(i - (cols + spacing), row) == ' ')
+    {
+      return false;
+    }
+  }
+  subject->getp2()->updateScore((subject->getp2()->getLevel() + 1)*(subject->getp2()->getLevel() + 1));
+  if (subject->getp2()->getScore() > subject->getp2()->getHighScore()){
+    subject->getp2()->updateHigh(subject->getp2()->getScore());
+  }
+  return true;
+}
+
+void Text::print1(int row)
+{
+  for (int j = 0; j < cols; ++j)
+  {
+    cout << subject->getStatep1(j, row);
+  }
+}
+
+void Text::print2(int row)
+{
+  for (int j = cols + spacing; j < 2 * cols + spacing; ++j)
+  {
+    cout << subject->getStatep2(j - (cols + spacing), row);
+  }
+}
+
+Text::Text(Studio *subject) : subject{subject}
+{
+}
+
+void Text::notify()
+{
   // print the beginning
   cout << "Level:     " << subject->getp1()->getLevel() << "     "; // 5 spaces inbetween board
   cout << "Level:     " << subject->getp2()->getLevel() << endl;
-  //print score
+  // print score
   cout << "Score:     " << subject->getp1()->getScore() << "     "; // 5 spaces inbetween board
   cout << "Score:     " << subject->getp2()->getScore() << endl;
-  //get high score
+  // get high score
   cout << "HighScore: " << subject->getp1()->getHighScore() << "     "; // 5 spaces inbetween board
   cout << "HighScore: " << subject->getp2()->getHighScore() << endl;
   // print top seperator
-  for (int i = 0; i < cols; i++){
+  for (int i = 0; i < cols; i++)
+  {
     cout << "-";
   }
-  for (int i = 0; i < spacing; i++){
+  for (int i = 0; i < spacing; i++)
+  {
     cout << " ";
   }
-  for (int i = cols + spacing; i < 2*cols + spacing; i++){
+  for (int i = cols + spacing; i < 2 * cols + spacing; i++)
+  {
     cout << "-";
   }
   cout << endl;
   // print board
-  for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-      cout << subject->getStatep1(j, i);
+  for (int p1counter = 0, p2counter = 0; p1counter < rows || p2counter < rows;)
+  {
+    if (!fullrow1(p1counter))
+    {
+      print1(p1counter); // if its not full print
+      p1counter++;
+    } else {
+      while(fullrow1(p1counter)){ // else loop until its not full
+        p1counter++;
+      }
+      print1(p1counter); // then print
     }
-    for (int j = 0; j < spacing; ++j) {
+    for (int j = 0; j < spacing; ++j)
+    {
       cout << " ";
     }
-    for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
-      cout << subject->getStatep2(j - (cols+spacing), i);
+    if (!fullrow2(p2counter))
+    {
+      print2(p2counter); // if its not full print
+      p2counter++;
+    } else {
+      while(fullrow2(p2counter)){ // else loop until its not full
+        p2counter++;
+      }
+      print2(p2counter); // then print
     }
     cout << endl;
   }
   // print second seperator
-  for (int i = 0; i < cols; i++){
+  for (int i = 0; i < cols; i++)
+  {
     cout << "-";
   }
-  for (int i = 0; i < spacing; i++){
+  for (int i = 0; i < spacing; i++)
+  {
     cout << " ";
   }
-  for (int i = cols + spacing; i < 2*cols + spacing; i++){
+  for (int i = cols + spacing; i < 2 * cols + spacing; i++)
+  {
     cout << "-";
   }
   cout << endl;
-  //next block
-  //manual function that presents the blocks
+  // next block
+  // manual function that presents the blocks
 }
 
-
-Text::~Text(){
+Text::~Text()
+{
   subject->detach(this);
 }
-

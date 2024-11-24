@@ -4,8 +4,8 @@
 #include "blank.h"
 #include "iblock.h"
 
-Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {
+Player::Player(Board* canvas, int score, int high,  Level* level) : 
+canvas{canvas}, score{score}, highscore{high}, level{level} {
     // canvas = new BlankBlock(canvas); // fix this later
     // canvas = picture;
 }
@@ -31,7 +31,7 @@ void Player::updateHigh(int high){
 }
 
 int Player::getLevel(){
-    return levelnum;
+    return level->getlevel();
 }
 Level *Player::Levelup(){
     // level up
@@ -111,7 +111,6 @@ void Player::restart(){
     delete picture;
     picture = nullptr;
     score = 0;
-    levelnum = 0;
     level = nullptr;
     canvas = new Blank();
 }

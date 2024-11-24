@@ -7,8 +7,8 @@
 
 ########## Variables ##########
 
-CXX = clang++					# compiler
-CXXFLAGS = -g -fsanitize=address -std=c++20 -g -Wall -Werror=vla -MMD			# compiler flags
+CXX = g++-11					# compiler
+CXXFLAGS = -std=c++20 -g -Wall -Werror=vla -MMD			# compiler flags
 MAKEFILE_NAME = ${firstword ${MAKEFILE_LIST}}	# makefile name
 
 SOURCES = $(wildcard *.cc)			# source files (*.cc)
