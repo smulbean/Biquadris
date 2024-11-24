@@ -21,8 +21,7 @@ private:
     int highscore;
     // int levelnum;
     Level *level; 
-    // Studio *canva;
-    // vector<Block *> blocks;
+    vector<Block *> blocks;
 
 public:
     Player(Board *canvas, int score = 0, int highscore = 0, Level *level = nullptr);
@@ -40,8 +39,8 @@ public:
     void setcur(char c);
     Block *getpic();
     Board *getboard();
-    void addcur(char c);
     void restart();
+    void store(Block *cur);
 };
 
 #endif

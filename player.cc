@@ -76,6 +76,8 @@ void Player::force(){
 void Player::setcur(char c){
     if (c == 'I'){
         picture = new IBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
         canvas = picture;
     }
     // else if (c == 'J'){
@@ -113,5 +115,9 @@ void Player::restart(){
     score = 0;
     level = nullptr;
     canvas = new Blank();
+}
+
+void Player::store(Block *cur){
+    
 }
 

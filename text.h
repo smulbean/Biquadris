@@ -9,8 +9,8 @@ class Text : public Observer {
   int rows = 18;
   int spacing = 5;
   bool blind; // remember to put in blind
-  bool fullrow1(int row);
-  bool fullrow2(int row);
+  int fullrow1();
+  int fullrow2(int row);
   void print1(int row);
   void print2(int row);
  public:
