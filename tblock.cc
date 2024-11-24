@@ -30,28 +30,43 @@ void TBLOCK::rotateCC() {
 
 void TBLOCK::rotateC(){
     if (phase == 1) {
-        coordinates[0]->x = coordinates[1]->x;
-        coordinates[0]->y = coordinates[1]->y-1;
+        if ((charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
 
-        coordinates[2]->x = coordinates[1]->x-1;
-        coordinates[2]->y = coordinates[1]->y;
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
 
-        coordinates[3]->x = coordinates[1]->x;
-        coordinates[3]->y = coordinates[1]->y+1;
-        phase++;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y+1;
+            phase++;
+            return;
+        }
+        return;
 
     } else if (phase == 2) {
-        coordinates[0]->x = coordinates[1]->x+1;
-        coordinates[0]->y = coordinates[1]->y;
+        if ((charAt(coordinates[1]->x+!, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
 
-        coordinates[3]->x = coordinates[1]->x-1;
-        coordinates[3]->y = coordinates[1]->y;
-        phase++;
+            coordinates[3]->x = coordinates[1]->x-1;
+            coordinates[3]->y = coordinates[1]->y;
+            phase++;
+            return;
+        }
+        return;
 
     } else if (phase == 3) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ')){
         coordinates[0]->x = coordinates[1]->x;
         coordinates[0]->y = coordinates[1]->y+1;
 
@@ -61,17 +76,26 @@ void TBLOCK::rotateC(){
         coordinates[3]->x = coordinates[1]->x;
         coordinates[3]->y = coordinates[1]->y-1;
         phase++;
+        return;
+        }
+        return;
         
     } else if (phase == 4) {
-        coordinates[0]->x = coordinates[1]->x-1;
-        coordinates[0]->y = coordinates[1]->y;
+        if ((charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y+1;
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y+1;
 
-        coordinates[3]->x = coordinates[1]->x+1;
-        coordinates[3]->y = coordinates[1]->y;
-        phase = 1;
+            coordinates[3]->x = coordinates[1]->x+1;
+            coordinates[3]->y = coordinates[1]->y;
+            phase = 1;
+            return;
+        }
+        return;
     }
 }
 
@@ -139,7 +163,6 @@ void TBLOCK::left(){
             return;
         }
     }
-    std::cout << "Here" << std::endl;
 
     for(int i = 0; i < 4; i++) {
         coordinates[i]->x--;
@@ -166,7 +189,7 @@ char TBLOCK::charAt(int col, int row) {
             return 'I';
         }
     }
-    return ' ';
+    return base->charAt(col, row);
 }
 
 void TBLOCK::drop(){
