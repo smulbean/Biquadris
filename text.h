@@ -9,10 +9,8 @@ class Text : public Observer {
   int rows = 18;
   int spacing = 5;
   bool blind; // remember to put in blind
-  int fullrow1();
-  int fullrow2(int row);
-  void print1(int row);
-  void print2(int row);
+  int full1();
+  int full2();
  public:
   Text(Studio *subject); // constructor
   void notify() override;

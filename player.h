@@ -41,6 +41,9 @@ public:
     Board *getboard();
     void restart();
     void store(Block *cur);
+
+    //Wendy your function
+    void setCor(int row);
 };
 
 #endif
