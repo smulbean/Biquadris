@@ -202,11 +202,13 @@ int main(int argc, char* argv[])
             if (turn1){
                 p = p2;
                 turn1 = false;
+                // store block when you created it
                 currentl2 = l2->createBlock();
                 p->setcur(currentl2);
             } else {
                 p = p1;
                 turn1 = true;
+                // store block when you create it
                 currentl1 = l1->createBlock();
                 p->setcur(currentl1);
             }

@@ -2,7 +2,7 @@
 #define STRUCT_H
 
 // Define your structure
-struct Coor {
+class Coor {
     int x;
     int y;
 
@@ -36,6 +36,21 @@ struct Coor {
         other.y = 0;
         return *this;
     };
+    void setX(int newx){
+        x = newx;
+    }
+
+    void setY(int newy){
+        y = newy;
+    }
+
+    int getX(){
+        return x;
+    }
+
+    int getY(){
+        return y;
+    }
 };
 
 
