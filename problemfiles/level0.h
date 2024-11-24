@@ -14,7 +14,7 @@ struct Player;
 
 class LevelZero : public Level{
 	std::vector<std::string> playerSequence;
-	int sequenceIdx;
+	size_t sequenceIdx;
 
 	public:
 		LevelZero(int id); // constructor
