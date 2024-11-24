@@ -15,20 +15,23 @@ using namespace std;
 class Player
 {
 private:
-    Board *current;
+    Block *picture;
     Board *canvas;
     int score;
     int highscore;
-    int levelnum;
+    // int levelnum;
     Level *level; 
     // Studio *canva;
     vector<Block *> blocks; // wendy
 
+
 public:
-    Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, Level *level = nullptr);
+    Player(Board *canvas, int score = 0, int highscore = 0, Level *level = nullptr);
     // need a copy constructor
     ~Player();
     int getScore();
+    void updateScore(int inc);
+    void updateHigh(int high);
     int getHighScore();
     int getLevel();
     Level *Levelup();
@@ -36,8 +39,13 @@ public:
     void force();
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
-    Board *getcanvas();
+    Block *getpic();
+    Board *getboard();
     void restart();
+    void store(Block *cur);
+
+    //Wendy your function
+    void setCor(int row);
 };
 
 #endif

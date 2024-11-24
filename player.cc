@@ -4,24 +4,38 @@
 #include "blank.h"
 #include "iblock.h"
 
-Player::Player(Board* canvas, int score, int high, int levelnum, Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, levelnum{}, level{level} {}
+Player::Player(Board* canvas, int score, int high,  Level* level) : 
+canvas{canvas}, score{score}, highscore{high}, level{level} {
+    // canvas = new BlankBlock(canvas); // fix this later
+    // canvas = picture;
+}
 
 Player::~Player()
 {
 }
-
+ 
 int Player::getScore(){
     return score;
 }
+
+void Player::updateScore(int inc){
+    score = score + inc;
+}
+
 int Player::getHighScore(){
     return highscore;
 }
+
+void Player::updateHigh(int high){
+    highscore = high;
+}
+
 int Player::getLevel(){
-    return levelnum;
+    return level->getlevel();
 }
 Level *Player::Levelup(){
     // level up
+
     // if (levelnum == 0){
     //     level = new levelone(); // and its level one parameters
     // } else if (levelnum == 1){
@@ -61,8 +75,10 @@ void Player::force(){
 
 void Player::setcur(char c){
     if (c == 'I'){
-        canvas = new IBlock(canvas); // fix this later
-        current = canvas;
+        picture = new IBlock(canvas); // fix this later
+        Block *cur = picture;
+        blocks.emplace_back(cur);
+        canvas = picture;
     }
     // else if (c == 'J'){
     //     cur = new JBlock(); // fix this later
@@ -85,16 +101,31 @@ void Player::setcur(char c){
 
 }
 
-
-Board* Player::getcanvas(){
+Board *Player::getboard(){
     return canvas;
 }
 
+Block* Player::getpic(){
+    return picture;
+}
+
 void Player::restart(){
-    blocks.erase(blocks.begin(), blocks.end());
-    // int score = 0;
-    // int levelnum = 0;
-    // level = new Levelzero();
+    delete picture;
+    picture = nullptr;
+    score = 0;
+    level = nullptr;
     canvas = new Blank();
+}
+
+void Player::store(Block *cur){
+    
+}
+
+void Player::setCor(int row){
+    for (auto it = blocks.begin(); it != blocks.end(); ++it){
+        // it is the block that it will be going thru
+        // you can call a function in block using it.function()
+    }
+
 }
 

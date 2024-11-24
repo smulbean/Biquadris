@@ -5,7 +5,12 @@
 
 class Text : public Observer {
   Studio *subject;
+  int cols = 11;
+  int rows = 18;
+  int spacing = 5;
   bool blind; // remember to put in blind
+  int full1();
+  int full2();
  public:
   Text(Studio *subject); // constructor
   void notify() override;

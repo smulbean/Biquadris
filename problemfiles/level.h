@@ -8,7 +8,7 @@
 #include <memory>
 #include "block.h"
 
-struct Player;
+class Player;
 
 
 class Level{
@@ -17,7 +17,6 @@ class Level{
 		Level(int id); // constructor
 		virtual ~Level();
 		virtual char createBlock() = 0; // factory method
-		virtual int getlevel() = 0;
 };
 
 

@@ -34,6 +34,21 @@ class Coor {
         other.y = 0;
         return *this;
     };
+    void setX(int newx){
+        x = newx;
+    }
+
+    void setY(int newy){
+        y = newy;
+    }
+
+    int getX(){
+        return x;
+    }
+
+    int getY(){
+        return y;
+    }
 };
 
 

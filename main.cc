@@ -18,7 +18,8 @@
 int main(int argc, char* argv[])
 {      
     //initialize a level
-    Level* l;
+    Level* l1;
+    Level* l2;
     bool textonly = false;
     bool startlevel = false;
     bool scriptfile1 = false;
@@ -39,16 +40,18 @@ int main(int argc, char* argv[])
     //         if (argv[i] == "-startlevel"){
     //             //l == new Level argv[i + 1]
     //             if (std::stoi(argv[i + 1]) == 1){
-    //                 l = new Levelone();
+    //                 l1 = new Levelone();
     //             }
     //             else if (std::stoi(argv[i + 1]) == 2){
-    //                 l = new Leveltwo();
+    //                 l1 = new Leveltwo();
     //             }
     //             else if (std::stoi(argv[i + 1]) == 3){
-    //                 l = new Levelthree();
+    //                 l1 = new Levelthree(); 
+    // add l2 to everything
     //             }
     //             else if (std::stoi(argv[i + 1]) == 4){
-    //                 l = new Levelfour();
+    //                 l1 = new Levelfour();
+    //                  l2 = new Levelfour();
     //             }
     //             startlevel = true;
     //         }
@@ -70,7 +73,8 @@ int main(int argc, char* argv[])
     // } 
     if (!startlevel){
         // start level 0
-        l = new LevelZero(); // fix this for parameters
+        l1 = new LevelZero(1);
+        l2 = new LevelZero(2); // fix this for parameters
     }
     if (!scriptfile1){
         file1string = "sequence1.txt"; // wrong
@@ -82,8 +86,8 @@ int main(int argc, char* argv[])
     Board* c1 = new Blank(); // fix this for parameters
     Board* c2 = new Blank();
     // initialize players
-    Player* p1 = new Player(c1, 0, 0, 0, l); // for now make it one player
-    Player* p2 = new Player(c2, 0, 0, 0, l); // for now make it one player
+    Player* p1 = new Player(c1, 0, 0, l1); // for now make it one player
+    Player* p2 = new Player(c2, 0, 0, l2); // for now make it one player
     Player* p = p1;
     // create studio
     Studio s{p1, p2};
@@ -110,27 +114,31 @@ int main(int argc, char* argv[])
     bool turn1 = true;
 
     string command;
+    char currentl1 = l1->createBlock();
+    char currentl2 = l2->createBlock();
+    p->setcur(currentl1);
+    s.notifyObservers();
     while (cin >> command)
     {
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
-            p->getcanvas()->left();
+            p->getpic()->left();
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
-            p->getcanvas()->right();
+            p->getpic()->right();
             s.notifyObservers();
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
-            p->getcanvas()->down();
+            p->getpic()->down();
             s.notifyObservers();
         }
-        else if (command[1] == 'r')
+        else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
-            p->getcanvas()->drop();
+            p->getpic()->drop();
             s.notifyObservers();
         }
         else if (command == "I")
@@ -140,14 +148,15 @@ int main(int argc, char* argv[])
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
-            p->getcanvas()->rotateC();
+            p->getpic()->rotateC();
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
-            p->getcanvas()->rotateCC();
+            p->getpic()->rotateCC();
             s.notifyObservers();
         }
+        
         // else if (command == "J")
         // {
         //     p->setcur('J');
@@ -184,20 +193,30 @@ int main(int argc, char* argv[])
         // else if (command[0] == 'l' && command[5] == 'd') { // level down
         //     p->Leveldown();
         // }
-        else if (command[0] == 'r' && command[5] == 'e') { // restart
+        else if (command[0] == 'r' && command[1] == 'e') { // restart
             p->restart();
-        }
-        if (p->getcanvas()->done()){
-            // level will return next block, will call p->setcur('L') and then notify
-            p->setcur('I');
             s.notifyObservers();
         }
-        if (turn1){
-            p = p2;
-            turn1 = false;
-        } else {
-            p = p1;
-            turn1 = true;
+        if ((p->getpic() != nullptr) && p->getpic()->done()){
+            // level will return next block, will call p->setcur('L') and then notify
+            if (turn1){
+                p = p2;
+                turn1 = false;
+                // store block when you created it
+                currentl2 = l2->createBlock();
+                p->setcur(currentl2);
+            } else {
+                p = p1;
+                turn1 = true;
+                // store block when you create it
+                currentl1 = l1->createBlock();
+                p->setcur(currentl1);
+            }
+            s.notifyObservers();
+        }
+        if (command == "exit")
+        { // exit
+            cin.eof();
         }
     } 
     file1.close();
@@ -207,3 +226,4 @@ int main(int argc, char* argv[])
     }
     return 0;
 } // main
+

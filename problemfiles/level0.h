@@ -9,18 +9,17 @@
 #include "level.h"
 #include "block.h"
 
-struct Player;
+class Player;
 
 
 class LevelZero : public Level{
 	std::vector<std::string> playerSequence;
-	size_t sequenceIdx;
+	int sequenceIdx;
 
 	public:
 		LevelZero(int id); // constructor
 		~LevelZero();
 		char createBlock() override; // create blocks for level 0
-		int getlevel() override;
 };
 
 #endif
