@@ -1,11 +1,11 @@
 #include "coor.h"
 #include "block.h"
-#include "JBLOCK.h"
+#include "jblock.h"
 #include "board.h"
 #include <iostream>
 
 
-JBLOCK::JBLOCK(Board* base): Block{base} {
+JBlock::JBlock(Board* base): Block{base} {
     phase = 1;
     end = false;
     coordinates[0] = new Coor(5, 1);
@@ -15,20 +15,85 @@ JBLOCK::JBLOCK(Board* base): Block{base} {
 
 }
 
-JBLOCK::~JBLOCK() {
+JBlock::~JBlock() {
     for (int i = 0; i<4 ; i++){
         delete coordinates[i];
     }
 }
 
-void JBLOCK::rotateCC() {
-    for(int i = 0; i<3; i++) {
-        rotateC();
+void JBlock::rotateCC() {
+    if (phase == 1) {
+        if ((charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y-2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y-2;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 2) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x+2, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
+
+            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x+2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase = 1;
+            return;
+        }
+        return;
+
+    } else if (phase == 3) {
+        if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y+2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y+1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y+2;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 4) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x-2, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y+1;
+
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x-2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase++;
+            return;
+        }
+        return;
+        
     }
-    return;
 }
 
-void JBLOCK::rotateC(){
+void JBlock::rotateC(){
     if (phase == 1) {
         if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
@@ -99,12 +164,15 @@ void JBLOCK::rotateC(){
     }
 }
 
-void JBLOCK::down(){
+void JBlock::down(){
     if(end) {
         return;
     }
 
-    if(coordinates[0]->y == 17) { //reached the bottom
+    if((phase == 1 || phase == 2) && (coordinates[3]->y == 17)) { //reached the bottom
+        end = true;
+        return;
+    } else if ((phase == 3 || phase == 4) && (coordinates[0]->y == 17)){
         end = true;
         return;
     }
@@ -157,11 +225,29 @@ void JBLOCK::down(){
     }
 }
 
-void JBLOCK::left(){
+void JBlock::left(){
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 1) {
             return;
         }
+    }
+
+    if((phase == 1)&&((charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' '))) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
+                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -170,11 +256,29 @@ void JBLOCK::left(){
     return;
 }
 
-void JBLOCK::right(){
+void JBlock::right(){
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 10) {
             return;
         }
+    }
+
+    if((phase == 1)&&((charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -183,7 +287,7 @@ void JBLOCK::right(){
     return;
 }
 
-char JBLOCK::charAt(int col, int row) {
+char JBlock::charAt(int col, int row) {
     for (int i = 0; i<4; i++){
         if((row == coordinates[i]->y) && (col == coordinates[i]->x)){
             return 'J';
@@ -192,7 +296,7 @@ char JBLOCK::charAt(int col, int row) {
     return base->charAt(col, row);
 }
 
-void JBLOCK::drop(){
+void JBlock::drop(){
     while (!end){
         down();
     }
@@ -200,6 +304,6 @@ void JBLOCK::drop(){
     return;
 }
 
-bool JBLOCK::done(){
+bool JBlock::done(){
     return end;
 }

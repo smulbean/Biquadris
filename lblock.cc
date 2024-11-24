@@ -5,7 +5,7 @@
 #include <iostream>
 
 
-LBLOCK::LBLOCK(Board* base): Block{base} {
+LBlock::LBlock(Board* base): Block{base} {
     phase = 1;
     end = false;
     coordinates[0] = new Coor(5, 1);
@@ -15,20 +15,85 @@ LBLOCK::LBLOCK(Board* base): Block{base} {
 
 }
 
-LBLOCK::~LBLOCK() {
+LBlock::~LBlock() {
     for (int i = 0; i<4 ; i++){
         delete coordinates[i];
     }
 }
 
-void LBLOCK::rotateCC() {
-    for(int i = 0; i<3; i++) {
-        rotateC();
+void LBlock::rotateCC() {
+    if (phase == 1) {
+        if ((charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y+2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y+1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y+2;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 2) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x-2, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
+
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x-2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase = 1;
+            return;
+        }
+        return;
+
+    } else if (phase == 3) {
+        if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (charAt(coordinates[1]->x, coordinates[1]->y-2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y-2;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 4) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x+2, coordinates[1]->y) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y+1;
+
+            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x+2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase++;
+            return;
+        }
+        return;
+        
     }
-    return;
 }
 
-void LBLOCK::rotateC(){
+void LBlock::rotateC(){
     if (phase == 1) {
         if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
@@ -99,12 +164,15 @@ void LBLOCK::rotateC(){
     }
 }
 
-void LBLOCK::down(){
+void LBlock::down(){
     if(end) {
         return;
     }
 
-    if(coordinates[0]->y == 17) { //reached the bottom
+    if((phase == 1 || phase == 4) && (coordinates[3]->y == 17)) { //reached the bottom
+        end = true;
+        return;
+    } else if ((phase == 3 || phase == 2) && (coordinates[0]->y == 17)){
         end = true;
         return;
     }
@@ -157,11 +225,26 @@ void LBLOCK::down(){
     }
 }
 
-void LBLOCK::left(){
+void LBlock::left(){
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 1) {
             return;
         }
+    }
+
+    if((phase == 1)&&(charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&(charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')) {
+        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -170,11 +253,29 @@ void LBLOCK::left(){
     return;
 }
 
-void LBLOCK::right(){
+void LBlock::right(){
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 10) {
             return;
         }
+    }
+
+    if((phase == 1)&&((charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' '))) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[3]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')) {
+        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -183,7 +284,7 @@ void LBLOCK::right(){
     return;
 }
 
-char LBLOCK::charAt(int col, int row) {
+char LBlock::charAt(int col, int row) {
     for (int i = 0; i<4; i++){
         if((row == coordinates[i]->y) && (col == coordinates[i]->x)){
             return 'L';
@@ -192,7 +293,7 @@ char LBLOCK::charAt(int col, int row) {
     return base->charAt(col, row);
 }
 
-void LBLOCK::drop(){
+void LBlock::drop(){
     while (!end){
         down();
     }
@@ -200,6 +301,6 @@ void LBLOCK::drop(){
     return;
 }
 
-bool LBLOCK::done(){
+bool LBlock::done(){
     return end;
 }

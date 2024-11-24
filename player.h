@@ -22,7 +22,7 @@ private:
     int levelnum;
     Level *level; 
     // Studio *canva;
-    vector<Block *> blocks;
+    vector<Block *> blocks; // wendy
 
 public:
     Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, Level *level = nullptr);

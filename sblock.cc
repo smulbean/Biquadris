@@ -22,10 +22,75 @@ SBlock::~SBlock() {
 }
 
 void SBlock::rotateCC() {
-    for(int i = 0; i<3; i++) {
-        rotateC();
+    if (phase == 1) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x-1, coordinates[1]->y-1) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y+1;
+
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x-1;
+            coordinates[3]->y = coordinates[1]->y-1;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 2) {
+        if ((charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
+
+            coordinates[3]->x = coordinates[1]->x+1;
+            coordinates[3]->y = coordinates[1]->y-1;
+            phase = 1;
+            return;
+        }
+        return;
+
+    } else if (phase == 3) {
+        if ((charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
+
+            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x+1;
+            coordinates[3]->y = coordinates[1]->y+1;
+            phase++;
+            return;
+        }
+        return;
+
+    } else if (phase == 4) {
+        if ((charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
+            (charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (charAt(coordinates[1]->x-1, coordinates[1]->y+1) == ' ')){
+        coordinates[0]->x = coordinates[1]->x+1;
+        coordinates[0]->y = coordinates[1]->y;
+
+        coordinates[2]->x = coordinates[1]->x;
+        coordinates[2]->y = coordinates[1]->y+1;
+
+        coordinates[3]->x = coordinates[1]->x-1;
+        coordinates[3]->y = coordinates[1]->y+1;
+        phase++;
+        return;
+        }
+        return;
+        
     }
-    return;
 }
 
 void SBlock::rotateC(){
@@ -104,7 +169,10 @@ void SBlock::down(){
         return;
     }
 
-    if(coordinates[0]->y == 17) { //reached the bottom
+    if((phase == 1 || phase == 2) && (coordinates[0]->y == 17)) { //reached the bottom
+        end = true;
+        return;
+    } else if ((phase == 1 || phase == 2) && (coordinates[3]->y == 17)){
         end = true;
         return;
     }
@@ -164,6 +232,24 @@ void SBlock::left(){
         }
     }
 
+    if((phase == 1)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                    (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
+                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&((charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
+                            (charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+        return;
+    }
+
     for(int i = 0; i < 4; i++) {
         coordinates[i]->x--;
     }
@@ -175,6 +261,24 @@ void SBlock::right(){
         if(coordinates[i]->x == 10) {
             return;
         }
+    }
+
+    if((phase == 1)&&((charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')||
+                    (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' '))) {
+        return;
+
+    } else if((phase == 2)&&((charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')||
+                            (charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
+        return;
+
+    } else if((phase == 3)&&((charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (charAt(coordinates[2]->x+1, coordinates[2]->y) != ' '))) {
+        return;
+    } else if((phase == 4)&&((charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')||
+                            (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
+        return;
     }
 
     for(int i = 0; i < 4; i++) {
