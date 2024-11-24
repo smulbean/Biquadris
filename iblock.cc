@@ -12,7 +12,6 @@ IBlock::IBlock(Board* base): Block{base} {
     coordinates[1] = new Coor(5, 2);
     coordinates[2] = new Coor(6, 2);
     coordinates[3] = new Coor(7, 2);
-
 }
 
 IBlock::~IBlock() {
@@ -155,7 +154,7 @@ char IBlock::charAt(int col, int row) {
             return 'I';
         }
     }
-    return ' ';
+    return base->charAt(col, row);
 }
 
 void IBlock::drop(){

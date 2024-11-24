@@ -29,6 +29,8 @@ public:
     // need a copy constructor
     ~Player();
     int getScore();
+    void updateScore(int inc);
+    void updateHigh(int high);
     int getHighScore();
     int getLevel();
     Level *Levelup();
@@ -37,6 +39,8 @@ public:
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
     Block *getpic();
+    Board *getboard();
+    void addcur(char c);
     void restart();
 };
 

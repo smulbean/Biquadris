@@ -148,6 +148,7 @@ int main(int argc, char* argv[])
             p->getpic()->rotateCC();
             s.notifyObservers();
         }
+        
         // else if (command == "J")
         // {
         //     p->setcur('J');
@@ -184,10 +185,11 @@ int main(int argc, char* argv[])
         // else if (command[0] == 'l' && command[5] == 'd') { // level down
         //     p->Leveldown();
         // }
-        else if (command[0] == 'r' && command[5] == 'e') { // restart
+        else if (command[0] == 'r' && command[1] == 'e') { // restart
             p->restart();
+            s.notifyObservers();
         }
-        if (p->getpic()->done()){
+        if ((p->getpic() != nullptr) && p->getpic()->done()){
             // level will return next block, will call p->setcur('L') and then notify
             p->setcur('I');
             s.notifyObservers();
@@ -198,6 +200,10 @@ int main(int argc, char* argv[])
         } else {
             p = p1;
             turn1 = true;
+        }
+        if (command == "exit")
+        { // exit
+            cin.eof();
         }
     } 
     file1.close();
