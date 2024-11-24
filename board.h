@@ -13,6 +13,7 @@ public:
   virtual void left() = 0;
   virtual void right() = 0;
   virtual void drop() = 0;
+  virtual bool done() = 0;
 };
 
 #endif

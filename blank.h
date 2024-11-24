@@ -7,12 +7,15 @@ class Blank : public Board
 {
 public:
   char charAt(int row, int col) override;
-  void rotateC(){};
-  void rotateCC(){};
-  void down(){};
-  void left(){};
-  void right(){};
-  void drop(){};
+  void rotateC() override{};
+  void rotateCC()override{};
+  void down()override{};
+  void left()override{};
+  void right()override{};
+  void drop()override{};
+  bool done()override{
+    return true;
+  };
 };
 
 #endif

@@ -10,6 +10,7 @@ class IBlock : public Block
 
 private:
     int phase;
+    bool end;
 
 public:
     IBlock(Board* base);  // constructor
@@ -21,6 +22,7 @@ public:
     void right() override;
     char charAt(int row, int col) override;
     void drop() override;
+    bool done() override;
 };
 
 #endif
