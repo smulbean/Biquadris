@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
             p->getcanvas()->right();
             s.notifyObservers();
         }
-        else if (command[1] == 'o')
+        else if (command[0] == 'd' && command[1] == 'o')
         { // down
             p->getcanvas()->down();
             s.notifyObservers();
@@ -136,6 +136,16 @@ int main(int argc, char* argv[])
         else if (command == "I")
         {
             p->setcur('I');
+            s.notifyObservers();
+        }
+        else if (command[0] == 'c' && command[1] == 'l')
+        { // clockwise
+            p->getcanvas()->rotateC();
+            s.notifyObservers();
+        }
+        else if (command[0] == 'c' && command[1] == 'o')
+        { // counterclockwise
+            p->getcanvas()->rotateCC();
             s.notifyObservers();
         }
         // else if (command == "J")
@@ -179,6 +189,8 @@ int main(int argc, char* argv[])
         }
         if (p->getcanvas()->done()){
             // level will return next block, will call p->setcur('L') and then notify
+            p->setcur('I');
+            s.notifyObservers();
         }
         if (turn1){
             p = p2;

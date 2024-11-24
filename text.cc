@@ -35,13 +35,13 @@ void Text::notify(){
   // print board
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < cols; ++j) {
-      cout << subject->getStatep1(i, j);
+      cout << subject->getStatep1(j, i);
     }
     for (int j = 0; j < spacing; ++j) {
       cout << " ";
     }
     for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
-      cout << subject->getStatep2(i, j - (cols+spacing));
+      cout << subject->getStatep2(j - (cols+spacing), i);
     }
     cout << endl;
   }

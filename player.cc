@@ -62,6 +62,7 @@ void Player::force(){
 void Player::setcur(char c){
     if (c == 'I'){
         canvas = new IBlock(canvas); // fix this later
+        current = canvas;
     }
     // else if (c == 'J'){
     //     cur = new JBlock(); // fix this later

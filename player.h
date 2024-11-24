@@ -15,6 +15,7 @@ using namespace std;
 class Player
 {
 private:
+    Board *current;
     Board *canvas;
     int score;
     int highscore;
