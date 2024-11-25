@@ -301,3 +301,19 @@ void OBlock::drop(){
 bool OBlock::done(){
     return end;
 }
+
+void OBlock::clear(int row) {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y == row){
+            this->coordinates[i]->x = -1;
+            this->coordinates[i]->y = -1;
+            continue;
+        } else if (this->coordinates[i]->y < row){
+            this->coordinates[i]->y++;
+            continue;
+        }
+    }
+    return;
+}
+
+
