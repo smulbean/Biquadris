@@ -14,6 +14,7 @@
 #include "subject.h"
 #include "player.h"
 #include "studio.h"
+#include "graphic.h"
 
 
 int main(int argc, char* argv[])
@@ -95,9 +96,9 @@ int main(int argc, char* argv[])
         Text *Tobserver = new Text(&s);
         s.attach(Tobserver);
         observers.push_back(Tobserver);
-        // Graphic *Gobserver = new Graphic(&s);
-        // s.attach(Gobserver);
-        //observers.push_back(Gobserver);
+        Graphic *Gobserver = new Graphic(&s);
+        s.attach(Gobserver);
+        observers.push_back(Gobserver);
     }
     //if textonly, then create the text observer
     if (textonly){
@@ -216,7 +217,7 @@ int main(int argc, char* argv[])
         }
         if (command == "exit")
         { // exit
-            cin.eof();
+            break;
         }
     } 
     file1.close();
