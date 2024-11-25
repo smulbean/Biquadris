@@ -148,8 +148,7 @@ void Player::store(Block *cur){
 void Player::setCor(int row){
     for (auto it = blocks.begin(); it != blocks.end(); ++it){
         // it is the block that it will be going thru
-        // you can call a function in block using it.function()
+        // you can call a function in block using it.function(int row)
     }
-
 }
 

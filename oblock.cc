@@ -34,7 +34,7 @@ void OBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase++;
+            phase=4;
             return;
         }
         return;
@@ -51,7 +51,7 @@ void OBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase = 1;
+            phase--;
             return;
         }
         return;
@@ -68,7 +68,7 @@ void OBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y+1;
-            phase++;
+            phase--;
             return;
         }
         return;
@@ -81,11 +81,11 @@ void OBlock::rotateCC() {
             coordinates[0]->y = coordinates[1]->y+1;
 
             coordinates[2]->x = coordinates[1]->x-1;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->y = coordinates[1]->y;
 
             coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y;
-            phase=1;
+            coordinates[3]->y = coordinates[1]->y+1;
+            phase--;
             return;
         }
         return;
@@ -119,10 +119,10 @@ void OBlock::rotateC(){
             coordinates[0]->y = coordinates[1]->y+1;
 
             coordinates[2]->x = coordinates[1]->x-1;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->y = coordinates[1]->y;
 
             coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y;
+            coordinates[3]->y = coordinates[1]->y+1;
             phase++;
             return;
         }

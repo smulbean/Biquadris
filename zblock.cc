@@ -33,7 +33,7 @@ void ZBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-1;
             coordinates[3]->y = coordinates[1]->y+1;
-            phase++;
+            phase=4;
             return;
         }
         return;
@@ -50,7 +50,7 @@ void ZBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase = 1;
+            phase--;
             return;
         }
         return;
@@ -67,7 +67,7 @@ void ZBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase++;
+            phase--;
             return;
         }
         return;
@@ -84,7 +84,7 @@ void ZBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y+1;
-            phase=1;
+            phase--;
             return;
             }
         return;

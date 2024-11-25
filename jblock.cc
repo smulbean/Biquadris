@@ -34,7 +34,7 @@ void JBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x;
             coordinates[3]->y = coordinates[1]->y-2;
-            phase++;
+            phase=4;
             return;
         }
         return;
@@ -51,7 +51,7 @@ void JBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+2;
             coordinates[3]->y = coordinates[1]->y;
-            phase = 1;
+            phase--;
             return;
         }
         return;
@@ -68,7 +68,7 @@ void JBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x;
             coordinates[3]->y = coordinates[1]->y+2;
-            phase++;
+            phase--;
             return;
         }
         return;
@@ -85,7 +85,7 @@ void JBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-2;
             coordinates[3]->y = coordinates[1]->y;
-            phase=1;
+            phase--;
             return;
         }
         return;
