@@ -20,6 +20,7 @@ class LevelZero : public Level{
 		LevelZero(int id); // constructor
 		~LevelZero();
 		char createBlock() override; // create blocks for level 0
+		int getLevel() override;
 };
 
 #endif
