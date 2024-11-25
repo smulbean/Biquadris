@@ -23,6 +23,8 @@ public:
     char charAt(int row, int col) override;
     void drop() override;
     bool done() override;
+    void clear(int row) override;
+
 };
 
 #endif

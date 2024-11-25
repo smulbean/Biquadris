@@ -22,6 +22,8 @@ public:
     virtual void right() = 0;
     virtual void drop() = 0;
     virtual bool done() = 0;
+    virtual void clear(int row) = 0;
+    virtual char charAt(int row, int col) = 0;
 };
 
 #endif

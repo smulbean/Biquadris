@@ -34,7 +34,7 @@ void SBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase++;
+            phase=4;
             return;
         }
         return;
@@ -51,7 +51,7 @@ void SBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y-1;
-            phase = 1;
+            phase--;
             return;
         }
         return;
@@ -68,7 +68,7 @@ void SBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y+1;
-            phase++;
+            phase--;
             return;
         }
         return;
@@ -85,7 +85,7 @@ void SBlock::rotateCC() {
 
         coordinates[3]->x = coordinates[1]->x-1;
         coordinates[3]->y = coordinates[1]->y+1;
-        phase=1;
+        phase--;
         return;
         }
         return;
@@ -169,10 +169,10 @@ void SBlock::down(){
         return;
     }
 
-    if((phase == 1 || phase == 2) && (coordinates[0]->y == 17)) { //reached the bottom
+    if((phase == 1 || phase == 4) && (coordinates[0]->y == 17)) { //reached the bottom
         end = true;
         return;
-    } else if ((phase == 1 || phase == 2) && (coordinates[3]->y == 17)){
+    } else if ((phase == 3 || phase == 2) && (coordinates[3]->y == 17)){
         end = true;
         return;
     }
@@ -306,4 +306,19 @@ void SBlock::drop(){
 
 bool SBlock::done(){
     return end;
+}
+
+
+void SBlock::clear(int row) {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y == row){
+            this->coordinates[i]->x = -1;
+            this->coordinates[i]->y = -1;
+            continue;
+        } else if (this->coordinates[i]->y < row){
+            this->coordinates[i]->y++;
+            continue;
+        }
+    }
+    return;
 }
