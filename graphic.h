@@ -6,6 +6,7 @@
 
 class Graphic : public Observer {
   Studio *subject;
+  Xwindow *w;
   int t = 0;
   int b = 18;
   int l = 0;

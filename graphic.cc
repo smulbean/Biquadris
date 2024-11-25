@@ -48,6 +48,7 @@ int Graphic::full2()
 
 Graphic::Graphic(Studio *subject) : subject{subject}
 {
+    w = new Xwindow(col*20, row*50);
 }
 
 void Graphic::notify()
@@ -62,8 +63,7 @@ void Graphic::notify()
     }
     int scaling = 20; // can't be zero
     int rows = scaling * (b - t + 1);
-    int cols = scaling * (r - l + 1);
-    Xwindow *w = new Xwindow(cols, rows);
+    int cols = scaling * (r - l + 1) + 150;
     for (int i = 0; i < rows; i = i + scaling)
     {
         for (int j = 0; j < cols; j = j + scaling)
