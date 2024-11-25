@@ -85,7 +85,7 @@ void JBlock::rotateCC() {
 
             coordinates[3]->x = coordinates[1]->x-2;
             coordinates[3]->y = coordinates[1]->y;
-            phase++;
+            phase=1;
             return;
         }
         return;
@@ -178,9 +178,9 @@ void JBlock::down(){
     }
 
     if (phase == 1) {
-        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
-            (charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
+            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
             for (int i=0; i<4; i++){
                 coordinates[i]->y++;
             }
@@ -190,8 +190,8 @@ void JBlock::down(){
         return;
 
     } else if (phase == 2) {
-        if ((charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ') && 
-            (charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
+        if ((base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ') && 
+            (base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
             for (int i=0; i<4; i++){
                 coordinates[i]->y++;
             }
@@ -201,9 +201,9 @@ void JBlock::down(){
         return;
 
     } else if (phase == 3) {
-        if ((charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && 
-            (charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
-            (charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
+        if ((base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && 
+            (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
+            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
             for (int i=0; i<4; i++){
                 coordinates[i]->y++;
             }
@@ -213,8 +213,8 @@ void JBlock::down(){
         return;
         
     } else if (phase == 4) {
-        if ((charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
             for (int i=0; i<4; i++){
                 coordinates[i]->y++;
             }
@@ -232,21 +232,21 @@ void JBlock::left(){
         }
     }
 
-    if((phase == 1)&&((charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
-                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' '))) {
+    if((phase == 1)&&((base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
+                            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) != ' '))) {
         return;
 
-    } else if((phase == 2)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
-                            (charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
-                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+    } else if((phase == 2)&&((base->charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ')||
+                            (base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
         return;
 
-    } else if((phase == 3)&&((charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
-                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
+    } else if((phase == 3)&&((base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
+                            (base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
         return;
-    } else if((phase == 4)&&((charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
-                            (charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
-                            (charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+    } else if((phase == 4)&&((base->charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
+                            (base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')||
+                            (base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
         return;
     }
 
@@ -263,21 +263,21 @@ void JBlock::right(){
         }
     }
 
-    if((phase == 1)&&((charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
-                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+    if((phase == 1)&&((base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
         return;
 
-    } else if((phase == 2)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
-                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
-                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+    } else if((phase == 2)&&((base->charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')||
+                            (base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
         return;
 
-    } else if((phase == 3)&&((charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
-                            (charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
+    } else if((phase == 3)&&((base->charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
         return;
-    } else if((phase == 4)&&((charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
-                            (charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
-                            (charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+    } else if((phase == 4)&&((base->charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
+                            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
+                            (base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
         return;
     }
 
