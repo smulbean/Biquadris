@@ -9,7 +9,7 @@ class Board;
 class Studio : public Subject{
   Player *p1;
   Player *p2;
-  int ticks = 0;
+  // int ticks = 0;
 
  public:
   explicit Studio( Player* player1, Player* player2): p1{player1}, p2{player2}{}

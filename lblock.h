@@ -1,9 +1,9 @@
-#ifndef __IBLOCK_H__
-#define __IBLOCK_H__
+#ifndef __LBLOCK_H__
+#define __LBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
 
-class IBlock : public Block
+class LBlock : public Block
 {
     Coor *coordinates[4]; // dynamic
     bool isHeavy;
@@ -14,8 +14,8 @@ private:
     bool lost;
 
 public:
-    IBlock(Board* base);  // constructor
-    ~IBlock(); // destructor
+    LBlock(Board* base);  // constructor
+    ~LBlock(); // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;
@@ -24,8 +24,9 @@ public:
     char charAt(int row, int col) override;
     void drop() override;
     bool done() override;
-    void clear(int row) override;
     bool lose() override;
+    void clear(int row) override;
+
 };
 
 #endif

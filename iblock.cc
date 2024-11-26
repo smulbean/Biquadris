@@ -4,14 +4,13 @@
 #include "board.h"
 #include <iostream>
 
-
 IBlock::IBlock(Board* base): Block{base} {
     phase = 1;
+    end = false;
     coordinates[0] = new Coor(4, 2);
     coordinates[1] = new Coor(5, 2);
     coordinates[2] = new Coor(6, 2);
     coordinates[3] = new Coor(7, 2);
-
 }
 
 IBlock::~IBlock() {
@@ -21,64 +20,194 @@ IBlock::~IBlock() {
 }
 
 void IBlock::rotateCC() {
-    for(int i = 0; i<3; i++) {
-        rotateC();
+    if (phase == 1) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (base->charAt(coordinates[1]->x, coordinates[1]->y-2) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y+1;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y-2;
+            phase=4;
+            return;
+        }
+        return;
+
+    } else if (phase == 2){
+        if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (base->charAt(coordinates[1]->x+2, coordinates[1]->y) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x+2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase--;
+            return;
+        }
+        return;
+
+    } else if (phase == 3) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (base->charAt(coordinates[1]->x, coordinates[1]->y+2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
+
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y+1;
+
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y+2;
+            phase--;
+            return;
+        }
+        return;
+
+    } else if (phase == 4) {
+        if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
+            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (base->charAt(coordinates[1]->x-2, coordinates[1]->y) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[3]->x = coordinates[1]->x-2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase--;
+            return;
+        }
+        return;
     }
-    return;
 }
 
 void IBlock::rotateC(){
     if (phase == 1) {
-        coordinates[0]->x = coordinates[1]->x;
-        coordinates[0]->y = coordinates[1]->y-1;
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
+            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
+            (base->charAt(coordinates[1]->x, coordinates[1]->y+2) == ' ')){
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y-1;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y+1;
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y+1;
 
-        coordinates[3]->x = coordinates[1]->x;
-        coordinates[3]->y = coordinates[1]->y+2;
-        phase++;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y+2;
+            phase++;
+            return;
+        }
+        return;
 
     } else if (phase == 2) {
-        coordinates[0]->x = coordinates[1]->x+1;
-        coordinates[0]->y = coordinates[1]->y;
+        if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
+            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
+            (base->charAt(coordinates[1]->x-2, coordinates[1]->y) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[2]->x = coordinates[1]->x-1;
-        coordinates[2]->y = coordinates[1]->y;
+            coordinates[2]->x = coordinates[1]->x-1;
+            coordinates[2]->y = coordinates[1]->y;
 
-        coordinates[3]->x = coordinates[1]->x-2;
-        coordinates[3]->y = coordinates[1]->y;
-        phase++;
+            coordinates[3]->x = coordinates[1]->x-2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase++;
+            return;
+        }
+        return;
 
     } else if (phase == 3) {
-        coordinates[0]->x = coordinates[1]->x;
-        coordinates[0]->y = coordinates[1]->y+1;
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
+            (base->charAt(coordinates[1]->x, coordinates[1]->y-2) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x;
+            coordinates[0]->y = coordinates[1]->y+1;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
 
-        coordinates[3]->x = coordinates[1]->x;
-        coordinates[3]->y = coordinates[1]->y-2;
-        phase++;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y-2;
+            phase++;
+            return;
+        }
+        return;
         
     } else if (phase == 4) {
-        coordinates[0]->x = coordinates[1]->x-1;
-        coordinates[0]->y = coordinates[1]->y;
+        if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
+            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
+            (base->charAt(coordinates[1]->x+2, coordinates[1]->y) == ' ')) {
+            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[2]->x = coordinates[1]->x+1;
-        coordinates[2]->y = coordinates[1]->y;
+            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->y = coordinates[1]->y;
 
-        coordinates[3]->x = coordinates[1]->x+2;
-        coordinates[3]->y = coordinates[1]->y;
-        phase = 1;
+            coordinates[3]->x = coordinates[1]->x+2;
+            coordinates[3]->y = coordinates[1]->y;
+            phase = 1;
+            return;
+        }
+        return;
     }
 }
 
 void IBlock::down(){
-    for(int i = 0; i < 4; i++) {
-        coordinates[i]->y++;
+    if(end) {
+        return;
     }
 
+    if((phase == 2)&&((coordinates[3]->y == 17))) { //reached the bottom
+        end = true;
+        return;
+    } else if (coordinates[0]->y == 17) {
+        end = true;
+        return;
+    }
+
+    if (phase == 1 || phase == 3) {
+        if ((base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && 
+                (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+                (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
+                (base->charAt(coordinates[3]->x,coordinates[3]->y+1) == ' ')) {
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+        
+            return;
+        }
+        end = true;
+        return;
+
+    } else if (phase == 2) {
+        if (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' '){
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            return;
+        }
+        end = true;
+        return;
+
+    } else if (phase == 4) {
+        if(base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' '){
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            return;
+        }
+        end = true;
+        return;
+    }
 }
 
 void IBlock::left(){
@@ -87,7 +216,18 @@ void IBlock::left(){
             return;
         }
     }
-    std::cout << "Here" << std::endl;
+
+    if ((phase == 1)&&(base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ')) {
+        return;
+    } else if ((phase == 2 || phase == 4)&&
+                ((base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' ') ||
+                (base->charAt(coordinates[1]->x-1, coordinates[1]->y) != ' ') ||
+                (base->charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ') ||
+                (base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
+        return;
+    } else if ((phase == 3)&&(base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')) {
+        return;
+    } 
 
     for(int i = 0; i < 4; i++) {
         coordinates[i]->x--;
@@ -97,10 +237,22 @@ void IBlock::left(){
 
 void IBlock::right(){
     for(int i = 0; i < 4; i++) {
-        if(coordinates[i]->x == 11) {
+        if(coordinates[i]->x == 10) {
             return;
         }
     }
+
+    if ((phase == 1)&&(base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')) {
+        return;
+    } else if ((phase == 2 || phase == 4)&&
+                ((base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ') ||
+                (base->charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ') ||
+                (base->charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ') ||
+                (base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' '))) {
+        return;
+    } else if ((phase == 3)&&(base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' ')) {
+        return;
+    } 
 
     for(int i = 0; i < 4; i++) {
         coordinates[i]->x++;
@@ -108,39 +260,43 @@ void IBlock::right(){
     return;
 }
 
-char IBlock::charAt(int row, int col) {
+char IBlock::charAt(int col, int row) {
     for (int i = 0; i<4; i++){
         if((row == coordinates[i]->y) && (col == coordinates[i]->x)){
             return 'I';
         }
     }
-    return ' ';
+    return base->charAt(col, row);
 }
 
 void IBlock::drop(){
-    if (phase == 1) {
-        while ((coordinates[0]->y+1 == ' ') && (coordinates[1]->y+1 == ' ') && (coordinates[2]->y+1 == ' ') && (coordinates[3]->y+1 == ' ')) {
-            down();
-        }
-        return;
-
-    } else if (phase == 2) {
-        while (coordinates[3]->y+1 == ' '){
-            down();
-        }
-        return;
-
-    } else if (phase == 3) {
-        while ((coordinates[0]->y+1 == ' ') && (coordinates[1]->y+1 == ' ') && (coordinates[2]->y+1 == ' ') && (coordinates[3]->y+1 == ' ')) {
-            down();
-        }
-        return;
-        
-    } else if (phase == 4) {
-        while (coordinates[0]->y+1 == ' '){
-            down();
-        }
-        return;
+    while (!end){
+        down();
     }
+    end = true;
+    return;
+}
 
+bool IBlock::done(){
+    return end;
+}
+
+void IBlock::clear(int row) {
+    for (int i=0; i<4; i++){
+        std::cout << row << std::endl;
+        if (this->coordinates[i]->y == row){
+            this->coordinates[i]->x = -1;
+            this->coordinates[i]->y = -1;
+            continue;
+            std::cout << "Iblock clear " << i << std::endl;
+        } else if (this->coordinates[i]->y < row){
+            this->coordinates[i]->y++;
+            continue;
+        }
+    }
+    return;
+}
+
+bool IBlock::lose(){
+    return lost;
 }
