@@ -121,6 +121,10 @@ int main(int argc, char* argv[])
     s.notifyObservers();
     while (cin >> command)
     {
+        if (p->getpic()!= nullptr && p->getpic()->lose()){
+            std::cout << "YOU LOSE!" << std::endl;
+            break;
+        }
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left

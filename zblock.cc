@@ -6,12 +6,23 @@
 
 
 ZBlock::ZBlock(Board* base): Block{base} {
-    phase = 1;
-    end = false;
-    coordinates[0] = new Coor(6, 2);
-    coordinates[1] = new Coor(5, 2);
-    coordinates[2] = new Coor(5, 1);
-    coordinates[3] = new Coor(4, 1);
+    if ((base->charAt(6, 2) == ' ')&&
+        (base->charAt(5, 2) == ' ')&&
+        (base->charAt(5, 1) == ' ')&&
+        (base->charAt(4, 1) == ' ')) {
+        phase = 1;
+        end = false;
+        coordinates[0] = new Coor(6, 2);
+        coordinates[1] = new Coor(5, 2);
+        coordinates[2] = new Coor(5, 1);
+        coordinates[3] = new Coor(4, 1);
+    } else {
+        lost = true;
+        coordinates[0] = new Coor(-1, -1);
+        coordinates[1] = new Coor(-1, -1);
+        coordinates[2] = new Coor(-1, -1);
+        coordinates[3] = new Coor(-1, -1);
+    }
 }
 
 ZBlock::~ZBlock() {
