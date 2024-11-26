@@ -15,6 +15,8 @@
 #include "player.h"
 #include "studio.h"
 #include "graphic.h"
+#include "level1.h"
+#include "level2.h"
 
 
 int main(int argc, char* argv[])
@@ -39,23 +41,25 @@ int main(int argc, char* argv[])
                 // text only
                 textonly = true;
             }
-            // if (std::strcmp(argv[i], "-startlevel") == 0){
-            //     //l == new Level argv[i + 1]
-            //     if (std::stoi(argv[i + 1]) == 1){
-            //         l1 = new LevelOne();
-            //     }
-            //     else if (std::stoi(argv[i + 1]) == 2){
-            //         l1 = new LevelTwo();
-            //     }
-            //     else if (std::stoi(argv[i + 1]) == 3){
-            //         l1 = new Levelthree(); 
-            //     }
-            //     else if (std::stoi(argv[i + 1]) == 4){
-            //         l1 = new Levelfour();
-            //          l2 = new Levelfour();
-            //     }
-            //     startlevel = true;
-            // }
+            if (std::strcmp(argv[i], "-startlevel") == 0){
+                //l == new Level argv[i + 1]
+                if (std::stoi(argv[i + 1]) == 1){
+                    l1 = new LevelOne(1);
+                    l2 = new LevelOne(2);
+                }
+                else if (std::stoi(argv[i + 1]) == 2){
+                    l1 = new LevelTwo(1);
+                    l2 = new LevelTwo(2);
+                }
+                // else if (std::stoi(argv[i + 1]) == 3){
+                //     l1 = new Levelthree(1); 
+                // }
+                // else if (std::stoi(argv[i + 1]) == 4){
+                //     l1 = new Levelfour(1);
+                //     l2 = new Levelfour(2);
+                // }
+                startlevel = true;
+            }
             // if (std::strcmp(argv[i], "-scriptfile1"){
             //     //read in to player 1 from argv[i + 1]
             //     file1string = argv[i + 1];
@@ -87,8 +91,8 @@ int main(int argc, char* argv[])
     Board* c1 = new Blank(); // fix this for parameters
     Board* c2 = new Blank();
     // initialize players
-    Player* p1 = new Player(c1, 0, 0, l1); // for now make it one player
-    Player* p2 = new Player(c2, 0, 0, l2); // for now make it one player
+    Player* p1 = new Player(c1, 0, 0, 0, 1, l1); // for now make it one player
+    Player* p2 = new Player(c2, 0, 0, 0, 2, l2); // for now make it one player
     Player* p = p1;
     // create studio
     Studio s{p1, p2};
@@ -115,8 +119,8 @@ int main(int argc, char* argv[])
     bool turn1 = true;
 
     string command;
-    char currentl1 = l1->createBlock();
-    char currentl2 = l2->createBlock();
+    char currentl1 = p1->next();
+    char currentl2 = p2->next();
     p->setcur(currentl1);
     s.notifyObservers();
     while (cin >> command)
@@ -188,12 +192,14 @@ int main(int argc, char* argv[])
             p->setcur('T');
             s.notifyObservers();
         }
-        // else if (command[0] == 'l' && command[5] == 'u') { // levelup 
-        //     p->Levelup();
-        // }
-        // else if (command[0] == 'l' && command[5] == 'd') { // level down
-        //     p->Leveldown();
-        // }
+        else if (command[0] == 'l' && command[1] == 'e' && command[2] == 'v' && command[5] == 'u' && command[6] == 'p') { // levelup 
+            p->Levelup();
+            
+        }
+        else if (command[0] == 'l' && command[5] == 'd') { // level down
+            p->Leveldown();
+            s.notifyObservers();
+        }
         else if (command[0] == 'r' && command[1] == 'e') { // restart
             p->restart();
             s.notifyObservers();
@@ -204,13 +210,13 @@ int main(int argc, char* argv[])
                 p = p2;
                 turn1 = false;
                 // store block when you created it
-                currentl2 = l2->createBlock();
+                currentl2 = p->next();
                 p->setcur(currentl2);
             } else {
                 p = p1;
                 turn1 = true;
                 // store block when you create it
-                currentl1 = l1->createBlock();
+                currentl1 = p->next();
                 p->setcur(currentl1);
             }
             s.notifyObservers();

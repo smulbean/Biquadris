@@ -10,37 +10,56 @@ using namespace std;
 // subject->getp1()->updateScore(int inc) adds inc to current score
 // subject->getp1()->updateHigh(int high)changes highscore to high
 
-
-int Text::full1(){
-  for (int i = 0; i < rows; i++){
+int Text::full1()
+{
+  for (int i = 0; i < rows; i++)
+  {
     int count = 0;
-    for (int j = 0; j < cols; j++){
-      if (subject->getStatep1(j, i) != ' '){
-        count ++;
+    for (int j = 0; j < cols; j++)
+    {
+      if (subject->getStatep1(j, i) != ' ')
+      {
+        count++;
       }
     }
-    if (count == cols){
+    if (count == cols)
+    {
+      subject->getp1()->updateScore((subject->getp1()->getLevel() + 1) * (subject->getp1()->getLevel() + 1));
+      if (subject->getp1()->getScore() > subject->getp1()->getHighScore())
+      {
+        subject->getp1()->updateHigh(subject->getp1()->getScore());
+      }
       return i;
     }
   }
   return -1;
 }
 
-int Text::full2(){
-  for (int i = 0; i < rows; i++){
+int Text::full2()
+{
+  for (int i = 0; i < rows; i++)
+  {
     int count = 0;
-    for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
-      if (subject->getStatep2(j - (cols+spacing), i) != ' '){
-        count ++;
+    for (int j = cols + spacing; j < 2 * cols + spacing; ++j)
+    {
+      if (subject->getStatep2(j - (cols + spacing), i) != ' ')
+      {
+        count++;
       }
     }
-    if (count == cols){
+    if (count == cols)
+    {
+      subject->getp2()->updateScore((subject->getp2()->getLevel() + 1) * (subject->getp2()->getLevel() + 1));
+      if (subject->getp2()->getScore() > subject->getp2()->getHighScore())
+      {
+        subject->getp2()->updateHigh(subject->getp2()->getScore());
+      }
       return i;
     }
   }
+
   return -1;
 }
-
 
 Text::Text(Studio *subject) : subject{subject}
 {
@@ -48,10 +67,12 @@ Text::Text(Studio *subject) : subject{subject}
 
 void Text::notify()
 {
-  if (full1() != -1){
+  if (full1() != -1)
+  {
     subject->getp1()->setCor(full1());
   }
-  if (full2() != -1){
+  if (full2() != -1)
+  {
     std::cout << "full in text" << std::endl;
     subject->getp2()->setCor(full2());
   }
@@ -79,15 +100,19 @@ void Text::notify()
   }
   cout << endl;
   // print board
-  for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j <= cols; ++j) {
+  for (int i = 0; i < rows; ++i)
+  {
+    for (int j = 0; j <= cols; ++j)
+    {
       cout << subject->getStatep1(j, i);
     }
-    for (int j = 0; j <= spacing; ++j) {
+    for (int j = 0; j <= spacing; ++j)
+    {
       cout << " ";
     }
-    for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
-      cout << subject->getStatep2(j - (cols+spacing), i);
+    for (int j = cols + spacing; j < 2 * cols + spacing; ++j)
+    {
+      cout << subject->getStatep2(j - (cols + spacing), i);
     }
     cout << endl;
   }

@@ -19,14 +19,15 @@ private:
     Board *canvas;
     int score;
     int highscore;
-    // int levelnum;
+    int levelnum;
     Level *level; 
+    int player;
     // Studio *canva;
     vector<Block *> blocks; // wendy
 
 
 public:
-    Player(Board *canvas, int score = 0, int highscore = 0, Level *level = nullptr);
+    Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, int player = 0, Level *level = nullptr);
     // need a copy constructor
     ~Player();
     int getScore();
@@ -34,8 +35,8 @@ public:
     void updateHigh(int high);
     int getHighScore();
     int getLevel();
-    Level *Levelup();
-    Level *Leveldown();
+    void Levelup();
+    void Leveldown();
     void force();
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
@@ -43,6 +44,7 @@ public:
     Board *getboard();
     void restart();
     void store(Block *cur);
+    char next();
 
     //Wendy your function
     void setCor(int row);
