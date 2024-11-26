@@ -128,6 +128,9 @@ int main(int argc, char *argv[])
     s.notifyObservers();
     while (cin >> command)
     {
+        if (p->getpic()!= nullptr && p->getpic()->lose()){
+            std::cout << "YOU LOSE!" << std::endl;
+            break;
         if (command[0] == 'r' && command[2] == 'a')
         { // random
             p->settrue();
@@ -248,9 +251,6 @@ int main(int argc, char *argv[])
             }
             s.notifyObservers();
         }
-        // if ((p->getpic() != nullptr) && p->getpic()->lose()){
-        //     break;
-        // }
         if (command == "exit")
         { // exit
             break;
