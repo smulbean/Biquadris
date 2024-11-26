@@ -48,6 +48,5 @@ char LevelFour::createBlock() {
     }
 }
 
-int LevelFour::getLevel() {
-    return 4;
-}
+
+

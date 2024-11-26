@@ -17,7 +17,6 @@ class Level{
 		Level(int id); // constructor
 		virtual ~Level();
 		virtual char createBlock() = 0; // factory method
-		virtual int getLevel() = 0;
 };
 
 

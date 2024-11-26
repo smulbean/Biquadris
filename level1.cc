@@ -26,7 +26,3 @@ char LevelOne::createBlock() {
         return 'O';
     }
 }
-
-int LevelOne::getLevel() {
-    return 0;
-}

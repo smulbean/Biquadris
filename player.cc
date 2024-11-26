@@ -11,11 +11,11 @@
 #include "sblock.h"
 #include "level1.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
-Player::Player(Board* canvas, int score, int high, int levelnum, int player,  Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, levelnum{levelnum}, player{player}, level{level} {
-    // canvas = new BlankBlock(canvas); // fix this later
-    // canvas = picture;
+Player::Player(Board* canvas, int score, int high, int levelnum, int player,  Level* level, string file, bool rand) : 
+canvas{canvas}, score{score}, highscore{high}, levelnum{levelnum}, player{player}, level{level}, file{file}, rand{rand} {
 }
 
 Player::~Player()
@@ -52,11 +52,11 @@ void Player::Levelup(){
         level = new LevelTwo(player);
         levelnum = 2;
     } // and its level one parameters
-    // } else if (levelnum == 2){
-    //     level = new levelthree(); // and its level one parameters
-    // } else if (levelnum == 3){
-    //     level = new levelfour(); // and its level one parameters
-    // }
+    else if (levelnum == 2){
+        level = new LevelThree(player, rand, file); // and its level one parameters
+    } else if (levelnum == 3){
+        level = new LevelFour(player, rand, file); // and its level one parameters
+    }
 
 }
 void Player::Leveldown(){
@@ -67,8 +67,8 @@ void Player::Leveldown(){
     } else if (levelnum == 3){
         level = new LevelTwo(player); // and its level one parameters
         levelnum = 2;
-    // } else if (levelnum == 4){
-    //     level = new levelthree(); // and its level one parameters
+    } else if (levelnum == 4){
+        level = new LevelThree(player, rand, file); // and its level one parameters
     } else if (levelnum == 1){
         level = new LevelZero(player); // and its level one parameters
         levelnum = 0;
@@ -162,3 +162,12 @@ void Player::setCor(int row){
 char Player::next(){
     return level->createBlock();
 }
+
+void Player::settrue(){
+    rand = true;
+}
+
+void Player::setfalse(){
+    rand = false;
+}
+

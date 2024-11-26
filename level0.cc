@@ -25,7 +25,3 @@ char LevelZero::createBlock() {
     }
     return blockID;
 }
-
-int LevelZero::getLevel() {
-    return 0;
-}

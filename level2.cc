@@ -27,6 +27,3 @@ char LevelTwo::createBlock() {
     }
 }
 
-int LevelTwo::getLevel() {
-    return 1;
-}

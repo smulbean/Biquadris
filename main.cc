@@ -91,8 +91,8 @@ int main(int argc, char* argv[])
     Board* c1 = new Blank(); // fix this for parameters
     Board* c2 = new Blank();
     // initialize players
-    Player* p1 = new Player(c1, 0, 0, 0, 1, l1); // for now make it one player
-    Player* p2 = new Player(c2, 0, 0, 0, 2, l2); // for now make it one player
+    Player* p1 = new Player(c1, 0, 0, 0, 1, l1, file1string, true); // for now make it one player
+    Player* p2 = new Player(c2, 0, 0, 0, 2, l2, file2string, true); // for now make it one player
     Player* p = p1;
     // create studio
     Studio s{p1, p2};
@@ -111,11 +111,6 @@ int main(int argc, char* argv[])
         observers.push_back(Tobserver);
     }
 
-    //read from files
-    std::ifstream file1(file1string); // did not account for the edge case where one file is longer than the other one
-    std::ifstream file2(file2string);
-    std::string line; // Flag to alternate between files
-
     bool turn1 = true;
 
     string command;
@@ -125,6 +120,12 @@ int main(int argc, char* argv[])
     s.notifyObservers();
     while (cin >> command)
     {
+        if (command[0] == 'r' && command[2] == 'a'){ // random
+            p->settrue();
+        }
+        if (command[0] == 'n' && command[2] == 'o'){ // random
+            p->setfalse();
+        }
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
@@ -229,8 +230,6 @@ int main(int argc, char* argv[])
             break;
         }
     } 
-    file1.close();
-    file2.close();
     for (Observer* observer : observers) {
         delete observer;  // Explicitly delete each observer
     }

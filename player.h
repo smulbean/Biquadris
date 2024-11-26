@@ -24,10 +24,11 @@ private:
     int player;
     // Studio *canva;
     vector<Block *> blocks; // wendy
-
+    string file;
+    bool rand;
 
 public:
-    Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, int player = 0, Level *level = nullptr);
+    Player(Board *canvas, int score = 0, int highscore = 0, int levelnum = 0, int player = 0, Level *level = nullptr, string file = "", bool rand = true);
     // need a copy constructor
     ~Player();
     int getScore();
@@ -45,6 +46,8 @@ public:
     void restart();
     void store(Block *cur);
     char next();
+    void settrue();
+    void setfalse();
 
     //Wendy your function
     void setCor(int row);

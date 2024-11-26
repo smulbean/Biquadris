@@ -1,5 +1,5 @@
-#ifndef __LEVELTWO_H__
-#define __LEVELTWO_H__
+#ifndef __LEVELFOUR_H__
+#define __LEVELFOURH__
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -21,7 +21,6 @@ class LevelFour : public Level{
 		LevelFour(int id, bool random, std::string file); // constructor
 		~LevelFour();
 		char createBlock() override; // create blocks for level 4
-		int getLevel() override;
 };
 
 #endif

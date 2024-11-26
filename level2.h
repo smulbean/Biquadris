@@ -16,7 +16,6 @@ class LevelTwo : public Level{
 		LevelTwo(int id); // constructor
 		~LevelTwo();
 		char createBlock() override; // create blocks for level 2
-		int getLevel() override;
 };
 
 #endif
