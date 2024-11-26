@@ -26,3 +26,7 @@ char LevelTwo::createBlock() {
         return 'T';
     }
 }
+
+int LevelTwo::getLevel() {
+    return 1;
+}

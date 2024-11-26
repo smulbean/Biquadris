@@ -1,0 +1,27 @@
+#ifndef __LEVELTWO_H__
+#define __LEVELTWO_H__
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <memory>
+#include "level.h"
+#include "block.h"
+
+struct Player;
+
+
+class LevelFour : public Level{
+    bool isRandom;
+    std::string randomFile;
+    std::vector<std::string> playerSequence;
+	size_t sequenceIdx;
+
+	public:
+		LevelFour(int id, bool random, std::string file); // constructor
+		~LevelFour();
+		char createBlock() override; // create blocks for level 4
+		int getLevel() override;
+};
+
+#endif

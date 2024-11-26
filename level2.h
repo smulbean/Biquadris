@@ -1,6 +1,5 @@
 #ifndef __LEVELTWO_H__
 #define __LEVELTWO_H__
-// this is the abstract class for level
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -17,6 +16,7 @@ class LevelTwo : public Level{
 		LevelTwo(int id); // constructor
 		~LevelTwo();
 		char createBlock() override; // create blocks for level 2
+		int getLevel() override;
 };
 
 #endif
