@@ -215,6 +215,9 @@ int main(int argc, char* argv[])
             }
             s.notifyObservers();
         }
+        // if ((p->getpic() != nullptr) && p->getpic()->lose()){
+        //     break;
+        // }
         if (command == "exit")
         { // exit
             break;

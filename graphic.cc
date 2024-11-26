@@ -48,7 +48,7 @@ int Graphic::full2()
 
 Graphic::Graphic(Studio *subject) : subject{subject}
 {
-    w = new Xwindow(col*20, row*50);
+    w = new Xwindow(col*40, row*40);
 }
 
 void Graphic::notify()
@@ -61,48 +61,111 @@ void Graphic::notify()
     {
         subject->getp2()->setCor(full1());
     }
-    int scaling = 20; // can't be zero
-    int rows = scaling * (b - t + 1);
-    int cols = scaling * (r - l + 1) + 150;
-    for (int i = 0; i < rows; i = i + scaling)
+    int scale = 20;
+    for (int row = t; row <= b; ++row)
     {
-        for (int j = 0; j < cols; j = j + scaling)
+        for (int col = l; col <= r; ++col)
         {
-            char ch = subject->getStatep1(t + i / scaling, l + j / scaling);
+            char ch = subject->getStatep1(col, row);
+            // char ch = subject->getStatep1(col, row);
             if (ch == 'J')
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Red);
-            }
-            else if (ch == 'T')
-            {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Green);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Red);
             }
             else if (ch == 'Z')
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Blue);
-            }
-            else if (ch == 'O')
-            {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Red);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Green);
             }
             else if (ch == 'I')
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Blue);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Blue);
             }
-            else if (ch == 'L')
+            if (ch == 'S')
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Green);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Red);
+            }
+            else if (ch == 'T')
+            {
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Blue);
+            }
+            else if (ch == 'O')
+            {
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Green);
             }
             else if (ch == ' ')
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::White);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::White);
             }
             else
             {
-                w->fillRectangle(i, j, scaling, scaling, Xwindow::Black);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Black);
+            }
+        }
+
+        for (int col = l; col <= r; ++col)
+        {
+            char ch = subject->getStatep2(col, row);
+            if (ch == 'J')
+            {
+                w->fillRectangle((col - l) * scale + 5*scale, (row - t) * scale, scale, scale, Xwindow::Red);
+            }
+            else if (ch == 'Z')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Green);
+            }
+            else if (ch == 'I')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Blue);
+            }
+            if (ch == 'S')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Red);
+            }
+            else if (ch == 'T')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Blue);
+            }
+            else if (ch == 'O')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Green);
+            }
+            else if (ch == ' ')
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::White);
+            }
+            else
+            {
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Black);
             }
         }
     }
+    
+    //player one level
+    w->drawString(row*spacing + spacing, row*spacing*spacing*1.4, "Level:   ");
+    std::string p1level = std::to_string(subject->getp1()->getLevel());
+    w->drawString(row*spacing*3, row*spacing*spacing*1.4, p1level);
+    //player two level
+    w->drawString(row*spacing*8, row*spacing*spacing*1.4, "Level:   ");
+    std::string p2level = std::to_string(subject->getp2()->getLevel());
+    w->drawString(row*spacing*10, row*spacing*spacing*1.4, p2level);
+
+     //player one score
+    w->drawString(row*spacing + spacing, row*spacing*spacing*1.45, "Score:   ");
+    std::string p1score = std::to_string(subject->getp1()->getScore());
+    w->drawString(row*spacing*3, row*spacing*spacing*1.45, p1score);
+    //player two score
+    w->drawString(row*spacing*8, row*spacing*spacing*1.45, "Score:   ");
+    std::string p2score = std::to_string(subject->getp2()->getScore());
+    w->drawString(row*spacing*10, row*spacing*spacing*1.45, p2score);
+
+    //player one high score
+    w->drawString(row*spacing + spacing, row*spacing*spacing*1.5, "HighScore:   ");
+    std::string p1high = std::to_string(subject->getp1()->getHighScore());
+    w->drawString(row*spacing*3, row*spacing*spacing*1.5, p1high);
+    //player two high score
+    w->drawString(row*spacing*8, row*spacing*spacing*1.5, "HighScore:   ");
+    std::string p2high = std::to_string(subject->getp2()->getHighScore());
+    w->drawString(row*spacing*10, row*spacing*spacing*1.5, p2high);
 }
 
 Graphic::~Graphic()
