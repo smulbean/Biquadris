@@ -297,3 +297,6 @@ void IBlock::clear(int row) {
     return;
 }
 
+bool IBlock::lose(){
+    return lost;
+}

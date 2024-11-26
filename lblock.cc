@@ -318,3 +318,7 @@ void LBlock::clear(int row) {
     }
     return;
 }
+
+bool LBlock::lose(){
+    return lost;
+}

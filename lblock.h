@@ -11,6 +11,7 @@ class LBlock : public Block
 private:
     int phase;
     bool end;
+    bool lost;
 
 public:
     LBlock(Board* base);  // constructor
@@ -23,7 +24,9 @@ public:
     char charAt(int row, int col) override;
     void drop() override;
     bool done() override;
+    bool lose() override;
     void clear(int row) override;
+
 };
 
 #endif

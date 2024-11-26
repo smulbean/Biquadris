@@ -11,6 +11,7 @@ class IBlock : public Block
 private:
     int phase;
     bool end;
+    bool lost;
 
 public:
     IBlock(Board* base);  // constructor
@@ -24,7 +25,7 @@ public:
     void drop() override;
     bool done() override;
     void clear(int row) override;
-
+    bool lose() override;
 };
 
 #endif

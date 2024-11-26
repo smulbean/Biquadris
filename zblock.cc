@@ -321,3 +321,6 @@ void ZBlock::clear(int row) {
     return;
 }
 
+bool ZBlock::lose(){
+    return lost;
+}

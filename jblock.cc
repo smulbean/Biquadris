@@ -323,4 +323,7 @@ void JBlock::clear(int row) {
     return;
 }
 
+bool JBlock::lose(){
+    return lost;
+}
 

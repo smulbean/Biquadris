@@ -327,4 +327,6 @@ void TBlock::clear(int row) {
     return;
 }
 
-
+bool TBlock::lose(){
+    return lost;
+}

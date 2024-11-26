@@ -322,3 +322,7 @@ void SBlock::clear(int row) {
     }
     return;
 }
+
+bool SBlock::lose(){
+    return lost;
+}

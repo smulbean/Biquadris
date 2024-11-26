@@ -11,6 +11,7 @@ class ZBlock : public Block
 private:
     int phase;
     bool end;
+    bool lost;
 
 public:
     ZBlock(Board* base);  // constructor
@@ -24,6 +25,7 @@ public:
     void drop() override;
     bool done() override;
     void clear(int row) override;
+    bool lose() override;
 };
 
 #endif

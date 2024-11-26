@@ -316,4 +316,6 @@ void OBlock::clear(int row) {
     return;
 }
 
-
+bool OBlock::lose(){
+    return lost;
+}
