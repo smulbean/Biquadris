@@ -64,25 +64,25 @@ void Text::notify()
   cout << "HighScore: " << subject->getp1()->getHighScore() << "     "; // 5 spaces inbetween board
   cout << "HighScore: " << subject->getp2()->getHighScore() << endl;
   // print top seperator
-  for (int i = 0; i <= cols; i++)
+  for (int i = 0; i < cols; i++)
   {
     cout << "-";
   }
-  for (int i = 0; i < spacing; i++)
+  for (int i = 0; i <= spacing; i++)
   {
     cout << " ";
   }
-  for (int i = cols + spacing; i <= 2 * cols + spacing; i++)
+  for (int i = cols + spacing; i < 2 * cols + spacing; i++)
   {
     cout << "-";
   }
   cout << endl;
   // print board
   for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
+    for (int j = 0; j <= cols; ++j) {
       cout << subject->getStatep1(j, i);
     }
-    for (int j = 0; j < spacing; ++j) {
+    for (int j = 0; j <= spacing; ++j) {
       cout << " ";
     }
     for (int j = cols + spacing; j < 2*cols+spacing; ++j) {
@@ -95,7 +95,7 @@ void Text::notify()
   {
     cout << "-";
   }
-  for (int i = 0; i < spacing; i++)
+  for (int i = 0; i <= spacing; i++)
   {
     cout << " ";
   }
