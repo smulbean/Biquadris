@@ -194,7 +194,7 @@ int main(int argc, char* argv[])
         }
         else if (command[0] == 'l' && command[1] == 'e' && command[2] == 'v' && command[5] == 'u' && command[6] == 'p') { // levelup 
             p->Levelup();
-            
+            s.notifyObservers();
         }
         else if (command[0] == 'l' && command[5] == 'd') { // level down
             p->Leveldown();
