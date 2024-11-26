@@ -52,7 +52,8 @@ void Text::notify()
     subject->getp1()->setCor(full1());
   }
   if (full2() != -1){
-    subject->getp2()->setCor(full1());
+    std::cout << "full in text" << std::endl;
+    subject->getp2()->setCor(full2());
   }
   // print the beginning
   cout << "Level:     " << subject->getp1()->getLevel() << "     "; // 5 spaces inbetween board

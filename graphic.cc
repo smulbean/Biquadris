@@ -55,11 +55,13 @@ void Graphic::notify()
 {
     if (full1() != -1)
     {
+        
         subject->getp1()->setCor(full1());
     }
     if (full2() != -1)
     {
-        subject->getp2()->setCor(full1());
+        std::cout << "full in graphic" << std::endl;
+        subject->getp2()->setCor(full2());
     }
     int scale = 20;
     for (int row = t; row <= b; ++row)

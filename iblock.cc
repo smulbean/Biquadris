@@ -283,10 +283,12 @@ bool IBlock::done(){
 
 void IBlock::clear(int row) {
     for (int i=0; i<4; i++){
+        std::cout << row << std::endl;
         if (this->coordinates[i]->y == row){
             this->coordinates[i]->x = -1;
             this->coordinates[i]->y = -1;
             continue;
+            std::cout << "Iblock clear " << i << std::endl;
         } else if (this->coordinates[i]->y < row){
             this->coordinates[i]->y++;
             continue;
