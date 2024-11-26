@@ -1,6 +1,5 @@
 #ifndef __LEVELTWO_H__
 #define __LEVELTWO_H__
-// this is the abstract class for level
 #include <iostream>
 #include <fstream>
 #include <string>

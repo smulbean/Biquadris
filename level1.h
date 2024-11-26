@@ -1,6 +1,5 @@
 #ifndef __LEVELONE_H__
 #define __LEVELONE_H__
-// this is the abstract class for level
 #include <iostream>
 #include <fstream>
 #include <string>
