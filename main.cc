@@ -131,6 +131,7 @@ int main(int argc, char *argv[])
         if (p->getpic()!= nullptr && p->getpic()->lose()){
             std::cout << "YOU LOSE!" << std::endl;
             break;
+        }
         if (command[0] == 'r' && command[2] == 'a')
         { // random
             p->settrue();
@@ -263,3 +264,5 @@ int main(int argc, char *argv[])
     }
     return 0;
 } // main
+
+
