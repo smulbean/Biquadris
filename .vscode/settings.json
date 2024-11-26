@@ -49,6 +49,7 @@
         "variant": "cpp",
         "vector": "cpp",
         "algorithm": "cpp",
-        "memory": "cpp"
+        "memory": "cpp",
+        "condition_variable": "cpp"
     }
 }

@@ -17,6 +17,8 @@
 #include "graphic.h"
 #include "level1.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 
 int main(int argc, char* argv[])
@@ -29,8 +31,8 @@ int main(int argc, char* argv[])
     bool scriptfile1 = false;
     bool scriptfile2 = false;
     // bool seed = false;
-    string file1string;
-    string file2string;
+    string file1string = "sequence1.txt";
+    string file2string = "sequence1.txt";
     // list of observers
     std::vector<Observer*> observers;
     // make studio work on canvas
@@ -40,6 +42,14 @@ int main(int argc, char* argv[])
             if (std::strcmp(argv[i], "-text") == 0){
                 // text only
                 textonly = true;
+            }
+            if (std::strcmp(argv[i], "-scriptfile1") == 0){
+                //read in to player 1 from argv[i + 1]
+                file1string = argv[i + 1];
+            }
+            if (std::strcmp(argv[i], "-scriptfile2") == 0){
+                //read in to player 2 from argv[i + 1]
+                file2string = argv[i+1];
             }
             if (std::strcmp(argv[i], "-startlevel") == 0){
                 //l == new Level argv[i + 1]
@@ -51,25 +61,16 @@ int main(int argc, char* argv[])
                     l1 = new LevelTwo(1);
                     l2 = new LevelTwo(2);
                 }
-                // else if (std::stoi(argv[i + 1]) == 3){
-                //     l1 = new Levelthree(1); 
-                // }
-                // else if (std::stoi(argv[i + 1]) == 4){
-                //     l1 = new Levelfour(1);
-                //     l2 = new Levelfour(2);
-                // }
+                else if (std::stoi(argv[i + 1]) == 3){
+                    l1 = new LevelThree(1, true, file2string); 
+                    l2 = new LevelThree(2, true, file2string);
+                }
+                else if (std::stoi(argv[i + 1]) == 4){
+                    l1 = new LevelFour(1, true, file2string);
+                    l2 = new LevelFour(2, true, file2string);
+                }
                 startlevel = true;
             }
-            // if (std::strcmp(argv[i], "-scriptfile1"){
-            //     //read in to player 1 from argv[i + 1]
-            //     file1string = argv[i + 1];
-            //     scriptfile1 = true;
-            // }
-            // if (std::strcmp(argv[i], "-scriptfile2"){
-            //     //read in to player 2 from argv[i + 1]
-            //     file2string = argv[i+1];
-            //     scriptfile2 = true;
-            // }
             // if (std::strcmp(argv[i], "-seed"){
             //     //read in seed from argv[i + 1]
             //     seed = true;
@@ -80,12 +81,6 @@ int main(int argc, char* argv[])
         // start level 0
         l1 = new LevelZero(1);
         l2 = new LevelZero(2); // fix this for parameters
-    }
-    if (!scriptfile1){
-        file1string = "sequence1.txt"; // wrong
-    }
-    if (!scriptfile2){
-        file2string = "sequence2.txt";
     }
     // make a new canvas for tetris
     Board* c1 = new Blank(); // fix this for parameters
@@ -230,6 +225,7 @@ int main(int argc, char* argv[])
             break;
         }
     } 
+
     for (Observer* observer : observers) {
         delete observer;  // Explicitly delete each observer
     }
