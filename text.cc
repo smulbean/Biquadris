@@ -96,7 +96,7 @@ void Text::notify()
   {
     cout << "-";
   }
-  for (int i = 0; i <= spacing; i++)
+  for (int i = 0; i <= spacing + 1; i++)
   {
     cout << " ";
   }
