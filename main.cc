@@ -125,10 +125,12 @@ int main(int argc, char *argv[])
     char currentl1 = p1->next();
     char currentl2 = p2->next();
     p->setcur(currentl1);
+
     s.notifyObservers();
     while (cin >> command)
     {
-        if (p->getpic()!= nullptr && p->getpic()->lose()){
+        if (p->getpic() != nullptr && p->getpic()->lose())
+        {
             std::cout << "YOU LOSE!" << std::endl;
             break;
         }

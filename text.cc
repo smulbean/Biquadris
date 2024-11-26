@@ -10,6 +10,28 @@ using namespace std;
 // subject->getp1()->updateScore(int inc) adds inc to current score
 // subject->getp1()->updateHigh(int high)changes highscore to high
 
+bool Text::emptytop1(){
+  for (int i = 0; i < 2; i++){
+    for (int j = 0; j < cols; j++){
+      if (subject->getStatep1(j, i) != ' '){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+bool Text::emptytop2(){
+  for (int i = 0; i < 2; i++){
+    for (int j = 0; j < cols; j++){
+      if (subject->getStatep2(j, i) != ' '){
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 int Text::full1()
 {
   for (int i = 0; i < rows; i++)
@@ -67,6 +89,14 @@ Text::Text(Studio *subject) : subject{subject}
 
 void Text::notify()
 {
+  // if (!emptytop1()){
+  //   std::cout << "Player 1 loses" << std::endl;
+  //   return;
+  // }
+  // if (!emptytop2()){
+  //   std::cout << "Player 2 loses" << std::endl;
+  //   return;
+  // }
   if (full1() != -1)
   {
     subject->getp1()->setCor(full1());

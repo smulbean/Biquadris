@@ -11,6 +11,8 @@ class Text : public Observer {
   bool blind; // remember to put in blind
   int full1();
   int full2();
+  bool emptytop1();
+  bool emptytop2();
  public:
   Text(Studio *subject); // constructor
   void notify() override;
