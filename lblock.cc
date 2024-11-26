@@ -227,7 +227,7 @@ void LBlock::down(){
 
 void LBlock::left(){
     for(int i = 0; i < 4; i++) {
-        if(coordinates[i]->x == 1) {
+        if(coordinates[i]->x == 0) {
             return;
         }
     }
