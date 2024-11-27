@@ -14,7 +14,6 @@ LevelZero::LevelZero(int id) : Level{id}, sequenceIdx{0} {
     }
 }
 
-LevelZero::~LevelZero() {}
 
 char LevelZero::createBlock() {
     char blockID = playerSequence[sequenceIdx][0];

@@ -3,8 +3,6 @@
 
 LevelOne::LevelOne(int id) : Level{id} {}
 
-LevelOne::~LevelOne() {}
-
 char LevelOne::createBlock() {
     static std::default_random_engine generator;
     static std::uniform_int_distribution<int> distribution(1,12);

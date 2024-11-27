@@ -5,7 +5,7 @@
 #include "window.h"
 
 class Graphic : public Observer {
-  Studio *subject;
+  std::shared_ptr<Studio> subject;
   Xwindow *w;
   int t = 0;
   int b = 18;
@@ -17,9 +17,9 @@ class Graphic : public Observer {
   int full1();
   int full2();
  public:
-  Graphic(Studio *subject); // constructor
+  Graphic(std::shared_ptr<Studio> subject); // constructor
   void notify() override;
-  ~Graphic() override;
+  ~Graphic() override = default;
 };
 
 #endif

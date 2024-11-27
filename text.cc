@@ -83,8 +83,7 @@ int Text::full2()
   return -1;
 }
 
-Text::Text(Studio *subject) : subject{subject}
-{
+Text::Text(std::shared_ptr<Studio> subject) : subject(subject) {
 }
 
 void Text::notify()
@@ -164,7 +163,7 @@ void Text::notify()
   // manual function that presents the blocks]
 }
 
-Text::~Text()
-{
-  subject->detach(this);
-}
+// Text::~Text()
+// {
+//   subject->detach(this);
+// }

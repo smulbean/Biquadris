@@ -14,8 +14,6 @@ LevelThree::LevelThree(int id, bool random, std::string file) : Level{id}, isRan
     }
 }
 
-LevelThree::~LevelThree() {}
-
 char LevelThree::createBlock() {
     if (isRandom) {
         char blockID = playerSequence[sequenceIdx][0];

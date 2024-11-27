@@ -3,8 +3,6 @@
 
 LevelTwo::LevelTwo(int id) : Level(id) {}
 
-LevelTwo::~LevelTwo() {}
-
 char LevelTwo::createBlock() {
     static std::default_random_engine generator;
     static std::uniform_int_distribution<int> distribution(1,7);

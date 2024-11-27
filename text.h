@@ -4,7 +4,7 @@
 #include "subject.h"
 
 class Text : public Observer {
-  Studio *subject;
+  std::shared_ptr<Studio> subject;
   int cols = 11;
   int rows = 18;
   int spacing = 5;
@@ -14,9 +14,9 @@ class Text : public Observer {
   bool emptytop1();
   bool emptytop2();
  public:
-  Text(Studio *subject); // constructor
+  explicit Text(std::shared_ptr<Studio> subject); // constructor
   void notify() override;
-  ~Text() override;
+  ~Text() override = default;
 };
 
 #endif

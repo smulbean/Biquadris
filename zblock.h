@@ -2,10 +2,11 @@
 #define __ZBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
+#include <memory>
 
 class ZBlock : public Block
 {
-    Coor *coordinates[4]; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
 
 private:
@@ -14,8 +15,8 @@ private:
     bool lost;
     bool exceed;
 public:
-    ZBlock(Board* base);  // constructor
-    ~ZBlock(); // destructor
+    ZBlock(std::shared_ptr<Board> base);  // constructor
+    ~ZBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;
