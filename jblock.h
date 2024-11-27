@@ -29,6 +29,7 @@ public:
     void clear(int row) override;
     bool lose() override;
     bool exceeded() override;
+    int blockdone(int row) override;
 };
 
 #endif

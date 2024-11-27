@@ -141,6 +141,22 @@ void Player::setCor(int row) {
     }
 }
 
+void Player::MoreScore(int row) {
+    for (auto it = blocks.begin(); it != blocks.end();) {
+        // Check if the block affects the specified row
+        if ((*it)->blockdone(row) == 1) {
+            // Increment the score based on the block's interaction with the row
+            score += (*it)->blockdone(row) + levelnum;
+
+            // Remove the block and advance the iterator
+            it = blocks.erase(it);
+        } else {
+            // Move to the next block
+            ++it;
+        }
+    }
+}
+
 
 
 char Player::next(){

@@ -39,6 +39,7 @@ public:
     void Levelup();
     void Leveldown();
     void force();
+    void MoreScore(int row);
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
     std::shared_ptr<Block> getpic();

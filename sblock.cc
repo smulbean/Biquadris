@@ -342,3 +342,14 @@ bool SBlock::exceeded() {
     }
     return false;
 }
+
+
+int SBlock::blockdone(int row) {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
+        return 0;
+        }
+    }
+    return 1;
+}
+
