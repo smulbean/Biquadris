@@ -128,19 +128,24 @@ int main(int argc, char *argv[])
         int n = 0;
         int digit = 0;
         std::cin >> command;
-        for (int i = 0; i < command.size(); i++){
-            if (command[i] >= '0' && command[i] <= '9'){
+        for (int i = 0; i < command.size(); i++)
+        {
+            if (command[i] >= '0' && command[i] <= '9')
+            {
                 digit++;
             }
         }
         number = command.substr(0, digit);
         command = command.substr(digit);
-        try {
+        try
+        {
             n = stoi(number);
         }
-         catch (const std::invalid_argument& e){
+        catch (const std::invalid_argument &e)
+        {
             n = 1;
         }
+        std::cout << n << " " << command << std::endl;
 
         if (p->getpic() != nullptr && p->getpic()->lose())
         {
@@ -281,12 +286,18 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'l' && command[1] == 'e' && command[2] == 'v' && command[5] == 'u' && command[6] == 'p')
         { // levelup
-            p->Levelup();
+            for (int i = 0; i < n; i++)
+            {
+                p->Levelup();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'l' && command[5] == 'd')
         { // level down
-            p->Leveldown();
+        for (int i = 0; i < n; i++)
+            {
+                p->Leveldown();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'e')

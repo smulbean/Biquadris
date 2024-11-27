@@ -143,7 +143,7 @@ void Graphic::notify()
             }
         }
     }
-    w->fillRectangle(0, row*spacing*spacing*1.35, 200, 200, Xwindow::White);
+    w->fillRectangle(0, row*spacing*spacing*1.35, 800, 800, Xwindow::White);
     
     //player one level
     w->drawString(row*spacing + spacing, row*spacing*spacing*1.4, "Level:   ");
