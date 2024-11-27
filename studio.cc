@@ -18,17 +18,13 @@ char Studio::getStatep2(int row, int col) const
     return p2->getboard()->charAt(row, col);
 }
 
-Studio::~Studio()
+std::shared_ptr<Player> Studio::getp1() 
 {
-    delete p1;
-    delete p2;
-}
-
-Player* Studio::getp1(){
     return p1;
 }
 
-Player* Studio::getp2(){
+std::shared_ptr<Player> Studio::getp2() 
+{
     return p2;
 }
 

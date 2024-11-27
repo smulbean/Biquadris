@@ -1,5 +1,7 @@
 #include "block.h"
 #include <iostream>
+#include <memory>
 
-Block::Block(Board* base) : base(base) {}
-Block::~Block() { delete base; }
+Block::Block(std::shared_ptr<Board> base) : base(std::move(base)) {}
+
+Block::~Block(){}

@@ -19,7 +19,7 @@ class LevelFour : public Level{
 
 	public:
 		LevelFour(int id, bool random, std::string file); // constructor
-		~LevelFour();
+		LevelFour() = default;
 		char createBlock() override; // create blocks for level 4
 };
 

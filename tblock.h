@@ -2,10 +2,11 @@
 #define __TBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
+#include <memory>
 
 class TBlock : public Block
 {
-    Coor *coordinates[4]; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
 
 private:
@@ -14,8 +15,8 @@ private:
     bool lost;
     bool exceed;
 public:
-    TBlock(Board* base);  // constructor
-    ~TBlock(); // destructor
+    TBlock(std::shared_ptr<Board> base);  // constructor
+    ~TBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;

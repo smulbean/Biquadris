@@ -14,8 +14,6 @@ LevelFour::LevelFour(int id, bool random, std::string file) : Level{id}, isRando
     }
 }
 
-LevelFour::~LevelFour() {}
-
 char LevelFour::createBlock() {
     if (isRandom) {
         char blockID = playerSequence[sequenceIdx][0];

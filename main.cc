@@ -3,6 +3,7 @@
 #include <cstring>
 #include <vector>
 #include <sstream>
+#include <memory>
 #include "blank.h"
 #include "block.h"
 #include "level.h"
@@ -23,18 +24,16 @@
 int main(int argc, char *argv[])
 {
     // initialize a level
-    Level *l1;
-    Level *l2;
+    std::shared_ptr<Level> l1;
+    std::shared_ptr<Level> l2;
     bool textonly = false;
     bool startlevel = false;
-    bool scriptfile1 = false;
-    bool scriptfile2 = false;
-    bool nextheavy = false;
+    // bool nextheavy = false;
     // bool seed = false;
     string file1string = "sequence1.txt";
     string file2string = "sequence1.txt";
     // list of observers
-    std::vector<Observer *> observers;
+    std::vector<std::shared_ptr<Observer>> observers;
     // make studio work on canvas
     // studio will take both players
     if (argc > 1)
@@ -61,23 +60,23 @@ int main(int argc, char *argv[])
                 // l == new Level argv[i + 1]
                 if (std::stoi(argv[i + 1]) == 1)
                 {
-                    l1 = new LevelOne(1);
-                    l2 = new LevelOne(2);
+                    l1 = std::make_shared<LevelOne>(1);
+                    l2 = std::make_shared<LevelOne>(2);
                 }
                 else if (std::stoi(argv[i + 1]) == 2)
                 {
-                    l1 = new LevelTwo(1);
-                    l2 = new LevelTwo(2);
+                    l1 = std::make_shared<LevelTwo>(1);
+                    l2 = std::make_shared<LevelTwo>(2);
                 }
                 else if (std::stoi(argv[i + 1]) == 3)
                 {
-                    l1 = new LevelThree(1, true, file2string);
-                    l2 = new LevelThree(2, true, file2string);
+                    l1 = std::make_shared<LevelThree>(1, true, file2string);
+                    l2 = std::make_shared<LevelThree>(2, true, file2string);
                 }
                 else if (std::stoi(argv[i + 1]) == 4)
                 {
-                    l1 = new LevelFour(1, true, file2string);
-                    l2 = new LevelFour(2, true, file2string);
+                    l1 = std::make_shared<LevelFour>(1, true, file2string);
+                    l2 = std::make_shared<LevelFour>(2, true, file2string);
                 }
                 startlevel = true;
             }
@@ -90,33 +89,29 @@ int main(int argc, char *argv[])
     if (!startlevel)
     {
         // start level 0
-        l1 = new LevelZero(1);
-        l2 = new LevelZero(2); // fix this for parameters
+        l1 = std::make_shared<LevelZero>(1);
+        l2 = std::make_shared<LevelZero>(2); // fix this for parameters
     }
     // make a new canvas for tetris
-    Board *c1 = new Blank(); // fix this for parameters
-    Board *c2 = new Blank();
+    std::shared_ptr<Board> c1 = std::make_shared<Blank>(); // fix this for parameters
+    std::shared_ptr<Board> c2 = std::make_shared<Blank>();
     // initialize players
-    Player *p1 = new Player(c1, 0, 0, 0, 1, l1, file1string, true); // for now make it one player
-    Player *p2 = new Player(c2, 0, 0, 0, 2, l2, file2string, true); // for now make it one player
-    Player *p = p1;
+    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true); // for now make it one player
+    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true); // for now make it one player
+    std::shared_ptr<Player> p = p1;
     // create studio
     Studio s{p1, p2};
+    auto s_ptr = std::make_shared<Studio>(s); // Create shared_ptr for Studio
+
+    auto Tobserver = std::make_shared<Text>(s_ptr); // Pass shared_ptr to Text observer
+    s.attach(Tobserver);
+    observers.push_back(Tobserver);
+
     if (!textonly)
     {
-        Text *Tobserver = new Text(&s);
-        s.attach(Tobserver);
-        observers.push_back(Tobserver);
-        Graphic *Gobserver = new Graphic(&s);
+        auto Gobserver = std::make_shared<Graphic>(s_ptr); // Pass shared_ptr to Graphic observer
         s.attach(Gobserver);
         observers.push_back(Gobserver);
-    }
-    // if textonly, then create the text observer
-    if (textonly)
-    {
-        Text *Tobserver = new Text(&s);
-        s.attach(Tobserver);
-        observers.push_back(Tobserver);
     }
 
     bool turn1 = true;
@@ -146,7 +141,8 @@ int main(int argc, char *argv[])
         if (command[0] == 'l' && command[2] == 'f')
         { // left
             p->getpic()->left();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -154,7 +150,8 @@ int main(int argc, char *argv[])
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
             p->getpic()->right();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -162,7 +159,8 @@ int main(int argc, char *argv[])
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
             p->getpic()->down();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -170,7 +168,8 @@ int main(int argc, char *argv[])
         else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
             p->getpic()->drop();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -178,7 +177,8 @@ int main(int argc, char *argv[])
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
             p->getpic()->rotateC();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -186,7 +186,8 @@ int main(int argc, char *argv[])
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
             p->getpic()->rotateCC();
-            if (p->getLevel() == 3 || p->getLevel() == 4){
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
                 p->getpic()->down();
             }
             s.notifyObservers();
@@ -259,9 +260,10 @@ int main(int argc, char *argv[])
         }
         if ((p->getpic() != nullptr) && p->getpic()->done())
         {
-            std::cout <<  p->getpic()->exceeded() << std::endl;
-           
-            if ((p->getpic() != nullptr) && p->getpic()->exceeded()){
+            std::cout << p->getpic()->exceeded() << std::endl;
+
+            if ((p->getpic() != nullptr) && p->getpic()->exceeded())
+            {
                 std::cout << "You lose!" << std::endl;
                 break;
             }
@@ -289,12 +291,5 @@ int main(int argc, char *argv[])
             break;
         }
     }
-
-    for (Observer *observer : observers)
-    {
-        delete observer; // Explicitly delete each observer
-    }
     return 0;
 } // main
-
-

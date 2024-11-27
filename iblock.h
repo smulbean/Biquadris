@@ -2,10 +2,11 @@
 #define __IBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
+#include <memory>
 
 class IBlock : public Block
 {
-    Coor *coordinates[4]; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
 
 private:
@@ -15,8 +16,8 @@ private:
     bool exceed;
 
 public:
-    IBlock(Board* base);  // constructor
-    ~IBlock(); // destructor
+    IBlock(std::shared_ptr<Board> base);  // constructor
+    ~IBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;

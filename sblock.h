@@ -1,11 +1,12 @@
 #ifndef __SBLOCK_H__
 #define __SBLOCK_H__
 #include "coor.h"
+#include <memory>
 #include "block.h" // h only no .cc
 
 class SBlock : public Block
 {
-    Coor *coordinates[4]; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
 
 private:
@@ -14,8 +15,8 @@ private:
     bool lost;
     bool exceed;
 public:
-    SBlock(Board* base);  // constructor
-    ~SBlock(); // destructor
+    SBlock(std::shared_ptr<Board> base);  // constructor
+    ~SBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;

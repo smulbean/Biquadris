@@ -3,33 +3,28 @@
 #include "iblock.h"
 #include "board.h"
 #include <iostream>
+#include <memory>
 
-IBlock::IBlock(Board* base): Block{base} {
-    if ((base->charAt(4, 2) == ' ')&&
-        (base->charAt(5, 2) == ' ')&&
-        (base->charAt(6, 2) == ' ')&&
+IBlock::IBlock(std::shared_ptr<Board> base): Block{base} {
+    if ((base->charAt(4, 2) == ' ') &&
+        (base->charAt(5, 2) == ' ') &&
+        (base->charAt(6, 2) == ' ') &&
         (base->charAt(7, 2) == ' ')) {
         phase = 1;
         end = false;
-        coordinates[0] = new Coor(4, 2);
-        coordinates[1] = new Coor(5, 2);
-        coordinates[2] = new Coor(6, 2);
-        coordinates[3] = new Coor(7, 2);
+        coordinates[0] = std::make_shared<Coor>(4, 2);
+        coordinates[1] = std::make_shared<Coor>(5, 2);
+        coordinates[2] = std::make_shared<Coor>(6, 2);
+        coordinates[3] = std::make_shared<Coor>(7, 2);
     } else {
         lost = true;
-        coordinates[0] = new Coor(-1, -1);
-        coordinates[1] = new Coor(-1, -1);
-        coordinates[2] = new Coor(-1, -1);
-        coordinates[3] = new Coor(-1, -1);
+        coordinates[0] = std::make_shared<Coor>(-1, -1);
+        coordinates[1] = std::make_shared<Coor>(-1, -1);
+        coordinates[2] = std::make_shared<Coor>(-1, -1);
+        coordinates[3] = std::make_shared<Coor>(-1, -1);
     }
-    
 }
 
-IBlock::~IBlock() {
-    for (int i = 0; i<4 ; i++){
-        delete coordinates[i];
-    }
-}
 
 void IBlock::rotateCC() {
     if (phase == 1) {

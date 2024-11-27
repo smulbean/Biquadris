@@ -4,6 +4,8 @@
 #include "graphic.h"
 #include <iostream>
 #include "window.h"
+#include <memory> 
+
 using namespace std;
 
 int Graphic::full1()
@@ -46,7 +48,7 @@ int Graphic::full2()
     return -1;
 }
 
-Graphic::Graphic(Studio *subject) : subject{subject}
+Graphic::Graphic(std::shared_ptr<Studio> subject) : subject{subject}
 {
     w = new Xwindow(col*40, row*40);
 }
@@ -171,7 +173,7 @@ void Graphic::notify()
     w->drawString(row*spacing*10, row*spacing*spacing*1.5, p2high);
 }
 
-Graphic::~Graphic()
-{
-    subject->detach(this);
-}
+// Graphic::~Graphic()
+// {
+//     subject->detach(this);
+// }
