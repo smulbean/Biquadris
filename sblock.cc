@@ -337,3 +337,12 @@ void SBlock::clear(int row) {
 bool SBlock::lose(){
     return lost;
 }
+
+bool SBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}

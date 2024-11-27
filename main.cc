@@ -235,6 +235,12 @@ int main(int argc, char *argv[])
         }
         if ((p->getpic() != nullptr) && p->getpic()->done())
         {
+            std::cout <<  p->getpic()->exceeded() << std::endl;
+           
+            if ((p->getpic() != nullptr) && p->getpic()->exceeded()){
+                std::cout << "You lose!" << std::endl;
+                break;
+            }
             // level will return next block, will call p->setcur('L') and then notify
             if (turn1)
             {

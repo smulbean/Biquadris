@@ -12,6 +12,7 @@ private:
     int phase;
     bool end;
     bool lost;
+    bool exceed;
 
 public:
     LBlock(Board* base);  // constructor
@@ -26,7 +27,7 @@ public:
     bool done() override;
     bool lose() override;
     void clear(int row) override;
-
+    bool exceeded() override;
 };
 
 #endif

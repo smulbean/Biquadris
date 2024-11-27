@@ -12,7 +12,7 @@ private:
     int phase;
     bool end;
     bool lost;
-
+    bool exceed;
 public:
     OBlock(Board* base);  // constructor
     ~OBlock(); // destructor
@@ -26,6 +26,7 @@ public:
     bool done() override;
     void clear(int row) override;
     bool lose() override;
+    bool exceeded() override;
 };
 
 #endif

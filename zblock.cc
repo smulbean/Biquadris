@@ -332,6 +332,15 @@ void ZBlock::clear(int row) {
     return;
 }
 
+bool ZBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}
+
 bool ZBlock::lose(){
     return lost;
 }

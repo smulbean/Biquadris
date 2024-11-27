@@ -330,3 +330,12 @@ void OBlock::clear(int row) {
 bool OBlock::lose(){
     return lost;
 }
+
+bool OBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}

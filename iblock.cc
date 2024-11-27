@@ -312,3 +312,15 @@ void IBlock::clear(int row) {
 bool IBlock::lose(){
     return lost;
 }
+
+
+
+bool IBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}
+

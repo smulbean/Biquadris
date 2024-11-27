@@ -341,3 +341,12 @@ void TBlock::clear(int row) {
 bool TBlock::lose(){
     return lost;
 }
+
+bool TBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}
