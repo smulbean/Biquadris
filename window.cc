@@ -26,21 +26,30 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
   gc = XCreateGC(d, pix, 0,(XGCValues *)0);
 
   XFlush(d);
-  XFlush(d);
 
-  // Set up colours.
+  // Set up colors.
   XColor xcolour;
   Colormap cmap;
-  char color_vals[5][10]={"white", "black", "red", "green", "blue"}; //
+  char color_vals[9][10] = {
+    "#FFFFFF",  // white
+    "#000000",  // black
+    "#FF0000",  // red
+    "#00FF00",  // green
+    "#0000FF",  // blue
+    "#800080",  // purple
+    "#FFFF00",  // yellow
+    "#FFC0CB",  // pink
+    "#FFA500"   // orange
+};
 
-  cmap=DefaultColormap(d,DefaultScreen(d)); // this will change color
-  for(int i=0; i < 5; ++i) {
-      XParseColor(d,cmap,color_vals[i],&xcolour);
-      XAllocColor(d,cmap,&xcolour);
-      colours[i]=xcolour.pixel;
+  cmap = DefaultColormap(d, DefaultScreen(d)); 
+  for (int i = 0; i < 9; ++i) {
+      XParseColor(d, cmap, color_vals[i], &xcolour);
+      XAllocColor(d, cmap, &xcolour);
+      colours[i] = xcolour.pixel;
   }
 
-  XSetForeground(d,gc,colours[Black]);
+  XSetForeground(d, gc, colours[Black]);
 
   // Make window non-resizeable.
   XSizeHints hints;
@@ -53,6 +62,7 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
 
   usleep(1000);
 }
+
 
 Xwindow::~Xwindow() {
   XFreeGC(d, gc);

@@ -86,15 +86,15 @@ void Graphic::notify()
             }
             if (ch == 'S')
             {
-                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Red);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Pink);
             }
             else if (ch == 'T')
             {
-                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Blue);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Purple);
             }
             else if (ch == 'O')
             {
-                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Green);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Yellow);
             }
             else if (ch == ' ')
             {
@@ -102,7 +102,7 @@ void Graphic::notify()
             }
             else
             {
-                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Black);
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }
         }
 
@@ -123,15 +123,15 @@ void Graphic::notify()
             }
             if (ch == 'S')
             {
-                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Red);
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Pink);
             }
             else if (ch == 'T')
             {
-                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Blue);
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Purple);
             }
             else if (ch == 'O')
             {
-                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Green);
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Yellow);
             }
             else if (ch == ' ')
             {
@@ -139,7 +139,7 @@ void Graphic::notify()
             }
             else
             {
-                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Black);
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }
         }
     }

@@ -122,8 +122,26 @@ int main(int argc, char *argv[])
     p->setcur(currentl1);
 
     s.notifyObservers();
-    while (cin >> command)
+    while (true)
     {
+        string number = "";
+        int n = 0;
+        int digit = 0;
+        std::cin >> command;
+        for (int i = 0; i < command.size(); i++){
+            if (command[i] >= '0' && command[i] <= '9'){
+                digit++;
+            }
+        }
+        number = command.substr(0, digit);
+        command = command.substr(digit);
+        try {
+            n = stoi(number);
+        }
+         catch (const std::invalid_argument& e){
+            n = 1;
+        }
+
         if (p->getpic() != nullptr && p->getpic()->lose())
         {
             std::cout << "YOU LOSE!" << std::endl;
@@ -140,7 +158,10 @@ int main(int argc, char *argv[])
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
-            p->getpic()->left();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->left();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
@@ -149,7 +170,10 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
-            p->getpic()->right();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->right();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
@@ -158,7 +182,10 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
-            p->getpic()->down();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->down();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
@@ -167,7 +194,10 @@ int main(int argc, char *argv[])
         }
         else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
-            p->getpic()->drop();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->drop();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
@@ -176,7 +206,10 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
-            p->getpic()->rotateC();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->rotateC();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
@@ -185,7 +218,10 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
-            p->getpic()->rotateCC();
+            for (int i = 0; i < n; i++)
+            {
+                p->getpic()->rotateCC();
+            }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();

@@ -52,6 +52,7 @@ void Player::Levelup() {
         levelnum = 4;
     }
 }
+
 void Player::Leveldown() {
     if (levelnum == 2) {
         level = std::make_shared<LevelOne>(player);
