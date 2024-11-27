@@ -35,14 +35,14 @@ void JBlock::rotateCC() {
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y;
 
-            coordinates[1]->x = coordinates[0]->x+1;
-            coordinates[1]->y = coordinates[0]->y;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y;
 
-            coordinates[2]->x = coordinates[0]->x+1;
-            coordinates[2]->y = coordinates[0]->y-1;
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y-1;
 
-            coordinates[3]->x = coordinates[0]->x+1;
-            coordinates[3]->y = coordinates[0]->y-2;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y-2;
             phase=4;
             return;
         }
@@ -53,11 +53,11 @@ void JBlock::rotateCC() {
             (base->charAt(coordinates[3]->x, coordinates[3]->y-1) == ' ') &&
             (base->charAt(coordinates[3]->x+1, coordinates[3]->y) == ' ') &&
             (base->charAt(coordinates[3]->x+2, coordinates[3]->y) == ' ')){
+            coordinates[0]->x = coordinates[2]->x;
+            coordinates[0]->y = coordinates[2]->y;
+
             coordinates[1]->x = coordinates[3]->x;
             coordinates[1]->y = coordinates[3]->y;
-
-            coordinates[0]->x = coordinates[1]->x;
-            coordinates[0]->y = coordinates[1]->y-1;
 
             coordinates[2]->x = coordinates[1]->x+1;
             coordinates[2]->y = coordinates[1]->y;
@@ -74,17 +74,17 @@ void JBlock::rotateCC() {
             (base->charAt(coordinates[3]->x+1, coordinates[3]->y+1-2) == ' ') &&
             (base->charAt(coordinates[3]->x, coordinates[3]->y+1-2) == ' ') &&
             (base->charAt(coordinates[3]->x, coordinates[3]->y+1-1) == ' ')) {
-            coordinates[3]->x = coordinates[3]->x;
-            coordinates[3]->y = coordinates[3]->y+1;
+            coordinates[2]->x = coordinates[3]->x;
+            coordinates[2]->y = coordinates[3]->y;
 
-            coordinates[0]->x = coordinates[1]->x+1;
-            coordinates[0]->y = coordinates[1]->y-2;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y+1;
 
-            coordinates[1]->x = coordinates[3]->x;
-            coordinates[1]->y = coordinates[3]->y-2;
+            coordinates[0]->x = coordinates[2]->x+1;
+            coordinates[0]->y = coordinates[2]->y-1;
 
-            coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y-1;
 
             phase--;
             return;
@@ -96,17 +96,14 @@ void JBlock::rotateCC() {
             (base->charAt(coordinates[0]->x+2, coordinates[0]->y-1) == ' ') &&
             (base->charAt(coordinates[0]->x+2-1, coordinates[0]->y-1) == ' ') &&
             (base->charAt(coordinates[0]->x+2-2, coordinates[0]->y-1) == ' ')){
-            coordinates[0]->x = coordinates[0]->x+2;
-            coordinates[0]->y = coordinates[0]->y;
+            coordinates[0]->x = coordinates[2]->x+1;
+            coordinates[0]->y = coordinates[2]->y+1;
 
-            coordinates[1]->x = coordinates[0]->x;
-            coordinates[1]->y = coordinates[0]->y-1;
+            coordinates[1]->x = coordinates[2]->x+1;
+            coordinates[1]->y = coordinates[2]->y;
 
-            coordinates[2]->x = coordinates[0]->x-1;
-            coordinates[2]->y = coordinates[0]->y-1;
-
-            coordinates[3]->x = coordinates[0]->x-2;
-            coordinates[3]->y = coordinates[0]->y-1;
+            coordinates[3]->x = coordinates[2]->x-1;
+            coordinates[3]->y = coordinates[2]->y;
 
             phase--;
             return;
@@ -125,14 +122,14 @@ void JBlock::rotateC(){
             coordinates[3]->x = coordinates[1]->x;
             coordinates[3]->y = coordinates[1]->y;
 
-            coordinates[0]->x = coordinates[1]->x+1;
-            coordinates[0]->y = coordinates[1]->y-2;
+            coordinates[0]->x = coordinates[3]->x+1;
+            coordinates[0]->y = coordinates[3]->y-2;
 
-            coordinates[1]->x = coordinates[1]->x;
-            coordinates[1]->y = coordinates[1]->y-2;
+            coordinates[1]->x = coordinates[3]->x;
+            coordinates[1]->y = coordinates[3]->y-2;
 
-            coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->x = coordinates[3]->x;
+            coordinates[2]->y = coordinates[3]->y-1;
 
             phase++;
             return;
@@ -144,8 +141,8 @@ void JBlock::rotateC(){
             (base->charAt(coordinates[1]->x+2, coordinates[1]->y-1+1) == ' ') &&
             (base->charAt(coordinates[1]->x+2, coordinates[1]->y-1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
-            coordinates[3]->x = coordinates[1]->x;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y;
 
             coordinates[0]->x = coordinates[3]->x+2;
             coordinates[0]->y = coordinates[3]->y+1;
@@ -166,17 +163,14 @@ void JBlock::rotateC(){
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1-1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1-2) == ' ')){
-            coordinates[0]->x = coordinates[3]->x;
-            coordinates[0]->y = coordinates[3]->y+1;
+            coordinates[0]->x = coordinates[2]->x-1;
+            coordinates[0]->y = coordinates[2]->y+1;
 
-            coordinates[1]->x = coordinates[0]->x+1;
-            coordinates[1]->y = coordinates[0]->y;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y+1;
 
-            coordinates[2]->x = coordinates[0]->x+1;
-            coordinates[2]->y = coordinates[0]->y-1;
-
-            coordinates[3]->x = coordinates[0]->x+1;
-            coordinates[3]->y = coordinates[0]->y-2;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y-1;
             phase++;
             return;
         }
@@ -187,14 +181,15 @@ void JBlock::rotateC(){
             (base->charAt(coordinates[0]->x+1, coordinates[0]->y-1) == ' ') &&
             (base->charAt(coordinates[0]->x+1, coordinates[0]->y) == ' ') &&
             (base->charAt(coordinates[0]->x+2, coordinates[0]->y) == ' ')){
+            
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y;
+
             coordinates[1]->x = coordinates[0]->x;
             coordinates[1]->y = coordinates[0]->y;
 
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y-1;
-
-            coordinates[2]->x = coordinates[1]->x+1;
-            coordinates[2]->y = coordinates[1]->y;
 
             coordinates[3]->x = coordinates[1]->x+2;
             coordinates[3]->y = coordinates[1]->y;
@@ -367,23 +362,12 @@ bool JBlock::lose(){
     return lost;
 }
 
-
-
 bool JBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
+        if (this->coordinates[i]->y < 2){
             return true;
         }
     }
     return false;
 }
 
-
-int JBlock::blockdone(int row) {
-    for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
-        return 0;
-        }
-    }
-    return 1;
-}

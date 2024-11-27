@@ -1,12 +1,12 @@
-#ifndef __OBLOCK_H__
-#define __OBLOCK_H__
+#ifndef __BROWNBLOCK_H__
+#define __BROWNBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
 #include <memory>
 
-class OBlock : public Block
+class BROWNBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
+    std::array<std::shared_ptr<Coor>, 1> coordinates; // dynamic
     bool isHeavy;
 
 private:
@@ -14,9 +14,10 @@ private:
     bool end;
     bool lost;
     bool exceed;
+
 public:
-    OBlock(std::shared_ptr<Board> base);  // constructor
-    ~OBlock() = default; // destructor
+    BROWNBlock(std::shared_ptr<Board> base);  // constructor
+    ~BROWNBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;

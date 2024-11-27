@@ -26,7 +26,6 @@ OBlock::OBlock(std::shared_ptr<Board> base): Block{base} {
 
 }
 
-
 void OBlock::rotateCC() {
     return;
 }
@@ -193,20 +192,9 @@ bool OBlock::lose(){
 
 bool OBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
+        if (this->coordinates[i]->y < 2){
             return true;
         }
     }
     return false;
 }
-
-
-int OBlock::blockdone(int row) {
-    for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
-        return 0;
-        }
-    }
-    return 1;
-}
-
