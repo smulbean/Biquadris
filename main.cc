@@ -146,33 +146,52 @@ int main(int argc, char *argv[])
         if (command[0] == 'l' && command[2] == 'f')
         { // left
             p->getpic()->left();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
             p->getpic()->right();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
             p->getpic()->down();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
             p->getpic()->drop();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
             p->getpic()->rotateC();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
             p->getpic()->rotateCC();
+            if (p->getLevel() == 3 || p->getLevel() == 4){
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
+        // // heavy implmented here
         // if (nextheavy == true)
         // {
         //     p->getpic()->down();
@@ -183,6 +202,11 @@ int main(int argc, char *argv[])
         // {
         //     nextheavy = true;
         // }
+        // // blind implemented here
+        // if (command[0] == 'b' && command[1] == 'l' && command[2] == 'i'){
+        //     p->blind();
+        // }
+        // // force implemented here
         else if (command == "I")
         {
             p->setcur('I');
