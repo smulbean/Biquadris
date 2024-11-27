@@ -145,7 +145,6 @@ int main(int argc, char *argv[])
         {
             n = 1;
         }
-        std::cout << n << " " << command << std::endl;
 
         if (p->getpic() != nullptr && p->getpic()->lose())
         {
@@ -307,7 +306,6 @@ int main(int argc, char *argv[])
         }
         if ((p->getpic() != nullptr) && p->getpic()->done())
         {
-            std::cout << p->getpic()->exceeded() << std::endl;
 
             if ((p->getpic() != nullptr) && p->getpic()->exceeded())
             {

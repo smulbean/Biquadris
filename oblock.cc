@@ -193,7 +193,7 @@ bool OBlock::lose(){
 
 bool OBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2){
+        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
             return true;
         }
     }

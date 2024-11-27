@@ -76,10 +76,10 @@ int Text::full2()
       {
         subject->getp2()->updateHigh(subject->getp2()->getScore());
       }
+      // std::cout << "THE ROW THATS FULL IS: " << i << std::endl;
       return i;
     }
   }
-
   return -1;
 }
 
@@ -88,21 +88,12 @@ Text::Text(std::shared_ptr<Studio> subject) : subject(subject) {
 
 void Text::notify()
 {
-  // if (!emptytop1()){
-  //   std::cout << "Player 1 loses" << std::endl;
-  //   return;
-  // }
-  // if (!emptytop2()){
-  //   std::cout << "Player 2 loses" << std::endl;
-  //   return;
-  // }
   if (full1() != -1)
   {
     subject->getp1()->setCor(full1());
   }
   if (full2() != -1)
   {
-    std::cout << "full in text" << std::endl;
     subject->getp2()->setCor(full2());
   }
   // print the beginning

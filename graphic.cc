@@ -62,7 +62,6 @@ void Graphic::notify()
     }
     if (full2() != -1)
     {
-        std::cout << "full in graphic" << std::endl;
         subject->getp2()->setCor(full2());
     }
     int scale = 20;
