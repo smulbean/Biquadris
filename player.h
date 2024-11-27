@@ -15,34 +15,39 @@ using namespace std;
 class Player
 {
 private:
-    Block *picture;
-    Board *canvas;
+    std::shared_ptr<Block> picture;
+    std::shared_ptr<Board> canvas;
     int score;
     int highscore;
-    // int levelnum;
-    Level *level; 
+    int levelnum;
+    std::shared_ptr<Level> level; 
+    int player;
     // Studio *canva;
-    vector<Block *> blocks; // wendy
-
+    vector<std::shared_ptr<Block>> blocks; // wendy
+    string file;
+    bool rand;
 
 public:
-    Player(Board *canvas, int score = 0, int highscore = 0, Level *level = nullptr);
+    Player(std::shared_ptr<Board> canvas, int score = 0, int highscore = 0, int levelnum = 0, int player = 0, std::shared_ptr<Level> level = nullptr, string file = "", bool rand = true);
     // need a copy constructor
-    ~Player();
+    ~Player() = default;
     int getScore();
     void updateScore(int inc);
     void updateHigh(int high);
     int getHighScore();
     int getLevel();
-    Level *Levelup();
-    Level *Leveldown();
+    void Levelup();
+    void Leveldown();
     void force();
     // Block *curBlock(); // Level->func() => block
     void setcur(char c);
-    Block *getpic();
-    Board *getboard();
+    std::shared_ptr<Block> getpic();
+    std::shared_ptr<Board> getboard();
     void restart();
-    void store(Block *cur);
+    // void store(Block *cur);
+    char next();
+    void settrue();
+    void setfalse();
 
     //Wendy your function
     void setCor(int row);

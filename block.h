@@ -10,10 +10,10 @@
 class Block : public Board
 {
 protected:
-    Board *base;
+    std::shared_ptr<Board> base;
 
 public:
-    Block(Board *base);
+    explicit Block(std::shared_ptr<Board> base);
     virtual ~Block();
     virtual void rotateC() = 0;
     virtual void rotateCC() = 0;
@@ -24,6 +24,8 @@ public:
     virtual bool done() = 0;
     virtual void clear(int row) = 0;
     virtual char charAt(int row, int col) = 0;
+    virtual bool lose() = 0;
+    virtual bool exceeded() = 0;
 };
 
 #endif

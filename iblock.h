@@ -2,19 +2,22 @@
 #define __IBLOCK_H__
 #include "coor.h"
 #include "block.h" // h only no .cc
+#include <memory>
 
 class IBlock : public Block
 {
-    Coor *coordinates[4]; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
 
 private:
     int phase;
     bool end;
+    bool lost;
+    bool exceed;
 
 public:
-    IBlock(Board* base);  // constructor
-    ~IBlock(); // destructor
+    IBlock(std::shared_ptr<Board> base);  // constructor
+    ~IBlock() = default; // destructor
     void rotateCC() override;
     void rotateC() override;
     void down() override;
@@ -24,7 +27,8 @@ public:
     void drop() override;
     bool done() override;
     void clear(int row) override;
-
+    bool lose() override;
+    bool exceeded() override;
 };
 
 #endif

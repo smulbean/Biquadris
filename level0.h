@@ -18,9 +18,8 @@ class LevelZero : public Level{
 
 	public:
 		LevelZero(int id); // constructor
-		~LevelZero();
-		char createBlock() override; // create blocks for level 0
-		int getlevel() override;
+		LevelZero() = default;
+		char createBlock() override; // create blocks for level 0make
 };
 
 #endif

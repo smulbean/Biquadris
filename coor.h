@@ -1,5 +1,6 @@
 #ifndef STRUCT_H
 #define STRUCT_H
+#include <memory>
 
 // Define your structure
 struct Coor {

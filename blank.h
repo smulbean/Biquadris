@@ -7,6 +7,7 @@ class Blank : public Board
 {
 public:
   char charAt(int row, int col) override;
+  ~Blank() = default;
 };
 
 #endif

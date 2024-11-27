@@ -1,7 +1,9 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <vector>
 #include <sstream>
+#include <memory>
 #include "blank.h"
 #include "block.h"
 #include "level.h"
@@ -13,150 +15,204 @@
 #include "subject.h"
 #include "player.h"
 #include "studio.h"
+#include "graphic.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
-
-int main(int argc, char* argv[])
-{      
-    //initialize a level
-    Level* l1;
-    Level* l2;
+int main(int argc, char *argv[])
+{
+    // initialize a level
+    std::shared_ptr<Level> l1;
+    std::shared_ptr<Level> l2;
     bool textonly = false;
     bool startlevel = false;
-    bool scriptfile1 = false;
-    bool scriptfile2 = false;
+    // bool nextheavy = false;
     // bool seed = false;
-    string file1string;
-    string file2string;
+    string file1string = "sequence1.txt";
+    string file2string = "sequence1.txt";
     // list of observers
-    std::vector<Observer*> observers;
+    std::vector<std::shared_ptr<Observer>> observers;
     // make studio work on canvas
     // studio will take both players
-    // if (argc > 1) {
-    //     for (int i = 1; i < argc; ++i) {
-    //         if (argv[i] == "-text"){
-    //             // text only
-    //             textonly = true;
-    //         }
-    //         if (argv[i] == "-startlevel"){
-    //             //l == new Level argv[i + 1]
-    //             if (std::stoi(argv[i + 1]) == 1){
-    //                 l1 = new Levelone();
-    //             }
-    //             else if (std::stoi(argv[i + 1]) == 2){
-    //                 l1 = new Leveltwo();
-    //             }
-    //             else if (std::stoi(argv[i + 1]) == 3){
-    //                 l1 = new Levelthree(); 
-    // add l2 to everything
-    //             }
-    //             else if (std::stoi(argv[i + 1]) == 4){
-    //                 l1 = new Levelfour();
-    //                  l2 = new Levelfour();
-    //             }
-    //             startlevel = true;
-    //         }
-    //         if (argv[i] == "-scriptfile1"){
-    //             //read in to player 1 from argv[i + 1]
-    //             file1string = argv[i + 1];
-    //             scriptfile1 = true;
-    //         }
-    //         if (argv[i] == "-scriptfile2"){
-    //             //read in to player 2 from argv[i + 1]
-    //             file2string = argv[i+1];
-    //             scriptfile2 = true;
-    //         }
-    //         if (argv[i] == "-seed "){
-    //             //read in seed from argv[i + 1]
-    //             seed = true;
-    //         }
-    //     }
-    // } 
-    if (!startlevel){
+    if (argc > 1)
+    {
+        for (int i = 1; i < argc; ++i)
+        {
+            if (std::strcmp(argv[i], "-text") == 0)
+            {
+                // text only
+                textonly = true;
+            }
+            if (std::strcmp(argv[i], "-scriptfile1") == 0)
+            {
+                // read in to player 1 from argv[i + 1]
+                file1string = argv[i + 1];
+            }
+            if (std::strcmp(argv[i], "-scriptfile2") == 0)
+            {
+                // read in to player 2 from argv[i + 1]
+                file2string = argv[i + 1];
+            }
+            if (std::strcmp(argv[i], "-startlevel") == 0)
+            {
+                // l == new Level argv[i + 1]
+                if (std::stoi(argv[i + 1]) == 1)
+                {
+                    l1 = std::make_shared<LevelOne>(1);
+                    l2 = std::make_shared<LevelOne>(2);
+                }
+                else if (std::stoi(argv[i + 1]) == 2)
+                {
+                    l1 = std::make_shared<LevelTwo>(1);
+                    l2 = std::make_shared<LevelTwo>(2);
+                }
+                else if (std::stoi(argv[i + 1]) == 3)
+                {
+                    l1 = std::make_shared<LevelThree>(1, true, file2string);
+                    l2 = std::make_shared<LevelThree>(2, true, file2string);
+                }
+                else if (std::stoi(argv[i + 1]) == 4)
+                {
+                    l1 = std::make_shared<LevelFour>(1, true, file2string);
+                    l2 = std::make_shared<LevelFour>(2, true, file2string);
+                }
+                startlevel = true;
+            }
+            // if (std::strcmp(argv[i], "-seed"){
+            //     //read in seed from argv[i + 1]
+            //     seed = true;
+            // }
+        }
+    }
+    if (!startlevel)
+    {
         // start level 0
-        l1 = new LevelZero(1);
-        l2 = new LevelZero(2); // fix this for parameters
-    }
-    if (!scriptfile1){
-        file1string = "sequence1.txt"; // wrong
-    }
-    if (!scriptfile2){
-        file2string = "sequence2.txt";
+        l1 = std::make_shared<LevelZero>(1);
+        l2 = std::make_shared<LevelZero>(2); // fix this for parameters
     }
     // make a new canvas for tetris
-    Board* c1 = new Blank(); // fix this for parameters
-    Board* c2 = new Blank();
+    std::shared_ptr<Board> c1 = std::make_shared<Blank>(); // fix this for parameters
+    std::shared_ptr<Board> c2 = std::make_shared<Blank>();
     // initialize players
-    Player* p1 = new Player(c1, 0, 0, l1); // for now make it one player
-    Player* p2 = new Player(c2, 0, 0, l2); // for now make it one player
-    Player* p = p1;
+    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true); // for now make it one player
+    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true); // for now make it one player
+    std::shared_ptr<Player> p = p1;
     // create studio
     Studio s{p1, p2};
-    if (!textonly){
-        Text *Tobserver = new Text(&s);
-        s.attach(Tobserver);
-        observers.push_back(Tobserver);
-        // Graphic *Gobserver = new Graphic(&s);
-        // s.attach(Gobserver);
-        //observers.push_back(Gobserver);
-    }
-    //if textonly, then create the text observer
-    if (textonly){
-        Text *Tobserver = new Text(&s);
-        s.attach(Tobserver);
-        observers.push_back(Tobserver);
-    }
+    auto s_ptr = std::make_shared<Studio>(s); // Create shared_ptr for Studio
 
-    //read from files
-    std::ifstream file1(file1string); // did not account for the edge case where one file is longer than the other one
-    std::ifstream file2(file2string);
-    std::string line; // Flag to alternate between files
+    auto Tobserver = std::make_shared<Text>(s_ptr); // Pass shared_ptr to Text observer
+    s.attach(Tobserver);
+    observers.push_back(Tobserver);
+
+    if (!textonly)
+    {
+        auto Gobserver = std::make_shared<Graphic>(s_ptr); // Pass shared_ptr to Graphic observer
+        s.attach(Gobserver);
+        observers.push_back(Gobserver);
+    }
 
     bool turn1 = true;
 
     string command;
-    char currentl1 = l1->createBlock();
-    char currentl2 = l2->createBlock();
+    char currentl1 = p1->next();
+    char currentl2 = p2->next();
     p->setcur(currentl1);
+
     s.notifyObservers();
     while (cin >> command)
     {
+        if (p->getpic() != nullptr && p->getpic()->lose())
+        {
+            std::cout << "YOU LOSE!" << std::endl;
+            break;
+        }
+        if (command[0] == 'r' && command[2] == 'a')
+        { // random
+            p->settrue();
+        }
+        if (command[0] == 'n' && command[2] == 'o')
+        { // norandom
+            p->setfalse();
+        }
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
             p->getpic()->left();
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
             p->getpic()->right();
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
             p->getpic()->down();
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
             p->getpic()->drop();
-            s.notifyObservers();
-        }
-        else if (command == "I")
-        {
-            p->setcur('I');
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
             p->getpic()->rotateC();
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
             p->getpic()->rotateCC();
+            if (p->getLevel() == 3 || p->getLevel() == 4)
+            {
+                p->getpic()->down();
+            }
             s.notifyObservers();
         }
-        
+        // // heavy implmented here
+        // if (nextheavy == true)
+        // {
+        //     p->getpic()->down();
+        //     s.notifyObservers();
+        //     nextheavy = false;
+        // }
+        // if (command[0] == 'h')
+        // {
+        //     nextheavy = true;
+        // }
+        // // blind implemented here
+        // if (command[0] == 'b' && command[1] == 'l' && command[2] == 'i'){
+        //     p->blind();
+        // }
+        // // force implemented here
+        else if (command == "I")
+        {
+            p->setcur('I');
+            s.notifyObservers();
+        }
         else if (command == "J")
         {
             p->setcur('J');
@@ -187,43 +243,53 @@ int main(int argc, char* argv[])
             p->setcur('T');
             s.notifyObservers();
         }
-        // else if (command[0] == 'l' && command[5] == 'u') { // levelup 
-        //     p->Levelup();
-        // }
-        // else if (command[0] == 'l' && command[5] == 'd') { // level down
-        //     p->Leveldown();
-        // }
-        else if (command[0] == 'r' && command[1] == 'e') { // restart
+        else if (command[0] == 'l' && command[1] == 'e' && command[2] == 'v' && command[5] == 'u' && command[6] == 'p')
+        { // levelup
+            p->Levelup();
+            s.notifyObservers();
+        }
+        else if (command[0] == 'l' && command[5] == 'd')
+        { // level down
+            p->Leveldown();
+            s.notifyObservers();
+        }
+        else if (command[0] == 'r' && command[1] == 'e')
+        { // restart
             p->restart();
             s.notifyObservers();
         }
-        if ((p->getpic() != nullptr) && p->getpic()->done()){
+        if ((p->getpic() != nullptr) && p->getpic()->done())
+        {
+            std::cout << p->getpic()->exceeded() << std::endl;
+
+            if ((p->getpic() != nullptr) && p->getpic()->exceeded())
+            {
+                std::cout << "You lose!" << std::endl;
+                break;
+            }
             // level will return next block, will call p->setcur('L') and then notify
-            if (turn1){
+            if (turn1)
+            {
                 p = p2;
                 turn1 = false;
                 // store block when you created it
-                currentl2 = l2->createBlock();
+                currentl2 = p->next();
                 p->setcur(currentl2);
-            } else {
+            }
+            else
+            {
                 p = p1;
                 turn1 = true;
                 // store block when you create it
-                currentl1 = l1->createBlock();
+                currentl1 = p->next();
                 p->setcur(currentl1);
             }
             s.notifyObservers();
         }
         if (command == "exit")
         { // exit
-            cin.eof();
+            break;
         }
-    } 
-    file1.close();
-    file2.close();
-    for (Observer* observer : observers) {
-        delete observer;  // Explicitly delete each observer
     }
     return 0;
 } // main
-

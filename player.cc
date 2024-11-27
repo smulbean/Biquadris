@@ -9,15 +9,13 @@
 #include "zblock.h"
 #include "oblock.h"
 #include "sblock.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
-Player::Player(Board* canvas, int score, int high,  Level* level) : 
-canvas{canvas}, score{score}, highscore{high}, level{level} {
-    // canvas = new BlankBlock(canvas); // fix this later
-    // canvas = picture;
-}
-
-Player::~Player()
-{
+Player::Player(std::shared_ptr<Board> canvas, int score, int high, int levelnum, int player, std::shared_ptr<Level> level, std::string file, bool rand) : 
+    canvas{canvas}, score{score}, highscore{high}, levelnum{levelnum}, player{player}, level{level}, file{file}, rand{rand} {
 }
  
 int Player::getScore(){
@@ -37,39 +35,37 @@ void Player::updateHigh(int high){
 }
 
 int Player::getLevel(){
-    return level->getlevel();
+    return levelnum;
 }
-Level *Player::Levelup(){
-    // level up
-
-    // if (levelnum == 0){
-    //     level = new levelone(); // and its level one parameters
-    // } else if (levelnum == 1){
-    //     level = new leveltwo(); // and its level one parameters
-    // } else if (levelnum == 2){
-    //     level = new levelthree(); // and its level one parameters
-    // } else if (levelnum == 3){
-    //     level = new levelfour(); // and its level one parameters
-    // } else {
-    //     return level;
-    // }
-    return level;
-
+void Player::Levelup() {
+    if (levelnum == 0) {
+        level = std::make_shared<LevelOne>(player);
+        levelnum = 1;
+    } else if (levelnum == 1) {
+        level = std::make_shared<LevelTwo>(player);
+        levelnum = 2;
+    } else if (levelnum == 2) {
+        level = std::make_shared<LevelThree>(player, rand, file);
+        levelnum = 3;
+    } else if (levelnum == 3) {
+        level = std::make_shared<LevelFour>(player, rand, file);
+        levelnum = 4;
+    }
 }
-Level *Player::Leveldown(){
-    // level down
-    // if (levelnum == 2){
-    //     level = new levelone(); // and its level one parameters
-    // } else if (levelnum == 3){
-    //     level = new leveltwo(); // and its level one parameters
-    // } else if (levelnum == 4){
-    //     level = new levelthree(); // and its level one parameters
-    // } else if (levelnum == 1){
-    //     level = new Levelzero(); // and its level one parameters
-    // } else {
-    //     return level;
-    // }
-    return level;
+void Player::Leveldown() {
+    if (levelnum == 2) {
+        level = std::make_shared<LevelOne>(player);
+        levelnum = 1;
+    } else if (levelnum == 3) {
+        level = std::make_shared<LevelTwo>(player);
+        levelnum = 2;
+    } else if (levelnum == 4) {
+        level = std::make_shared<LevelThree>(player, rand, file);
+        levelnum = 3;
+    } else if (levelnum == 1) {
+        level = std::make_shared<LevelZero>(player);
+        levelnum = 0;
+    }
 }
 void Player::force(){
     // force
@@ -78,78 +74,83 @@ void Player::force(){
 // Block* Player::curBlock(){
 //     return blocks[blocks.size() - 1];
 // }
-
-void Player::setcur(char c){
-    if (c == 'I'){
-        picture = new IBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+void Player::setcur(char c) {
+    if (c == 'I') {
+        picture = std::make_shared<IBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else if (c == 'J'){
-        picture = new JBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else if (c == 'J') {
+        picture = std::make_shared<JBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else if (c == 'L'){
-        picture = new LBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else if (c == 'L') {
+        picture = std::make_shared<LBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else if (c == 'O'){
-        picture = new OBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else if (c == 'O') {
+        picture = std::make_shared<OBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else if (c == 'S'){
-        picture = new SBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else if (c == 'S') {
+        picture = std::make_shared<SBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else if (c == 'Z'){
-        picture = new ZBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else if (c == 'Z') {
+        picture = std::make_shared<ZBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-    else{
-        picture = new TBlock(canvas); // fix this later
-        Block *cur = picture;
-        blocks.emplace_back(cur);
+    else {
+        picture = std::make_shared<TBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
         canvas = picture;
     }
-
 }
 
-Board *Player::getboard(){
+
+std::shared_ptr<Board> Player::getboard() {
     return canvas;
 }
 
-Block* Player::getpic(){
+std::shared_ptr<Block> Player::getpic() {
     return picture;
 }
 
-void Player::restart(){
-    delete picture;
-    picture = nullptr;
+
+void Player::restart() {
+    picture = nullptr; // No need to manually delete since we use shared_ptr
     score = 0;
+    levelnum = 0;
     level = nullptr;
-    canvas = new Blank();
+    canvas = std::make_shared<Blank>(); // Create new Blank as shared_ptr
 }
 
-void Player::store(Block *cur){
+// void Player::store(Block *cur){
     
+// }
+
+void Player::setCor(int row) {
+    for (auto& block : blocks) {
+        block->clear(row);
+    }
 }
 
-void Player::setCor(int row){
-    for (auto it = blocks.begin(); it != blocks.end(); ++it){
-        (*it)->clear(row);
-        // it is the block that it will be going thru
-        // you can call a function in block using it.function(int row)
-    }
+
+
+char Player::next(){
+    return level->createBlock();
+}
+
+void Player::settrue(){
+    rand = true;
+}
+
+void Player::setfalse(){
+    rand = false;
 }
 

@@ -3,21 +3,26 @@
 #include "jblock.h"
 #include "board.h"
 #include <iostream>
+#include <memory>
 
 
-JBlock::JBlock(Board* base): Block{base} {
-    phase = 1;
-    end = false;
-    coordinates[0] = new Coor(5, 1);
-    coordinates[1] = new Coor(5, 2);
-    coordinates[2] = new Coor(6, 2);
-    coordinates[3] = new Coor(7, 2);
-
-}
-
-JBlock::~JBlock() {
-    for (int i = 0; i<4 ; i++){
-        delete coordinates[i];
+JBlock::JBlock(std::shared_ptr<Board> base): Block{base} {
+    if ((base->charAt(5, 1) == ' ')&&
+        (base->charAt(5, 2) == ' ')&&
+        (base->charAt(6, 2) == ' ')&&
+        (base->charAt(7, 2) == ' ')) {
+        phase = 1;
+        end = false;
+        coordinates[0] = std::make_shared<Coor>(5, 1);
+        coordinates[1] = std::make_shared<Coor>(5, 2);
+        coordinates[2] = std::make_shared<Coor>(6, 2);
+        coordinates[3] = std::make_shared<Coor>(7, 2);
+    } else {
+        lost = true;
+        coordinates[0] = std::make_shared<Coor>(-1, -1);
+        coordinates[1] = std::make_shared<Coor>(-1, -1);
+        coordinates[2] = std::make_shared<Coor>(-1, -1);
+        coordinates[3] = std::make_shared<Coor>(-1, -1);
     }
 }
 
@@ -263,7 +268,7 @@ void JBlock::down(){
 
 void JBlock::left(){
     for(int i = 0; i < 4; i++) {
-        if(coordinates[i]->x == 1) {
+        if(coordinates[i]->x == 0) {
             return;
         }
     }
@@ -358,4 +363,18 @@ void JBlock::clear(int row) {
     return;
 }
 
+bool JBlock::lose(){
+    return lost;
+}
+
+
+
+bool JBlock::exceeded() {
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y < 2){
+            return true;
+        }
+    }
+    return false;
+}
 
