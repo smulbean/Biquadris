@@ -53,8 +53,10 @@ void Player::Levelup(){
         levelnum = 2;
     } // and its level one parameters
     else if (levelnum == 2){
+        levelnum = 3;
         level = new LevelThree(player, rand, file); // and its level one parameters
     } else if (levelnum == 3){
+        levelnum = 4;
         level = new LevelFour(player, rand, file); // and its level one parameters
     }
 
@@ -68,6 +70,7 @@ void Player::Leveldown(){
         level = new LevelTwo(player); // and its level one parameters
         levelnum = 2;
     } else if (levelnum == 4){
+        levelnum = 3;
         level = new LevelThree(player, rand, file); // and its level one parameters
     } else if (levelnum == 1){
         level = new LevelZero(player); // and its level one parameters
