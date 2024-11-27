@@ -27,14 +27,16 @@ SBlock::SBlock(std::shared_ptr<Board> base): Block{base} {
 
 }
 
-
 void SBlock::rotateCC() {
     if (phase == 1) {
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y-1) == ' ')){
             coordinates[0]->x = coordinates[1]->x;
-            coordinates[0]->y = coordinates[1]->y+1;
+            coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y;
 
             coordinates[2]->x = coordinates[1]->x-1;
             coordinates[2]->y = coordinates[1]->y;
@@ -50,14 +52,14 @@ void SBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
+            coordinates[1]->x = coordinates[3]->x;
+            coordinates[1]->y = coordinates[3]->y;
+
             coordinates[0]->x = coordinates[1]->x-1;
             coordinates[0]->y = coordinates[1]->y;
 
-            coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
-
-            coordinates[3]->x = coordinates[1]->x+1;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[2]->x+1;
+            coordinates[3]->y = coordinates[2]->y;
             phase--;
             return;
         }
@@ -67,14 +69,17 @@ void SBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x;
-            coordinates[0]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y;
 
-            coordinates[2]->x = coordinates[1]->x+1;
+            coordinates[2]->x = coordinates[1]->x;
             coordinates[2]->y = coordinates[1]->y;
 
-            coordinates[3]->x = coordinates[1]->x+1;
-            coordinates[3]->y = coordinates[1]->y+1;
+            coordinates[1]->x = coordinates[2]->x-1;
+            coordinates[1]->y = coordinates[2]->y;
+
+            coordinates[0]->x = coordinates[2]->x-1;
+            coordinates[0]->y = coordinates[2]->y-1;
             phase--;
             return;
         }
@@ -84,19 +89,19 @@ void SBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y+1) == ' ')){
-        coordinates[0]->x = coordinates[1]->x+1;
-        coordinates[0]->y = coordinates[1]->y;
+            
+            coordinates[2]->x = coordinates[0]->x;
+            coordinates[2]->y = coordinates[0]->y;
+            
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y+1;
-
-        coordinates[3]->x = coordinates[1]->x-1;
-        coordinates[3]->y = coordinates[1]->y+1;
+            coordinates[3]->x = coordinates[2]->x-1;
+            coordinates[3]->y = coordinates[2]->y;
         phase--;
         return;
         }
         return;
-        
     }
 }
 
@@ -105,14 +110,14 @@ void SBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x;
-            coordinates[0]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y;
 
-            coordinates[2]->x = coordinates[1]->x+1;
-            coordinates[2]->y = coordinates[1]->y;
+            coordinates[1]->x = coordinates[2]->x-1;
+            coordinates[1]->y = coordinates[2]->y;
 
-            coordinates[3]->x = coordinates[1]->x+1;
-            coordinates[3]->y = coordinates[1]->y+1;
+            coordinates[0]->x = coordinates[2]->x-1;
+            coordinates[0]->y = coordinates[2]->y-1;
             phase++;
             return;
         }
@@ -122,16 +127,19 @@ void SBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y+1) == ' ')){
-        coordinates[0]->x = coordinates[1]->x+1;
-        coordinates[0]->y = coordinates[1]->y;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y;
+            
+            coordinates[2]->x = coordinates[3]->x;
+            coordinates[2]->y = coordinates[3]->y;
 
-        coordinates[2]->x = coordinates[1]->x;
-        coordinates[2]->y = coordinates[1]->y+1;
+            coordinates[0]->x = coordinates[1]->x+1;
+            coordinates[0]->y = coordinates[1]->y;
 
-        coordinates[3]->x = coordinates[1]->x-1;
-        coordinates[3]->y = coordinates[1]->y+1;
-        phase++;
-        return;
+            coordinates[3]->x = coordinates[2]->x-1;
+            coordinates[3]->y = coordinates[2]->y;
+            phase++;
+            return;
         }
         return;
 
@@ -139,8 +147,8 @@ void SBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y-1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x;
-            coordinates[0]->y = coordinates[1]->y+1;
+            coordinates[0]->x = coordinates[2]->x;
+            coordinates[0]->y = coordinates[2]->y;
 
             coordinates[2]->x = coordinates[1]->x-1;
             coordinates[2]->y = coordinates[1]->y;
@@ -156,14 +164,17 @@ void SBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[1]->x = coordinates[0]->x;
+            coordinates[1]->y = coordinates[0]->y;
+
             coordinates[0]->x = coordinates[1]->x-1;
             coordinates[0]->y = coordinates[1]->y;
 
-            coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
-
-            coordinates[3]->x = coordinates[1]->x+1;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[2]->x+1;
+            coordinates[3]->y = coordinates[2]->y;
             phase = 1;
             return;
         }
@@ -315,7 +326,6 @@ bool SBlock::done(){
     return end;
 }
 
-
 void SBlock::clear(int row) {
     for (int i=0; i<4; i++){
         if (this->coordinates[i]->y == row){
@@ -336,20 +346,9 @@ bool SBlock::lose(){
 
 bool SBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
+        if (this->coordinates[i]->y < 2){
             return true;
         }
     }
     return false;
 }
-
-
-int SBlock::blockdone(int row) {
-    for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
-        return 0;
-        }
-    }
-    return 1;
-}
-

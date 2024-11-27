@@ -5,7 +5,6 @@
 #include <iostream>
 #include <memory>
 
-
 ZBlock::ZBlock(std::shared_ptr<Board> base): Block{base} {
     if ((base->charAt(6, 2) == ' ')&&
         (base->charAt(5, 2) == ' ')&&
@@ -25,19 +24,24 @@ ZBlock::ZBlock(std::shared_ptr<Board> base): Block{base} {
         coordinates[3] = std::make_shared<Coor>(-1, -1);
     }
 }
+
 void ZBlock::rotateCC() {
     if (phase == 1) {
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y+1) == ' ')){
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y;
+
+            coordinates[2]->x = coordinates[3]->x;
+            coordinates[2]->y = coordinates[3]->y;
+
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y+1;
+
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y-1;
 
-            coordinates[2]->x = coordinates[1]->x-1;
-            coordinates[2]->y = coordinates[1]->y;
-
-            coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y+1;
             phase=4;
             return;
         }
@@ -47,14 +51,15 @@ void ZBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y-1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x+1;
-            coordinates[0]->y = coordinates[1]->y;
+            coordinates[3]->x = coordinates[1]->x;
+            coordinates[3]->y = coordinates[1]->y;
 
-            coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[0]->x = coordinates[2]->x+1;
+            coordinates[0]->y = coordinates[2]->y+1;
 
-            coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y+1;
+
             phase--;
             return;
         }
@@ -64,11 +69,14 @@ void ZBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
+            coordinates[2]->x = coordinates[1]->x;
+            coordinates[2]->y = coordinates[1]->y;
+
+            coordinates[1]->x = coordinates[0]->x;
+            coordinates[1]->y = coordinates[0]->y;
+
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y+1;
-
-            coordinates[2]->x = coordinates[1]->x+1;
-            coordinates[2]->y = coordinates[1]->y;
 
             coordinates[3]->x = coordinates[1]->x+1;
             coordinates[3]->y = coordinates[1]->y-1;
@@ -81,8 +89,8 @@ void ZBlock::rotateCC() {
         if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x-1;
-            coordinates[0]->y = coordinates[1]->y;
+            coordinates[0]->x = coordinates[2]->x;
+            coordinates[0]->y = coordinates[2]->y;
 
             coordinates[2]->x = coordinates[1]->x;
             coordinates[2]->y = coordinates[1]->y+1;
@@ -102,14 +110,14 @@ void ZBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y-1) == ' ')){
+            coordinates[1]->x = coordinates[3]->x;
+            coordinates[1]->y = coordinates[3]->y;
+
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y+1;
 
-            coordinates[2]->x = coordinates[1]->x+1;
-            coordinates[2]->y = coordinates[1]->y;
-
-            coordinates[3]->x = coordinates[1]->x+1;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y-1;
             phase++;
             return;
         }
@@ -119,8 +127,11 @@ void ZBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
             (base->charAt(coordinates[1]->x+1, coordinates[1]->y+1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x-1;
+            coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y;
+
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y;
 
             coordinates[2]->x = coordinates[1]->x;
             coordinates[2]->y = coordinates[1]->y+1;
@@ -136,14 +147,14 @@ void ZBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y+1) == ' ')){
+            coordinates[2]->x = coordinates[0]->x;
+            coordinates[2]->y = coordinates[0]->y;
+
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y-1;
 
-            coordinates[2]->x = coordinates[1]->x-1;
-            coordinates[2]->y = coordinates[1]->y;
-
-            coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y+1;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y+1;
             phase++;
             return;
         }
@@ -153,14 +164,17 @@ void ZBlock::rotateC(){
         if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
             (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
             (base->charAt(coordinates[1]->x-1, coordinates[1]->y-1) == ' ')){
-            coordinates[0]->x = coordinates[1]->x+1;
-            coordinates[0]->y = coordinates[1]->y;
+            coordinates[3]->x = coordinates[2]->x;
+            coordinates[3]->y = coordinates[2]->y;
 
             coordinates[2]->x = coordinates[1]->x;
-            coordinates[2]->y = coordinates[1]->y-1;
+            coordinates[2]->y = coordinates[1]->y;
 
-            coordinates[3]->x = coordinates[1]->x-1;
-            coordinates[3]->y = coordinates[1]->y-1;
+            coordinates[1]->x = coordinates[2]->x;
+            coordinates[1]->y = coordinates[2]->y+1;
+
+            coordinates[0]->x = coordinates[2]->x+1;
+            coordinates[0]->y = coordinates[2]->y+1;
             phase = 1;
             return;
         }
@@ -328,7 +342,7 @@ void ZBlock::clear(int row) {
 
 bool ZBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
+        if (this->coordinates[i]->y < 2){
             return true;
         }
     }
@@ -338,13 +352,3 @@ bool ZBlock::exceeded() {
 bool ZBlock::lose(){
     return lost;
 }
-
-int ZBlock::blockdone(int row) {
-    for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
-        return 0;
-        }
-    }
-    return 1;
-}
-
