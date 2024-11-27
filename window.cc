@@ -33,12 +33,12 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
   char color_vals[9][10] = {
     "#FFFFFF",  // white
     "#000000",  // black
-    "#FF0000",  // red
+    "#FFC0CB",  // red
     "#00FF00",  // green
     "#0000FF",  // blue
     "#800080",  // purple
     "#FFFF00",  // yellow
-    "#FFC0CB",  // pink
+    "#FF0000",  // pink
     "#FFA500"   // orange
 };
 

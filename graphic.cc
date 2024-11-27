@@ -99,7 +99,7 @@ void Graphic::notify()
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::White);
             }
-            else
+            else if (ch == 'L')
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }
@@ -110,7 +110,7 @@ void Graphic::notify()
             char ch = subject->getStatep2(col, row);
             if (ch == 'J')
             {
-                w->fillRectangle((col - l) * scale + 5*scale, (row - t) * scale, scale, scale, Xwindow::Red);
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Red);
             }
             else if (ch == 'Z')
             {
@@ -136,7 +136,7 @@ void Graphic::notify()
             {
                 w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::White);
             }
-            else
+            else if (ch == 'L')
             {
                 w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }

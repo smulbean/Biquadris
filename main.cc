@@ -151,6 +151,7 @@ int main(int argc, char *argv[])
             std::cout << "YOU LOSE!" << std::endl;
             break;
         }
+        // if level 4, then create brown block and drop it.
         if (command[0] == 'r' && command[2] == 'a')
         { // random
             p->settrue();
@@ -293,7 +294,7 @@ int main(int argc, char *argv[])
         }
         else if (command[0] == 'l' && command[5] == 'd')
         { // level down
-        for (int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
             {
                 p->Leveldown();
             }
@@ -303,6 +304,11 @@ int main(int argc, char *argv[])
         { // restart
             p->restart();
             s.notifyObservers();
+        }
+        if ((p->getLevel() == 4) && (p->blocknum() % 5 == 0))
+        {
+            p->setcur('B');
+            p->getpic()->drop();
         }
         if ((p->getpic() != nullptr) && p->getpic()->done())
         {

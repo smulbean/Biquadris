@@ -13,6 +13,7 @@
 #include "level2.h"
 #include "level3.h"
 #include "level4.h"
+#include "brownblock.h"
 
 Player::Player(std::shared_ptr<Board> canvas, int score, int high, int levelnum, int player, std::shared_ptr<Level> level, std::string file, bool rand) : 
     canvas{canvas}, score{score}, highscore{high}, levelnum{levelnum}, player{player}, level{level}, file{file}, rand{rand} {
@@ -106,6 +107,11 @@ void Player::setcur(char c) {
         blocks.push_back(picture);
         canvas = picture;
     }
+    else if (c == 'B') {
+        picture = std::make_shared<BROWNBlock>(canvas);  // Automatically managed
+        blocks.push_back(picture);
+        canvas = picture;
+    }
     else {
         picture = std::make_shared<TBlock>(canvas);  // Automatically managed
         blocks.push_back(picture);
@@ -141,12 +147,12 @@ void Player::setCor(int row) {
     }
 }
 
-void Player::MoreScore(int row) {
+void Player::MoreScore() {
     for (auto it = blocks.begin(); it != blocks.end();) {
         // Check if the block affects the specified row
-        if ((*it)->blockdone(row) == 1) {
+        if ((*it)->blockdone() == 1) {
             // Increment the score based on the block's interaction with the row
-            score += (*it)->blockdone(row) + levelnum;
+            score += (*it)->blockdone() + levelnum;
 
             // Remove the block and advance the iterator
             it = blocks.erase(it);
@@ -171,3 +177,7 @@ void Player::setfalse(){
     rand = false;
 }
 
+
+int Player::blocknum(){
+    return blocks.size();
+}

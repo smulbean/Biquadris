@@ -311,7 +311,6 @@ void IBlock::clear(int row) {
             this->coordinates[i]->x = -1;
             this->coordinates[i]->y = -1;
             continue;
-            std::cout << "Iblock clear " << i << std::endl;
         } else if (this->coordinates[i]->y < row){
             this->coordinates[i]->y++;
             continue;
@@ -328,10 +327,19 @@ bool IBlock::lose(){
 
 bool IBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2){
+        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
             return true;
         }
     }
     return false;
+}
+
+int IBlock::blockdone(){
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
+            return 0;
+        }
+    }
+    return 1;
 }
 

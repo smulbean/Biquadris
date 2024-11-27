@@ -352,9 +352,19 @@ bool TBlock::lose(){
 
 bool TBlock::exceeded() {
     for (int i=0; i<4; i++){
-        if (this->coordinates[i]->y < 2){
+        if (this->coordinates[i]->y < 2 && this->coordinates[i]->y > -1){
             return true;
         }
     }
     return false;
 }
+
+int TBlock::blockdone(){
+    for (int i=0; i<4; i++){
+        if (this->coordinates[i]->y != -1 || this->coordinates[i]->x != -1){
+            return 0;
+        }
+    }
+    return 1;
+}
+

@@ -95,8 +95,8 @@ void Text::notify()
   {
     subject->getp2()->setCor(full2());
   }
-  subject->getp1()->MoreScore(0);
-  subject->getp2()->MoreScore(0);
+  subject->getp1()->MoreScore();
+  subject->getp2()->MoreScore();
   // print the beginning
   cout << "Level:     " << subject->getp1()->getLevel() << "     "; // 5 spaces inbetween board
   cout << "Level:     " << subject->getp2()->getLevel() << endl;
