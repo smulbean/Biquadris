@@ -3,7 +3,6 @@
 extern std::string file1string;
 extern std::string file2string;
 
-
 LevelZero::LevelZero(int id) : Level{id}, sequenceIdx{0} {
     std::ifstream readSeq{id == 1 ? file1string : file2string};
 
