@@ -28,9 +28,8 @@ TBlock::TBlock(std::shared_ptr<Board> base): Block{base} {
 
 void TBlock::rotateCC() {
     if (phase == 1) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
-            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ')){
+        if ((base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && (coordinates[0]->x >= 0) && (coordinates[0]->x <=10) &&  
+            (base->charAt(coordinates[0]->x, coordinates[0]->y-1) == ' ') ){
             coordinates[2]->x = coordinates[1]->x;
             coordinates[2]->y = coordinates[1]->y;
 
@@ -49,9 +48,7 @@ void TBlock::rotateCC() {
         return;
 
     } else if (phase == 2) {
-        if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
-            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
-            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ')){
+        if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && (coordinates[1]->x+1 >= 0) && (coordinates[1]->x+1 <=10)){
             coordinates[0]->x = coordinates[2]->x;
             coordinates[0]->y = coordinates[2]->y;
 
@@ -66,9 +63,8 @@ void TBlock::rotateCC() {
         return;
 
     } else if (phase == 3) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
-            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
-            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ')){
+        if ((base->charAt(coordinates[2]->x-1, coordinates[2]->y) == ' ') && (coordinates[2]->x-1 >= 0) && (coordinates[2]->x-1 <=10) &&  
+            (base->charAt(coordinates[2]->x, coordinates[2]->y-1) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10)){
             coordinates[3]->x = coordinates[1]->x;
             coordinates[3]->y = coordinates[1]->y;
 
@@ -86,9 +82,8 @@ void TBlock::rotateCC() {
         return;
 
     } else if (phase == 4) {
-        if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
-            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
-            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ')){
+        if ((base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10) &&  
+            (base->charAt(coordinates[2]->x+1, coordinates[2]->y+1) == ' ') && (coordinates[2]->x+1 >= 0) && (coordinates[2]->x+1 <=10)){
             coordinates[3]->x = coordinates[0]->x;
             coordinates[3]->y = coordinates[0]->y;
 
@@ -108,9 +103,7 @@ void TBlock::rotateCC() {
 
 void TBlock::rotateC(){
     if (phase == 1) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && 
-            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') &&
-            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ')){
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') && (coordinates[1]->x >= 0) && (coordinates[1]->x <=10) ){
             coordinates[3]->x = coordinates[2]->x;
             coordinates[3]->y = coordinates[2]->y;
 
@@ -125,9 +118,8 @@ void TBlock::rotateC(){
         return;
 
     } else if (phase == 2) {
-        if ((base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') && 
-            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ') &&
-            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ')){
+        if ((base->charAt(coordinates[3]->x+1, coordinates[3]->y) == ' ') && (coordinates[3]->x+1 >= 0) && (coordinates[3]->x+1 <=10) &&  
+            (base->charAt(coordinates[3]->x-1, coordinates[3]->y) == ' ') && (coordinates[3]->x-1 >= 0) && (coordinates[3]->x-1 <=10)) {
             coordinates[2]->x = coordinates[1]->x;
             coordinates[2]->y = coordinates[1]->y;
 
@@ -145,9 +137,8 @@ void TBlock::rotateC(){
         return;
 
     } else if (phase == 3) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ') &&
-            (base->charAt(coordinates[1]->x, coordinates[1]->y-1) == ' ')){
+        if ((base->charAt(coordinates[2]->x-1, coordinates[2]->y) == ' ') && (coordinates[2]->x-1 >= 0) && (coordinates[2]->x-1 <=10) &&  
+            (base->charAt(coordinates[2]->x-1, coordinates[2]->y-1) == ' ')){
             coordinates[0]->x = coordinates[3]->x;
             coordinates[0]->y = coordinates[3]->y;
 
@@ -163,9 +154,8 @@ void TBlock::rotateC(){
         return;
         
     } else if (phase == 4) {
-        if ((base->charAt(coordinates[1]->x-1, coordinates[1]->y) == ' ') && 
-            (base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') &&
-            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) == ' ')){
+        if ((base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10) &&  
+            (base->charAt(coordinates[2]->x+1, coordinates[2]->y) == ' ') && (coordinates[2]->x+1 >= 0) && (coordinates[2]->x+1 <=10) ){
             coordinates[0]->x = coordinates[1]->x;
             coordinates[0]->y = coordinates[1]->y;
 
