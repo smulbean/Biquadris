@@ -1,10 +1,11 @@
 #include "level0.h"
 
-std::string file1Sequence = "sequence1.txt";
-std::string file2Sequence = "sequence2.txt";
+extern std::string file1string;
+extern std::string file2string;
+
 
 LevelZero::LevelZero(int id) : Level{id}, sequenceIdx{0} {
-    std::ifstream readSeq{id == 1 ? file1Sequence : file2Sequence};
+    std::ifstream readSeq{id == 1 ? file1string : file2string};
 
     std::string sequenceContent;
 
@@ -24,5 +25,3 @@ char LevelZero::createBlock() {
     }
     return blockID;
 }
-
-

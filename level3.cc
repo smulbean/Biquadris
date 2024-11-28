@@ -1,6 +1,9 @@
 #include "level3.h"
 #include <random>
 
+extern bool isSeed;
+extern int seed;
+
 LevelThree::LevelThree(int id, bool random, std::string file) : Level{id}, isRandom{random}, randomFile{file}, sequenceIdx{0} {
     if (random) {
         std::ifstream readFile{file};
@@ -24,9 +27,16 @@ char LevelThree::createBlock() {
         }
         return blockID;
     } else {
-        static std::default_random_engine generator;
-        static std::uniform_int_distribution<int> distribution(1,9);
-        int blockID = distribution(generator);
+        int blockID;
+        if (isSeed) {
+            srand(seed);
+            blockID = (rand() % 9) + 1;
+        } else {
+            std::random_device rd;
+            std::mt19937 generator(rd());
+            std::uniform_int_distribution<int> distribution(1, 9);
+            blockID = distribution(generator);
+        }
 
         if (blockID == 1 || blockID == 2) {
             return 'S';
