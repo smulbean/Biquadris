@@ -5,7 +5,7 @@
 #include "studio.h"
 
 class Observer {
-  Studio *subject;
+   std::shared_ptr<Studio>subject;
  public:
   virtual void notify() = 0;
   virtual ~Observer() = default;
