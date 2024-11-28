@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
     char currentl2 = p2->next();
     p->setcur(currentl1);
     string file = "";
-
+    std::ifstream f;
     s.notifyObservers();
     while (true)
     {
@@ -125,8 +125,11 @@ int main(int argc, char *argv[])
         int n = 0;
         int digit = 0;
         if (sequence){
-            ifstream f{file};
-            f >> command;
+            if (!(f >> command)) { // Check for EOF or read failure
+                sequence = false; // Reset sequence mode
+                f.close();        // Close the file
+                continue;         // Skip further input until the next iteration
+            }
         } else {
             std::cin >> command;
         }
@@ -156,6 +159,7 @@ int main(int argc, char *argv[])
         if (command[0] == 's' && command[1] == 'e'){
             sequence = true;
             std::cin >> file;
+            f.open(file);
         }
         if (command[0] == 'r' && command[2] == 'a')
         { // random
