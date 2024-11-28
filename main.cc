@@ -28,14 +28,11 @@ int main(int argc, char *argv[])
     std::shared_ptr<Level> l2;
     bool textonly = false;
     bool startlevel = false;
-    // bool nextheavy = false;
-    // bool seed = false;
     string file1string = "sequence1.txt";
     string file2string = "sequence1.txt";
     // list of observers
     std::vector<std::shared_ptr<Observer>> observers;
-    // make studio work on canvas
-    // studio will take both players
+
     if (argc > 1)
     {
         for (int i = 1; i < argc; ++i)
@@ -233,22 +230,6 @@ int main(int argc, char *argv[])
             }
             s.notifyObservers();
         }
-        // // heavy implmented here
-        // if (nextheavy == true)
-        // {
-        //     p->getpic()->down();
-        //     s.notifyObservers();
-        //     nextheavy = false;
-        // }
-        // if (command[0] == 'h')
-        // {
-        //     nextheavy = true;
-        // }
-        // // blind implemented here
-        // if (command[0] == 'b' && command[1] == 'l' && command[2] == 'i'){
-        //     p->blind();
-        // }
-        // // force implemented here
         else if (command == "I")
         {
             p->setcur('I');
@@ -318,12 +299,10 @@ int main(int argc, char *argv[])
                 std::cout << "You lose!" << std::endl;
                 break;
             }
-            // level will return next block, will call p->setcur('L') and then notify
             if (turn1)
             {
                 p = p2;
                 turn1 = false;
-                // store block when you created it
                 currentl2 = p->next();
                 p->setcur(currentl2);
             }
@@ -331,16 +310,16 @@ int main(int argc, char *argv[])
             {
                 p = p1;
                 turn1 = true;
-                // store block when you create it
                 currentl1 = p->next();
                 p->setcur(currentl1);
             }
             s.notifyObservers();
         }
         if (command == "exit")
-        { // exit
+        { 
             break;
         }
     }
     return 0;
-} // main
+} 
+

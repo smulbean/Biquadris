@@ -10,7 +10,6 @@ class Board;
 class Studio : public Subject{
   std::shared_ptr<Player> p1;
   std::shared_ptr<Player> p2;
-  // int ticks = 0;
 
  public:
   explicit Studio(std::shared_ptr<Player> player1, std::shared_ptr<Player> player2)

@@ -8,8 +8,6 @@ class IBlock : public Block
 {
     std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
     bool isHeavy;
-
-private:
     int phase;
     bool end;
     bool lost;

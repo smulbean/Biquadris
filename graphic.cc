@@ -70,7 +70,6 @@ void Graphic::notify()
         for (int col = l; col <= r; ++col)
         {
             char ch = subject->getStatep1(col, row);
-            // char ch = subject->getStatep1(col, row);
             if (ch == 'J')
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Red);
@@ -102,6 +101,9 @@ void Graphic::notify()
             else if (ch == 'L')
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Orange);
+            }
+            else if (ch == '*'){
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Brown);
             }
         }
 
@@ -140,6 +142,9 @@ void Graphic::notify()
             {
                 w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }
+            else if (ch == '*'){
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Brown);
+            }
         }
     }
     w->fillRectangle(0, row*spacing*spacing*1.35, 800, 800, Xwindow::White);
@@ -172,7 +177,3 @@ void Graphic::notify()
     w->drawString(row*spacing*10, row*spacing*spacing*1.5, p2high);
 }
 
-// Graphic::~Graphic()
-// {
-//     subject->detach(this);
-// }

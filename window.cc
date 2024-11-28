@@ -30,7 +30,7 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
   // Set up colors.
   XColor xcolour;
   Colormap cmap;
-  char color_vals[9][10] = {
+  char color_vals[10][10] = {
     "#FFFFFF",  // white
     "#000000",  // black
     "#FFC0CB",  // red
@@ -39,11 +39,12 @@ Xwindow::Xwindow(int width, int height) : width{width}, height{height} {
     "#800080",  // purple
     "#FFFF00",  // yellow
     "#FF0000",  // pink
-    "#FFA500"   // orange
+    "#FFA500",  // orange
+    "brown" // brown
 };
 
   cmap = DefaultColormap(d, DefaultScreen(d)); 
-  for (int i = 0; i < 9; ++i) {
+  for (int i = 0; i < 10; ++i) {
       XParseColor(d, cmap, color_vals[i], &xcolour);
       XAllocColor(d, cmap, &xcolour);
       colours[i] = xcolour.pixel;
