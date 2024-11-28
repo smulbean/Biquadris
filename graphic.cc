@@ -103,6 +103,9 @@ void Graphic::notify()
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Orange);
             }
+            else if (ch == '*'){
+                w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Brown);
+            }
         }
 
         for (int col = l; col <= r; ++col)
@@ -139,6 +142,9 @@ void Graphic::notify()
             else if (ch == 'L')
             {
                 w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Orange);
+            }
+            else if (ch == '*'){
+                w->fillRectangle((col - l) * scale + 20*scale, (row - t) * scale, scale, scale, Xwindow::Brown);
             }
         }
     }
