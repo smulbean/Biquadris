@@ -5,7 +5,6 @@
 #include <memory>
 #include <iostream>
 #include "board.h"
-// abstract class for block
 
 class Block : public Board
 {

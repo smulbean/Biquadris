@@ -1,12 +1,12 @@
 #ifndef __BROWNBLOCK_H__
 #define __BROWNBLOCK_H__
 #include "coor.h"
-#include "block.h" // h only no .cc
+#include "block.h" 
 #include <memory>
 
 class BROWNBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 1> coordinates; // dynamic
+    std::array<std::shared_ptr<Coor>, 1> coordinates; 
     bool isHeavy;
     int phase;
     bool end;
@@ -14,8 +14,8 @@ class BROWNBlock : public Block
     bool exceed;
 
 public:
-    BROWNBlock(std::shared_ptr<Board> base);  // constructor
-    ~BROWNBlock() = default; // destructor
+    BROWNBlock(std::shared_ptr<Board> base);  
+    ~BROWNBlock() = default; 
     void rotateCC() override;
     void rotateC() override;
     void down() override;

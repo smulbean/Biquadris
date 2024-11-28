@@ -11,7 +11,7 @@ class Text : public Observer {
   int full1();
   int full2();
  public:
-  explicit Text(std::shared_ptr<Studio> subject); // constructor
+  explicit Text(std::shared_ptr<Studio> subject); 
   void notify() override;
   ~Text() override = default;
 };

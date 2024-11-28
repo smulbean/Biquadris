@@ -1,12 +1,12 @@
 #ifndef __IBLOCK_H__
 #define __IBLOCK_H__
 #include "coor.h"
-#include "block.h" // h only no .cc
+#include "block.h" 
 #include <memory>
 
 class IBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
     int phase;
     bool end;
@@ -14,8 +14,8 @@ class IBlock : public Block
     bool exceed;
 
 public:
-    IBlock(std::shared_ptr<Board> base);  // constructor
-    ~IBlock() = default; // destructor
+    IBlock(std::shared_ptr<Board> base); 
+    ~IBlock() = default; 
     void rotateCC() override;
     void rotateC() override;
     void down() override;
@@ -31,3 +31,4 @@ public:
 };
 
 #endif
+

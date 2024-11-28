@@ -30,16 +30,12 @@ bool isSeed = false;
 
 int main(int argc, char *argv[])
 {
-    // initialize a level
     std::shared_ptr<Level> l1;
     std::shared_ptr<Level> l2;
     bool textonly = false;
     bool startlevel = false;
     bool scriptfile1 = false;
     bool scriptfile2 = false;
-    // string file1string;
-    // string file2string;
-    // list of observers
     std::vector<std::shared_ptr<Observer>> observers;
 
     if (argc > 1)
@@ -156,10 +152,10 @@ int main(int argc, char *argv[])
         int n = 0;
         int digit = 0;
         if (sequence){
-            if (!(f >> command)) { // Check for EOF or read failure
-                sequence = false; // Reset sequence mode
-                f.close();        // Close the file
-                continue;         // Skip further input until the next iteration
+            if (!(f >> command)) { 
+                sequence = false; 
+                f.close();        
+                continue;         
             }
         } else {
             std::cin >> command;
@@ -375,4 +371,5 @@ int main(int argc, char *argv[])
     }
     return 0;
 } 
+
 

@@ -12,7 +12,6 @@ char LevelOne::createBlock() {
         srand(seed);
         blockID = (rand() % 12) + 1;
     } else {
-        // for true, chaotic randomness
         std::random_device rd;
         std::mt19937 generator(rd());
         std::uniform_int_distribution<int> distribution(1, 12);
@@ -35,3 +34,5 @@ char LevelOne::createBlock() {
         return 'O';
     }
 }
+
+

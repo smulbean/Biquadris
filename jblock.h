@@ -2,11 +2,11 @@
 #define __JBLOCK_H__
 #include "coor.h"
 #include <memory>
-#include "block.h" // h only no .cc
+#include "block.h" 
 
 class JBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
 
 private:
@@ -16,8 +16,8 @@ private:
     bool exceed;
 
 public:
-    JBlock(std::shared_ptr<Board> base);  // constructor
-    ~JBlock() = default; // destructor
+    JBlock(std::shared_ptr<Board> base);  
+    ~JBlock() = default; 
     void rotateCC() override;
     void rotateC() override;
     void down() override;
@@ -33,3 +33,4 @@ public:
 };
 
 #endif
+

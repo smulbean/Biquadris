@@ -3,7 +3,7 @@
 #include <vector>
 #include <memory> 
 
-class Observer; // forward declaration
+class Observer; 
 
 class Subject {
   std::vector<std::shared_ptr<Observer>> observers;

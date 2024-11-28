@@ -1,6 +1,5 @@
 #ifndef __LEVEL_H__
 #define __LEVEL_H__
-// this is the abstract class for level
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,9 +13,9 @@ struct Player;
 class Level{
 	int playerNumber;
 	public:
-		Level(int id); // constructor
+		Level(int id); 
 		virtual ~Level();
-		virtual char createBlock() = 0; // factory method
+		virtual char createBlock() = 0; 
 };
 
 

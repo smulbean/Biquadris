@@ -17,9 +17,10 @@ class LevelZero : public Level{
 	size_t sequenceIdx;
 
 	public:
-		LevelZero(int id); // constructor
+		LevelZero(int id); 
 		~LevelZero() = default;
-		char createBlock() override; // create blocks for level 0make
+		char createBlock() override; 
 };
 
 #endif
+

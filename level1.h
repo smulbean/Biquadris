@@ -13,9 +13,10 @@ struct Player;
 
 class LevelOne : public Level{
 	public:
-		LevelOne(int id); // constructor
+		LevelOne(int id);
 		~LevelOne() = default;
-		char createBlock() override; // create blocks for level 1
+		char createBlock() override; 
 };
 
 #endif
+

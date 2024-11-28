@@ -18,9 +18,9 @@ class LevelThree : public Level{
 	size_t sequenceIdx;
 
 	public:
-		LevelThree(int id, bool random, std::string file); // constructor
+		LevelThree(int id, bool random, std::string file); 
 		~LevelThree() = default;
-		char createBlock() override; // create blocks for level 3
+		char createBlock() override; 
 };
 
 #endif

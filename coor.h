@@ -2,7 +2,6 @@
 #define STRUCT_H
 #include <memory>
 
-// Define your structure
 struct Coor {
     int x;
     int y;

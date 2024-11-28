@@ -9,8 +9,8 @@ LevelZero::LevelZero(int id) : Level{id}, sequenceIdx{0} {
     std::string sequenceContent;
 
     while (readSeq >> sequenceContent) {
-        std::string command = sequenceContent; // make it separately to construct
-        playerSequence.emplace_back(command); // constructs, places at back
+        std::string command = sequenceContent; 
+        playerSequence.emplace_back(command); 
     }
 }
 
@@ -24,3 +24,4 @@ char LevelZero::createBlock() {
     }
     return blockID;
 }
+

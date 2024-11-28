@@ -110,7 +110,6 @@ void Text::notify()
     }
     cout << endl;
   }
-  // print second seperator
   for (int i = 0; i < cols; i++)
   {
     cout << "-";

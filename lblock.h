@@ -1,12 +1,12 @@
 #ifndef __LBLOCK_H__
 #define __LBLOCK_H__
 #include "coor.h"
-#include "block.h" // h only no .cc
+#include "block.h"
 #include <memory>
 
 class LBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 4> coordinates; // dynamic
+    std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
 
 private:
@@ -16,8 +16,8 @@ private:
     bool exceed;
 
 public:
-    LBlock(std::shared_ptr<Board> base);  // constructor
-    ~LBlock() = default; // destructor
+    LBlock(std::shared_ptr<Board> base);  
+    ~LBlock() = default; 
     void rotateCC() override;
     void rotateC() override;
     void down() override;
