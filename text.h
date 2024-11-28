@@ -10,8 +10,6 @@ class Text : public Observer {
   int spacing = 5;
   int full1();
   int full2();
-  bool emptytop1();
-  bool emptytop2();
  public:
   explicit Text(std::shared_ptr<Studio> subject); // constructor
   void notify() override;

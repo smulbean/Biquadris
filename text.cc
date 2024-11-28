@@ -5,28 +5,6 @@
 #include <iostream>
 using namespace std;
 
-bool Text::emptytop1(){
-  for (int i = 0; i < 2; i++){
-    for (int j = 0; j < cols; j++){
-      if (subject->getStatep1(j, i) != ' '){
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-bool Text::emptytop2(){
-  for (int i = 0; i < 2; i++){
-    for (int j = 0; j < cols; j++){
-      if (subject->getStatep2(j, i) != ' '){
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
 int Text::full1()
 {
   for (int i = 0; i < rows; i++)
