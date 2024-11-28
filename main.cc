@@ -19,6 +19,8 @@
 #include "graphic.h"
 #include "level1.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 
 std::string file1string = "sequence1.txt";
