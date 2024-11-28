@@ -22,7 +22,7 @@ private:
     int levelnum;
     std::shared_ptr<Level> level; 
     int player;
-    vector<std::shared_ptr<Block>> blocks; // wendy
+    vector<std::shared_ptr<Block>> blocks; 
     string file;
     bool rand;
 
@@ -36,7 +36,6 @@ public:
     int getLevel();
     void Levelup();
     void Leveldown();
-    void force();
     void MoreScore();
     int blocknum();
     void setcur(char c);

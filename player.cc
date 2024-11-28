@@ -69,51 +69,45 @@ void Player::Leveldown() {
         levelnum = 0;
     }
 }
-void Player::force(){
-    // force
-}
 
-// Block* Player::curBlock(){
-//     return blocks[blocks.size() - 1];
-// }
 void Player::setcur(char c) {
     if (c == 'I') {
-        picture = std::make_shared<IBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<IBlock>(canvas);  
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'J') {
-        picture = std::make_shared<JBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<JBlock>(canvas);  
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'L') {
-        picture = std::make_shared<LBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<LBlock>(canvas); 
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'O') {
-        picture = std::make_shared<OBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<OBlock>(canvas);  
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'S') {
-        picture = std::make_shared<SBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<SBlock>(canvas); 
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'Z') {
-        picture = std::make_shared<ZBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<ZBlock>(canvas);  
         blocks.push_back(picture);
         canvas = picture;
     }
     else if (c == 'B') {
-        picture = std::make_shared<BROWNBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<BROWNBlock>(canvas);  
         blocks.push_back(picture);
         canvas = picture;
     }
     else {
-        picture = std::make_shared<TBlock>(canvas);  // Automatically managed
+        picture = std::make_shared<TBlock>(canvas); 
         blocks.push_back(picture);
         canvas = picture;
     }
@@ -130,16 +124,13 @@ std::shared_ptr<Block> Player::getpic() {
 
 
 void Player::restart() {
-    picture = nullptr; // No need to manually delete since we use shared_ptr
+    picture = nullptr; 
     score = 0;
     levelnum = 0;
     level = std::make_shared<LevelOne>(player);
     canvas = std::make_shared<Blank>(); 
 }
 
-// void Player::store(Block *cur){
-    
-// }
 
 void Player::setCor(int row) {
     for (auto& block : blocks) {
@@ -149,15 +140,15 @@ void Player::setCor(int row) {
 
 void Player::MoreScore() {
     for (auto it = blocks.begin(); it != blocks.end();) {
-        // Check if the block affects the specified row
+       
         if ((*it)->blockdone() == 1) {
-            // Increment the score based on the block's interaction with the row
+            
             score += (*it)->blockdone() + levelnum;
 
-            // Remove the block and advance the iterator
+           
             it = blocks.erase(it);
         } else {
-            // Move to the next block
+            
             ++it;
         }
     }
