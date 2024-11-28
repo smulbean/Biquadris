@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <fstream>
 #include <sstream>
 #include <memory>
 #include "blank.h"
@@ -44,17 +45,14 @@ int main(int argc, char *argv[])
             }
             if (std::strcmp(argv[i], "-scriptfile1") == 0)
             {
-                // read in to player 1 from argv[i + 1]
                 file1string = argv[i + 1];
             }
             if (std::strcmp(argv[i], "-scriptfile2") == 0)
             {
-                // read in to player 2 from argv[i + 1]
                 file2string = argv[i + 1];
             }
             if (std::strcmp(argv[i], "-startlevel") == 0)
             {
-                // l == new Level argv[i + 1]
                 if (std::stoi(argv[i + 1]) == 1)
                 {
                     l1 = std::make_shared<LevelOne>(1);
@@ -87,36 +85,38 @@ int main(int argc, char *argv[])
     {
         // start level 0
         l1 = std::make_shared<LevelZero>(1);
-        l2 = std::make_shared<LevelZero>(2); // fix this for parameters
+        l2 = std::make_shared<LevelZero>(2); 
     }
     // make a new canvas for tetris
-    std::shared_ptr<Board> c1 = std::make_shared<Blank>(); // fix this for parameters
+    std::shared_ptr<Board> c1 = std::make_shared<Blank>(); 
     std::shared_ptr<Board> c2 = std::make_shared<Blank>();
     // initialize players
-    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true); // for now make it one player
-    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true); // for now make it one player
+    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true); 
+    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true); 
     std::shared_ptr<Player> p = p1;
     // create studio
     Studio s{p1, p2};
-    auto s_ptr = std::make_shared<Studio>(s); // Create shared_ptr for Studio
+    auto s_ptr = std::make_shared<Studio>(s); 
 
-    auto Tobserver = std::make_shared<Text>(s_ptr); // Pass shared_ptr to Text observer
+    auto Tobserver = std::make_shared<Text>(s_ptr); 
     s.attach(Tobserver);
     observers.push_back(Tobserver);
 
     if (!textonly)
     {
-        auto Gobserver = std::make_shared<Graphic>(s_ptr); // Pass shared_ptr to Graphic observer
+        auto Gobserver = std::make_shared<Graphic>(s_ptr); 
         s.attach(Gobserver);
         observers.push_back(Gobserver);
     }
 
     bool turn1 = true;
+    bool sequence = false;
 
     string command;
     char currentl1 = p1->next();
     char currentl2 = p2->next();
     p->setcur(currentl1);
+    string file = "";
 
     s.notifyObservers();
     while (true)
@@ -124,7 +124,12 @@ int main(int argc, char *argv[])
         string number = "";
         int n = 0;
         int digit = 0;
-        std::cin >> command;
+        if (sequence){
+            ifstream f{file};
+            f >> command;
+        } else {
+            std::cin >> command;
+        }
         for (int i = 0; i < command.size(); i++)
         {
             if (command[i] >= '0' && command[i] <= '9')
@@ -148,7 +153,10 @@ int main(int argc, char *argv[])
             std::cout << "YOU LOSE!" << std::endl;
             break;
         }
-        // if level 4, then create brown block and drop it.
+        if (command[0] == 's' && command[1] == 'e'){
+            sequence = true;
+            std::cin >> file;
+        }
         if (command[0] == 'r' && command[2] == 'a')
         { // random
             p->settrue();
