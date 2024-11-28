@@ -19,6 +19,8 @@
 #include "graphic.h"
 #include "level1.h"
 #include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 
 std::string file1string = "sequence1.txt";
@@ -83,7 +85,7 @@ int main(int argc, char *argv[])
             }
             if (std::strcmp(argv[i], "-seed") == 0){
                  //read in seed from argv[i + 1]
-                 seed = argv[i + 1];
+                 seed = std::stoi(argv[i + 1]);
                  isSeed = true;
             }
         }
