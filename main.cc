@@ -284,6 +284,16 @@ int main(int argc, char *argv[])
         else if (command[0] == 'r' && command[1] == 'e')
         { // restart
             p->restart();
+            if (turn1)
+            {
+                currentl2 = p->next();
+                p->setcur(currentl2);
+            }
+            else
+            {
+                currentl1 = p->next();
+                p->setcur(currentl1);
+            }
             s.notifyObservers();
         }
         if ((p->getLevel() == 4) && (p->blocknum() % 5 == 0))

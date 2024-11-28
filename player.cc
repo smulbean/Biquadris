@@ -133,8 +133,8 @@ void Player::restart() {
     picture = nullptr; // No need to manually delete since we use shared_ptr
     score = 0;
     levelnum = 0;
-    level = nullptr;
-    canvas = std::make_shared<Blank>(); // Create new Blank as shared_ptr
+    level = std::make_shared<LevelOne>(player);
+    canvas = std::make_shared<Blank>(); 
 }
 
 // void Player::store(Block *cur){
