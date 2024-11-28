@@ -49,15 +49,24 @@ int main(int argc, char *argv[])
             if (std::strcmp(argv[i], "-text") == 0)
             {
                 // text only
+                std::cout << "Entering text-only mode!" << std::endl;
                 textonly = true;
             }
             if (std::strcmp(argv[i], "-scriptfile1") == 0)
             {
-                file1string = argv[i + 1];
+                if (i + 1 < argc && argv[i + 1][0] == '-') {
+                    std::cout << "You forgot to give us a file!" << std::endl;
+                } else {
+                    file1string = argv[i + 1];
+                }
             }
             if (std::strcmp(argv[i], "-scriptfile2") == 0)
             {
-                file2string = argv[i + 1];
+                if (i + 1 < argc && argv[i + 1][0] == '-') {
+                    std::cout << "You forgot to give us a file!" << std::endl;
+                } else {
+                    file2string = argv[i + 1];
+                }
             }
             if (std::strcmp(argv[i], "-startlevel") == 0)
             {
@@ -65,28 +74,41 @@ int main(int argc, char *argv[])
                 {
                     l1 = std::make_shared<LevelOne>(1);
                     l2 = std::make_shared<LevelOne>(2);
+                    std::cout << "Starting Level 1" << std::endl;
                 }
                 else if (std::stoi(argv[i + 1]) == 2)
                 {
                     l1 = std::make_shared<LevelTwo>(1);
                     l2 = std::make_shared<LevelTwo>(2);
+                    std::cout << "Starting Level 2" << std::endl;
                 }
                 else if (std::stoi(argv[i + 1]) == 3)
                 {
                     l1 = std::make_shared<LevelThree>(1, true, file1string);
                     l2 = std::make_shared<LevelThree>(2, true, file2string);
+                    std::cout << "Starting Level 3" << std::endl;
                 }
                 else if (std::stoi(argv[i + 1]) == 4)
                 {
                     l1 = std::make_shared<LevelFour>(1, true, file1string);
                     l2 = std::make_shared<LevelFour>(2, true, file2string);
+                    std::cout << "Starting Level 4" << std::endl;
                 }
                 startlevel = true;
             }
             if (std::strcmp(argv[i], "-seed") == 0){
                  //read in seed from argv[i + 1]
-                 seed = std::stoi(argv[i + 1]);
+                 if (i + 1 < argc && ('0' <= argv[i + 1][0] && argv[i + 1][0] <= '9')) {
+                    seed = std::stoi(argv[i + 1]);
+                 } else {
+                    std::cout << "Please enter a valid number for your seed!" << std::endl;
+                 }
                  isSeed = true;
+            }
+            if (std::strcmp(argv[i], "-noseed") == 0) {
+                // for true randomness
+                std::cout << "You entered random-mode!" << std::endl;
+                isSeed = false;
             }
         }
     }
