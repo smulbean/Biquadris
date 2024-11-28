@@ -1,12 +1,22 @@
 #include "level2.h"
 #include <random>
 
+extern bool isSeed;
+extern int seed;
+
 LevelTwo::LevelTwo(int id) : Level(id) {}
 
 char LevelTwo::createBlock() {
-    static std::default_random_engine generator;
-    static std::uniform_int_distribution<int> distribution(1,7);
-    int blockID = distribution(generator);
+    int blockID;
+    if (isSeed) {
+        srand(seed);
+        blockID = (rand() % 7) + 1;
+    } else {
+        std::random_device rd;
+        std::mt19937 generator(rd());
+        std::uniform_int_distribution<int> distribution(1, 7);
+        blockID = distribution(generator);
+    }
 
     if (blockID == 1) {
         return 'I'; 

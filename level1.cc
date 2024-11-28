@@ -1,12 +1,23 @@
 #include "level1.h"
 #include <random>
 
+extern bool isSeed;
+extern int seed;
+
 LevelOne::LevelOne(int id) : Level{id} {}
 
 char LevelOne::createBlock() {
-    static std::default_random_engine generator;
-    static std::uniform_int_distribution<int> distribution(1,12);
-    int blockID = distribution(generator);
+    int blockID;
+    if (isSeed) {
+        srand(seed);
+        blockID = (rand() % 12) + 1;
+    } else {
+        // for true, chaotic randomness
+        std::random_device rd;
+        std::mt19937 generator(rd());
+        std::uniform_int_distribution<int> distribution(1, 12);
+        blockID = distribution(generator);
+    }
 
     if (blockID == 1) {
         return 'S';
