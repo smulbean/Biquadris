@@ -14,7 +14,7 @@ struct Player;
 class LevelTwo : public Level{
 	public:
 		LevelTwo(int id); // constructor
-		LevelTwo() = default;
+		~LevelTwo() = default;
 		char createBlock() override; // create blocks for level 2
 };
 

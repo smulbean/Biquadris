@@ -181,3 +181,4 @@ void Player::setfalse(){
 int Player::blocknum(){
     return blocks.size();
 }
+

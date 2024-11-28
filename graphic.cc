@@ -70,7 +70,6 @@ void Graphic::notify()
         for (int col = l; col <= r; ++col)
         {
             char ch = subject->getStatep1(col, row);
-            // char ch = subject->getStatep1(col, row);
             if (ch == 'J')
             {
                 w->fillRectangle((col - l) * scale, (row - t) * scale, scale, scale, Xwindow::Red);
@@ -178,7 +177,3 @@ void Graphic::notify()
     w->drawString(row*spacing*10, row*spacing*spacing*1.5, p2high);
 }
 
-// Graphic::~Graphic()
-// {
-//     subject->detach(this);
-// }

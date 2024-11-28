@@ -5,11 +5,6 @@
 #include <iostream>
 using namespace std;
 
-// need a function to check if everyline on that board is cleansed, if so, we just not print that line
-// and then add the score to score and update highscore
-// subject->getp1()->updateScore(int inc) adds inc to current score
-// subject->getp1()->updateHigh(int high)changes highscore to high
-
 bool Text::emptytop1(){
   for (int i = 0; i < 2; i++){
     for (int j = 0; j < cols; j++){
@@ -151,11 +146,6 @@ void Text::notify()
     cout << "-";
   }
   cout << endl;
-  // next block
-  // manual function that presents the blocks]
 }
 
-// Text::~Text()
-// {
-//   subject->detach(this);
-// }
+

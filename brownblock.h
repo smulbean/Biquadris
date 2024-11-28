@@ -8,8 +8,6 @@ class BROWNBlock : public Block
 {
     std::array<std::shared_ptr<Coor>, 1> coordinates; // dynamic
     bool isHeavy;
-
-private:
     int phase;
     bool end;
     bool lost;
@@ -33,3 +31,4 @@ public:
 };
 
 #endif
+

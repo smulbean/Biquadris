@@ -8,7 +8,6 @@ class Text : public Observer {
   int cols = 11;
   int rows = 18;
   int spacing = 5;
-  bool blind; // remember to put in blind
   int full1();
   int full2();
   bool emptytop1();
