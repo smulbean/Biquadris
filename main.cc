@@ -21,7 +21,7 @@
 #include "level2.h"
 
 
-std:string file1string = "sequence1.txt";
+std::string file1string = "sequence1.txt";
 std::string file2string = "sequence2.txt";
 int seed = 288;
 bool isSeed = false;
@@ -71,12 +71,12 @@ int main(int argc, char *argv[])
                 }
                 else if (std::stoi(argv[i + 1]) == 3)
                 {
-                    l1 = std::make_shared<LevelThree>(1, true, file2string);
+                    l1 = std::make_shared<LevelThree>(1, true, file1string);
                     l2 = std::make_shared<LevelThree>(2, true, file2string);
                 }
                 else if (std::stoi(argv[i + 1]) == 4)
                 {
-                    l1 = std::make_shared<LevelFour>(1, true, file2string);
+                    l1 = std::make_shared<LevelFour>(1, true, file1string);
                     l2 = std::make_shared<LevelFour>(2, true, file2string);
                 }
                 startlevel = true;
