@@ -321,8 +321,66 @@ char JBlock::charAt(int col, int row) {
 }
 
 void JBlock::drop(){
+    storeold();
     while (!end){
-        down();
+        if(end) {
+        return;
+    }
+
+    if((phase == 1 || phase == 2) && (coordinates[3]->y == 17)) { //reached the bottom
+        end = true;
+        return;
+    } else if ((phase == 3 || phase == 4) && (coordinates[0]->y == 17)){
+        end = true;
+        return;
+    }
+
+    if (phase == 1) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
+            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            continue;
+        }
+        end = true;
+        return;
+
+    } else if (phase == 2) {
+        if ((base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ') && 
+            (base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            continue;
+        }
+        end = true;
+        return;
+
+    } else if (phase == 3) {
+        if ((base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && 
+            (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
+            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            continue;
+        }
+        end = true;
+        return;
+        
+    } else if (phase == 4) {
+        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+            (base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
+            for (int i=0; i<4; i++){
+                coordinates[i]->y++;
+            }
+            continue;
+        }
+        end = true;
+        return;
+    }
     }
     end = true;
     return;
