@@ -17,6 +17,7 @@
 
 Player::Player(std::shared_ptr<Board> canvas, int score, int high, int levelnum, int player, std::shared_ptr<Level> level, std::string file, bool rand) : 
     canvas{canvas}, score{score}, highscore{high}, levelnum{levelnum}, player{player}, level{level}, file{file}, rand{rand} {
+        old = canvas;
 }
  
 int Player::getScore(){
@@ -70,7 +71,12 @@ void Player::Leveldown() {
     }
 }
 
+void Player::update(){
+    old = canvas;
+}
+
 void Player::setcur(char c) {
+    old = canvas;
     if (c == 'I') {
         picture = std::make_shared<IBlock>(canvas);  
         blocks.push_back(picture);
@@ -118,9 +124,22 @@ std::shared_ptr<Board> Player::getboard() {
     return canvas;
 }
 
+std::shared_ptr<Board> Player::getold() {
+    return old;
+}
+
+
 std::shared_ptr<Block> Player::getpic() {
     return picture;
 }
+
+std::shared_ptr<Block> Player::getcur() {
+    if (blocks.size() == 0){
+        return nullptr;
+    }
+    return blocks[blocks.size() - 1];
+}
+
 
 
 void Player::restart() {
@@ -138,6 +157,14 @@ void Player::setCor(int row) {
     }
 }
 
+bool Player::getclear(){
+    return clear;
+}
+
+void Player::changeclear(bool n){
+    clear = n;
+}
+
 void Player::MoreScore() {
     for (auto it = blocks.begin(); it != blocks.end();) {
        
@@ -153,7 +180,6 @@ void Player::MoreScore() {
         }
     }
 }
-
 
 
 char Player::next(){

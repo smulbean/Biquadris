@@ -50,6 +50,7 @@
         "vector": "cpp",
         "algorithm": "cpp",
         "memory": "cpp",
-        "condition_variable": "cpp"
+        "condition_variable": "cpp",
+        "deque": "cpp"
     }
 }

@@ -8,15 +8,19 @@ class OBlock : public Block
 {
     std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
-
-private:
     int phase;
     bool end;
     bool lost;
     bool exceed;
+    void storeold();
+    int arrX[4];
+    int arrY[4];
+
 public:
-    OBlock(std::shared_ptr<Board> base);  
+    OBlock(std::shared_ptr<Board> base); 
     ~OBlock() = default; 
+    int getX(int num) override;
+    int getY(int num) override;
     void rotateCC() override;
     void rotateC() override;
     void down() override;

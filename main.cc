@@ -22,7 +22,6 @@
 #include "level3.h"
 #include "level4.h"
 
-
 std::string file1string = "sequence1.txt";
 std::string file2string = "sequence2.txt";
 int seed = 288;
@@ -34,8 +33,6 @@ int main(int argc, char *argv[])
     std::shared_ptr<Level> l2;
     bool textonly = false;
     bool startlevel = false;
-    bool scriptfile1 = false;
-    bool scriptfile2 = false;
     std::vector<std::shared_ptr<Observer>> observers;
 
     if (argc > 1)
@@ -50,17 +47,23 @@ int main(int argc, char *argv[])
             }
             if (std::strcmp(argv[i], "-scriptfile1") == 0)
             {
-                if (i + 1 < argc && argv[i + 1][0] == '-') {
+                if (i + 1 < argc && argv[i + 1][0] == '-')
+                {
                     std::cout << "You forgot to give us a file!" << std::endl;
-                } else {
+                }
+                else
+                {
                     file1string = argv[i + 1];
                 }
             }
             if (std::strcmp(argv[i], "-scriptfile2") == 0)
             {
-                if (i + 1 < argc && argv[i + 1][0] == '-') {
+                if (i + 1 < argc && argv[i + 1][0] == '-')
+                {
                     std::cout << "You forgot to give us a file!" << std::endl;
-                } else {
+                }
+                else
+                {
                     file2string = argv[i + 1];
                 }
             }
@@ -92,16 +95,21 @@ int main(int argc, char *argv[])
                 }
                 startlevel = true;
             }
-            if (std::strcmp(argv[i], "-seed") == 0){
-                 //read in seed from argv[i + 1]
-                 if (i + 1 < argc && ('0' <= argv[i + 1][0] && argv[i + 1][0] <= '9')) {
+            if (std::strcmp(argv[i], "-seed") == 0)
+            {
+                // read in seed from argv[i + 1]
+                if (i + 1 < argc && ('0' <= argv[i + 1][0] && argv[i + 1][0] <= '9'))
+                {
                     seed = std::stoi(argv[i + 1]);
-                 } else {
+                }
+                else
+                {
                     std::cout << "Please enter a valid number for your seed!" << std::endl;
-                 }
-                 isSeed = true;
+                }
+                isSeed = true;
             }
-            if (std::strcmp(argv[i], "-noseed") == 0) {
+            if (std::strcmp(argv[i], "-noseed") == 0)
+            {
                 // for true randomness
                 std::cout << "You entered random-mode!" << std::endl;
                 isSeed = false;
@@ -112,26 +120,26 @@ int main(int argc, char *argv[])
     {
         // start level 0
         l1 = std::make_shared<LevelZero>(1);
-        l2 = std::make_shared<LevelZero>(2); 
+        l2 = std::make_shared<LevelZero>(2);
     }
     // make a new canvas for tetris
-    std::shared_ptr<Board> c1 = std::make_shared<Blank>(); 
+    std::shared_ptr<Board> c1 = std::make_shared<Blank>();
     std::shared_ptr<Board> c2 = std::make_shared<Blank>();
     // initialize players
-    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true); 
-    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true); 
+    std::shared_ptr<Player> p1 = std::make_shared<Player>(c1, 0, 0, 0, 1, l1, file1string, true);
+    std::shared_ptr<Player> p2 = std::make_shared<Player>(c2, 0, 0, 0, 2, l2, file2string, true);
     std::shared_ptr<Player> p = p1;
     // create studio
     Studio s{p1, p2};
-    auto s_ptr = std::make_shared<Studio>(s); 
+    auto s_ptr = std::make_shared<Studio>(s);
 
-    auto Tobserver = std::make_shared<Text>(s_ptr); 
+    auto Tobserver = std::make_shared<Text>(s_ptr);
     s.attach(Tobserver);
     observers.push_back(Tobserver);
 
     if (!textonly)
     {
-        auto Gobserver = std::make_shared<Graphic>(s_ptr); 
+        auto Gobserver = std::make_shared<Graphic>(s_ptr);
         s.attach(Gobserver);
         observers.push_back(Gobserver);
     }
@@ -151,13 +159,17 @@ int main(int argc, char *argv[])
         string number = "";
         int n = 0;
         int digit = 0;
-        if (sequence){
-            if (!(f >> command)) { 
-                sequence = false; 
-                f.close();        
-                continue;         
+        if (sequence)
+        {
+            if (!(f >> command))
+            {
+                sequence = false;
+                f.close();
+                continue;
             }
-        } else {
+        }
+        else
+        {
             std::cin >> command;
         }
         for (int i = 0; i < command.size(); i++)
@@ -183,7 +195,8 @@ int main(int argc, char *argv[])
             std::cout << "YOU LOSE!" << std::endl;
             break;
         }
-        if (command[0] == 's' && command[1] == 'e'){
+        if (command[0] == 's' && command[1] == 'e')
+        {
             sequence = true;
             std::cin >> file;
             f.open(file);
@@ -199,75 +212,99 @@ int main(int argc, char *argv[])
         // do the command
         if (command[0] == 'l' && command[2] == 'f')
         { // left
+            if (n > 11)
+            {
+                n = 11;
+            }
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->left();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if (command[0] == 'r' && command[1] == 'i')
         { // right
+            if (n > 11)
+            {
+                n = 11;
+            }
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->right();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if (command[0] == 'd' && command[1] == 'o')
         { // down
+            if (n > 15)
+            {
+                n = 11;
+            }
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if ((p->getpic() != nullptr) && (command[0] == 'd') && (command[1] == 'r'))
         { // drop
+            if (n > 15)
+            {
+                n = 11;
+            }
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->drop();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'l')
         { // clockwise
+            n = n % 4;
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->rotateC();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if (command[0] == 'c' && command[1] == 'o')
         { // counterclockwise
+            n = n % 4;
             for (int i = 0; i < n; i++)
             {
                 p->getpic()->rotateCC();
+                s.notifyObservers();
             }
             if (p->getLevel() == 3 || p->getLevel() == 4)
             {
                 p->getpic()->down();
+                s.notifyObservers();
             }
-            s.notifyObservers();
         }
         else if (command == "I")
         {
@@ -365,11 +402,9 @@ int main(int argc, char *argv[])
             s.notifyObservers();
         }
         if (command == "exit")
-        { 
+        {
             break;
         }
     }
     return 0;
-} 
-
-
+}

@@ -26,6 +26,8 @@ public:
     virtual bool lose() = 0;
     virtual bool exceeded() = 0;
     virtual int blockdone() = 0;
+    virtual int getX(int num) = 0;
+    virtual int getY(int num) = 0;
 };
 
 #endif

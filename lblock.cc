@@ -367,3 +367,11 @@ int LBlock::blockdone(){
 }
 
 
+
+int LBlock::getX(int num){
+    return arrX[num];
+}
+
+int LBlock::getY(int num){
+    return arrY[num];
+}

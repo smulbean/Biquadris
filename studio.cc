@@ -18,6 +18,16 @@ char Studio::getStatep2(int row, int col) const
     return p2->getboard()->charAt(row, col);
 }
 
+char Studio::getOldp1(int row, int col) const
+{
+    return p1->getold()->charAt(row, col);
+}
+
+char Studio::getOldp2(int row, int col) const
+{
+    return p2->getold()->charAt(row, col);
+}
+
 std::shared_ptr<Player> Studio::getp1() 
 {
     return p1;

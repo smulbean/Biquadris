@@ -208,3 +208,12 @@ int OBlock::blockdone(){
     return 1;
 }
 
+
+int OBlock::getX(int num){
+    return arrX[num];
+}
+
+int OBlock::getY(int num){
+    return arrY[num];
+}
+

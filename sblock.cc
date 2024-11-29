@@ -355,3 +355,11 @@ int SBlock::blockdone(){
 }
 
 
+int SBlock::getX(int num){
+    return arrX[num];
+}
+
+int SBlock::getY(int num){
+    return arrY[num];
+}
+

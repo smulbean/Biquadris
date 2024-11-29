@@ -12,10 +12,16 @@ class IBlock : public Block
     bool end;
     bool lost;
     bool exceed;
+    void storeold();
+    void downpt2();
+    int arrX[4];
+    int arrY[4];
 
 public:
     IBlock(std::shared_ptr<Board> base); 
     ~IBlock() = default; 
+    int getX(int num) override;
+    int getY(int num) override;
     void rotateCC() override;
     void rotateC() override;
     void down() override;
