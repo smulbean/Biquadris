@@ -12,7 +12,9 @@ class Subject {
   void detach(std::shared_ptr<Observer> o);  
   void notifyObservers();  
   virtual char getStatep1(int row, int col) const = 0; 
+  virtual char getOldp1(int row, int col) const = 0; 
   virtual char getStatep2(int row, int col) const = 0;
+  virtual char getOldp2(int row, int col) const = 0;
   virtual ~Subject() = default; 
 };
 

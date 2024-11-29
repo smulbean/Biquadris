@@ -125,3 +125,12 @@ int BROWNBlock::blockdone()
     return 1;
 }
 
+
+int BROWNBlock::getX(int num){
+    return arrX[num];
+}
+
+int BROWNBlock::getY(int num){
+    return arrY[num];
+}
+

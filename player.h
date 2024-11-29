@@ -17,19 +17,23 @@ class Player
 private:
     std::shared_ptr<Block> picture;
     std::shared_ptr<Board> canvas;
+    std::shared_ptr<Board> old;
     int score;
     int highscore;
     int levelnum;
-    std::shared_ptr<Level> level; 
+    std::shared_ptr<Level> level;
     int player;
-    vector<std::shared_ptr<Block>> blocks; 
+    vector<std::shared_ptr<Block>> blocks;
     string file;
     bool rand;
+    bool clear;
 
 public:
     Player(std::shared_ptr<Board> canvas, int score = 0, int highscore = 0, int levelnum = 0, int player = 0, std::shared_ptr<Level> level = nullptr, string file = "", bool rand = true);
     ~Player() = default;
     int getScore();
+    bool getclear();
+    void changeclear(bool n);
     void updateScore(int inc);
     void updateHigh(int high);
     int getHighScore();
@@ -39,14 +43,18 @@ public:
     void MoreScore();
     int blocknum();
     void setcur(char c);
+    std::shared_ptr<Block> getcur();
     std::shared_ptr<Block> getpic();
     std::shared_ptr<Board> getboard();
+    std::shared_ptr<Board> getold();
     void restart();
     char next();
     void settrue();
     void setfalse();
     void setCor(int row);
+    void update();
 };
 
 #endif
+
 

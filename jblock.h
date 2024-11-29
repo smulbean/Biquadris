@@ -8,16 +8,19 @@ class JBlock : public Block
 {
     std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
-
-private:
     int phase;
     bool end;
     bool lost;
     bool exceed;
+    void storeold();
+    int arrX[4];
+    int arrY[4];
 
 public:
-    JBlock(std::shared_ptr<Board> base);  
+    JBlock(std::shared_ptr<Board> base); 
     ~JBlock() = default; 
+    int getX(int num) override;
+    int getY(int num) override;
     void rotateCC() override;
     void rotateC() override;
     void down() override;

@@ -6,17 +6,21 @@
 
 class ZBlock : public Block
 {
-    std::array<std::shared_ptr<Coor>, 4> coordinates;
+    std::array<std::shared_ptr<Coor>, 4> coordinates; 
     bool isHeavy;
-
-private:
     int phase;
     bool end;
     bool lost;
     bool exceed;
+    void storeold();
+    int arrX[4];
+    int arrY[4];
+
 public:
     ZBlock(std::shared_ptr<Board> base); 
     ~ZBlock() = default; 
+    int getX(int num) override;
+    int getY(int num) override;
     void rotateCC() override;
     void rotateC() override;
     void down() override;

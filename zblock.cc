@@ -355,3 +355,11 @@ int ZBlock::blockdone(){
     return 1;
 }
 
+int ZBlock::getX(int num){
+    return arrX[num];
+}
+
+int ZBlock::getY(int num){
+    return arrY[num];
+}
+

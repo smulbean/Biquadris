@@ -368,4 +368,11 @@ int JBlock::blockdone(){
     return 1;
 }
 
+int JBlock::getX(int num){
+    return arrX[num];
+}
+
+int JBlock::getY(int num){
+    return arrY[num];
+}
 

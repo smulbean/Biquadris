@@ -63,10 +63,12 @@ void Text::notify()
   if (full1() != -1)
   {
     subject->getp1()->setCor(full1());
+    subject->getp1()->changeclear(true);
   }
   if (full2() != -1)
   {
     subject->getp2()->setCor(full2());
+    subject->getp2()->changeclear(true);
   }
   subject->getp1()->MoreScore();
   subject->getp2()->MoreScore();

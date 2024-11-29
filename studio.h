@@ -20,6 +20,8 @@ class Studio : public Subject{
   std::shared_ptr<Player> getp2();  
   char getStatep1(int row, int col) const override;
   char getStatep2(int row, int col) const override;
+  char getOldp1(int row, int col) const override;
+  char getOldp2(int row, int col) const override;
 
   ~Studio() = default;
 };

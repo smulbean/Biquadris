@@ -358,3 +358,11 @@ int TBlock::blockdone(){
     return 1;
 }
 
+
+int TBlock::getX(int num){
+    return arrX[num];
+}
+
+int TBlock::getY(int num){
+    return arrY[num];
+}
