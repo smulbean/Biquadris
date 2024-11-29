@@ -14,8 +14,6 @@ class Graphic : public Observer {
   int row = 11;
   int col = 18;
   int spacing = 5;
-  int full1();
-  int full2();
  public:
   Graphic(std::shared_ptr<Studio> subject); // constructor
   void notify() override;

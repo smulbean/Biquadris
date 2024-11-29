@@ -26,7 +26,17 @@ JBlock::JBlock(std::shared_ptr<Board> base): Block{base} {
     }
 }
 
+void JBlock::storeold()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        arrX[i] = coordinates[i]->x;
+        arrY[i] = coordinates[i]->y;
+    }
+}
+
 void JBlock::rotateCC() {
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[2]->x, coordinates[2]->y-1) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10) &&  
             (base->charAt(coordinates[2]->x, coordinates[2]->y-2) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10)){
@@ -107,7 +117,9 @@ void JBlock::rotateCC() {
     }
 }
 
+
 void JBlock::rotateC(){
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[0]->x, coordinates[0]->y-1) == ' ') && (coordinates[0]->x >= 0) && (coordinates[0]->x <=10) &&  
             (base->charAt(coordinates[0]->x+1, coordinates[0]->y-1) == ' ') && (coordinates[0]->x+1 >= 0) && (coordinates[0]->x+1 <=10)){
@@ -189,6 +201,7 @@ void JBlock::rotateC(){
 }
 
 void JBlock::down(){
+    storeold();
     if(end) {
         return;
     }
@@ -250,6 +263,7 @@ void JBlock::down(){
 }
 
 void JBlock::left(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 0) {
             return;
@@ -281,6 +295,7 @@ void JBlock::left(){
 }
 
 void JBlock::right(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 10) {
             return;
@@ -333,6 +348,7 @@ bool JBlock::done(){
 }
 
 void JBlock::clear(int row) {
+    storeold();
     for (int i=0; i<4; i++){
         if (this->coordinates[i]->y == row){
             this->coordinates[i]->x = -1;

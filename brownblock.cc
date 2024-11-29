@@ -21,6 +21,12 @@ BROWNBlock::BROWNBlock(std::shared_ptr<Board> base) : Block{base}
     }
 }
 
+void BROWNBlock::storeold()
+{
+    arrX = coordinates[0]->x;
+    arrY = coordinates[0]->y;
+}
+
 void BROWNBlock::rotateCC()
 {
     return;
@@ -32,7 +38,9 @@ void BROWNBlock::rotateC()
 }
 
 void BROWNBlock::down()
+
 {
+    storeold();
     if (end)
     {
         return;
@@ -90,6 +98,7 @@ bool BROWNBlock::done()
 
 void BROWNBlock::clear(int row)
 {
+    storeold();
     if (this->coordinates[0]->y == row)
     {
         this->coordinates[0]->x = -1;
@@ -127,10 +136,10 @@ int BROWNBlock::blockdone()
 
 
 int BROWNBlock::getX(int num){
-    return arrX[num];
+    return arrX;
 }
 
 int BROWNBlock::getY(int num){
-    return arrY[num];
+    return arrY;
 }
 

@@ -26,6 +26,15 @@ OBlock::OBlock(std::shared_ptr<Board> base): Block{base} {
 
 }
 
+void OBlock::storeold()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        arrX[i] = coordinates[i]->x;
+        arrY[i] = coordinates[i]->y;
+    }
+}
+
 void OBlock::rotateCC() {
     return;
 }
@@ -35,6 +44,7 @@ void OBlock::rotateC(){
 }
 
 void OBlock::down(){
+    storeold();
     if(end) {
         return;
     }
@@ -94,6 +104,7 @@ void OBlock::down(){
 }
 
 void OBlock::left(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 0) {
             return;
@@ -123,6 +134,7 @@ void OBlock::left(){
 }
 
 void OBlock::right(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 10) {
             return;
@@ -173,6 +185,7 @@ bool OBlock::done(){
 }
 
 void OBlock::clear(int row) {
+    storeold();
     for (int i=0; i<4; i++){
         if (this->coordinates[i]->y == row){
             this->coordinates[i]->x = -1;

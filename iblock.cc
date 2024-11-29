@@ -449,10 +449,6 @@ bool IBlock::done()
 void IBlock::clear(int row)
 {
     storeold();
-    // for (int i = 0; i < 4; i++)
-    // {
-    //     std::cout << arrX[i] << " " << arrY[i] << std::endl;
-    // }
 
     for (int i = 0; i < 4; i++)
     {

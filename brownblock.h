@@ -11,9 +11,10 @@ class BROWNBlock : public Block
     int phase;
     bool end;
     bool lost;
-    int arrX[4];
-    int arrY[4];
+    int arrX;
+    int arrY;
     bool exceed;
+    void storeold();
 
 public:
     BROWNBlock(std::shared_ptr<Board> base);  

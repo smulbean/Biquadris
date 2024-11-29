@@ -8,46 +8,6 @@
 
 using namespace std;
 
-int Graphic::full1()
-{
-    for (int i = 0; i < row; i++)
-    {
-        int count = 0;
-        for (int j = 0; j < col; j++)
-        {
-            if (subject->getStatep1(j, i) != ' ')
-            {
-                count++;
-            }
-        }
-        if (count == col)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
-int Graphic::full2()
-{
-    for (int i = 0; i < row; i++)
-    {
-        int count = 0;
-        for (int j = col + spacing; j < 2 * col + spacing; ++j)
-        {
-            if (subject->getStatep2(j - (col + spacing), i) != ' ')
-            {
-                count++;
-            }
-        }
-        if (count == col)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
-
 Graphic::Graphic(std::shared_ptr<Studio> subject) : subject{subject}
 {
     w = new Xwindow(col * 40, row * 40);

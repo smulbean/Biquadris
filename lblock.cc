@@ -27,7 +27,17 @@ LBlock::LBlock(std::shared_ptr<Board> base): Block{base} {
 
 }
 
+void LBlock::storeold()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        arrX[i] = coordinates[i]->x;
+        arrY[i] = coordinates[i]->y;
+    }
+}
+
 void LBlock::rotateCC() {
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[2]->x, coordinates[2]->y-1) == ' ') && (coordinates[2]->x >= 0) && (coordinates[2]->x <=10) &&  
             (base->charAt(coordinates[2]->x, coordinates[2]->y-2) == ' ') && (coordinates[2]->x-1 >= 0) && (coordinates[2]->x-1 <=10) &&  
@@ -111,6 +121,7 @@ void LBlock::rotateCC() {
 }
 
 void LBlock::rotateC(){
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[3]->x, coordinates[3]->y-1) == ' ') && (coordinates[3]->x >= 0) && (coordinates[3]->x <=10) &&  
             (base->charAt(coordinates[3]->x, coordinates[3]->y-2) == ' ')){
@@ -190,6 +201,7 @@ void LBlock::rotateC(){
 }
 
 void LBlock::down(){
+    storeold();
     if(end) {
         return;
     }
@@ -251,6 +263,7 @@ void LBlock::down(){
 }
 
 void LBlock::left(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 0) {
             return;
@@ -279,6 +292,7 @@ void LBlock::left(){
 }
 
 void LBlock::right(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 10) {
             return;
@@ -331,6 +345,7 @@ bool LBlock::done(){
 }
 
 void LBlock::clear(int row) {
+    storeold();
     for (int i=0; i<4; i++){
         if (this->coordinates[i]->y == row){
             this->coordinates[i]->x = -1;

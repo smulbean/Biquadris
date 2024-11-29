@@ -13,7 +13,6 @@ class IBlock : public Block
     bool lost;
     bool exceed;
     void storeold();
-    void downpt2();
     int arrX[4];
     int arrY[4];
 

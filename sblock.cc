@@ -27,7 +27,17 @@ SBlock::SBlock(std::shared_ptr<Board> base): Block{base} {
 
 }
 
+void SBlock::storeold()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        arrX[i] = coordinates[i]->x;
+        arrY[i] = coordinates[i]->y;
+    }
+}
+
 void SBlock::rotateCC() {
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[2]->x-1, coordinates[2]->y) == ' ') && (coordinates[2]->x-1 >= 0) && (coordinates[2]->x-1 <=10) &&  
             (base->charAt(coordinates[2]->x-1, coordinates[2]->y-1) == ' ')) {
@@ -102,6 +112,7 @@ void SBlock::rotateCC() {
 }
 
 void SBlock::rotateC(){
+    storeold();
     if (phase == 1) {
         if ((base->charAt(coordinates[2]->x-1, coordinates[2]->y) == ' ') && (coordinates[2]->x-1 >= 0) && (coordinates[2]->x-1 <=10) &&  
             (base->charAt(coordinates[2]->x-1, coordinates[2]->y-1) == ' ') ){
@@ -175,6 +186,7 @@ void SBlock::rotateC(){
 }
 
 void SBlock::down(){
+    storeold();
     if(end) {
         return;
     }
@@ -236,6 +248,7 @@ void SBlock::down(){
 }
 
 void SBlock::left(){
+    storeold();
     for(int i = 0; i < 4; i++) {
         if(coordinates[i]->x == 0) {
             return;
@@ -319,6 +332,7 @@ bool SBlock::done(){
 }
 
 void SBlock::clear(int row) {
+    storeold();
     for (int i=0; i<4; i++){
         if (this->coordinates[i]->y == row){
             this->coordinates[i]->x = -1;
