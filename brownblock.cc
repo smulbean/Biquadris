@@ -83,9 +83,27 @@ char BROWNBlock::charAt(int col, int row)
 
 void BROWNBlock::drop()
 {
+    storeold();
     while (!end)
     {
-        down();
+        if (end)
+    {
+        return;
+    }
+
+    if (coordinates[0]->y == 17)
+    {
+        end = true;
+        return;
+    }
+
+    if ((base->charAt(coordinates[0]->x, coordinates[0]->y + 1) == ' '))
+    {
+        coordinates[0]->y++;
+        continue;
+    }
+    end = true;
+    return;
     }
     end = true;
     return;

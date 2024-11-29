@@ -49,58 +49,15 @@ void OBlock::down(){
         return;
     }
 
-    if((phase == 3 || phase == 4) && (coordinates[0]->y == 17)) { //reached the bottom
-        end = true;
-        return;
-    } else if ((phase == 1 || phase == 2) && (coordinates[2]->y == 17)){
-        end = true;
+    if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+        (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ')) {
+        for (int i=0; i<4; i++){
+            coordinates[i]->y++;
+        }
         return;
     }
-
-    if (phase == 1) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ')) {
-            for (int i=0; i<4; i++){
-                coordinates[i]->y++;
-            }
-            return;
-        }
-        end = true;
-        return;
-
-    } else if (phase == 2) {
-        if ((base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ') && 
-            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
-            for (int i=0; i<4; i++){
-                coordinates[i]->y++;
-            }
-            return;
-        }
-        end = true;
-        return;
-
-    } else if (phase == 3) {
-        if ((base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ') && 
-            (base->charAt(coordinates[3]->x, coordinates[3]->y+1) == ' ')) {
-            for (int i=0; i<4; i++){
-                coordinates[i]->y++;
-            }
-            return;
-        }
-        end = true;
-        return;
-        
-    } else if (phase == 4) {
-        if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
-            (base->charAt(coordinates[0]->x, coordinates[0]->y+1) == ' ')) {
-            for (int i=0; i<4; i++){
-                coordinates[i]->y++;
-            }
-            return;
-        }
-        end = true;
-        return;
-    }
+    end = true;
+    return;
 }
 
 void OBlock::left(){
@@ -115,16 +72,6 @@ void OBlock::left(){
                     (base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
         return;
 
-    } else if((phase == 2)&&((base->charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
-                            (base->charAt(coordinates[1]->x-1, coordinates[1]->y) != ' '))) {
-        return;
-
-    } else if((phase == 3)&&((base->charAt(coordinates[2]->x-1, coordinates[2]->y) != ' ')||
-                            (base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' '))) {
-        return;
-    } else if((phase == 4)&&((base->charAt(coordinates[3]->x-1, coordinates[3]->y) != ' ')||
-                            (base->charAt(coordinates[0]->x-1, coordinates[0]->y) != ' '))) {
-        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -145,16 +92,6 @@ void OBlock::right(){
                     (base->charAt(coordinates[2]->x+1, coordinates[2]->y) != ' '))) {
         return;
 
-    } else if((phase == 2)&&((base->charAt(coordinates[3]->x+1, coordinates[3]->y) != ' ')||
-                            (base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
-        return;
-
-    } else if((phase == 3)&&((base->charAt(coordinates[1]->x+1, coordinates[1]->y) != ' ')||
-                            (base->charAt(coordinates[0]->x+1, coordinates[0]->y) != ' '))) {
-        return;
-    } else if((phase == 4)&&((base->charAt(coordinates[2]->x+1, coordinates[2]->y) != ' ')||
-                            (base->charAt(coordinates[1]->x+1, coordinates[1]->y) != ' '))) {
-        return;
     }
 
     for(int i = 0; i < 4; i++) {
@@ -173,8 +110,22 @@ char OBlock::charAt(int col, int row) {
 }
 
 void OBlock::drop(){
+    storeold();
     while (!end){
-        down();
+        
+        if(end) {
+        return;
+    }
+
+    if ((base->charAt(coordinates[1]->x, coordinates[1]->y+1) == ' ') && 
+        (base->charAt(coordinates[2]->x, coordinates[2]->y+1) == ' ')) {
+        for (int i=0; i<4; i++){
+            coordinates[i]->y++;
+        }
+        continue;
+    }
+    end = true;
+    return;
     }
     end = true;
     return;
